@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hugorecolet@gmail.com>           +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:35:35 by hrecolet          #+#    #+#             */
-/*   Updated: 2021/11/24 14:32:28 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:36:13 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:32:00 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*t;
+	int	i;
 
-	if (lst || *lst || del)
+	i = 0;
+	while (lst)
 	{
-		while (lst && *lst)
-		{
-			t = (*lst)->next;
-			ft_lstdelone(*lst, del);
-			*lst = t;
-		}
+		i++;
+		lst = lst->next;
 	}
+	return (i);
 }

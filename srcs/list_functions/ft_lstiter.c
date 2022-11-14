@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 00:33:48 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:35:47 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:32:18 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer(char *cmd)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i])
+	if (f)
 	{
-		
-		i++;
+		while (lst)
+		{
+			(f)(lst->token);
+			lst = lst->next;
+		}
 	}
 }

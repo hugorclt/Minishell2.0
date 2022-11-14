@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hugorecolet@gmail.com>           +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:35:47 by hrecolet          #+#    #+#             */
-/*   Updated: 2021/11/24 14:32:35 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:36:07 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:32:37 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+t_list	*ft_lstnew(void *content)
 {
-	if (f)
-	{
-		while (lst)
-		{
-			(f)(lst->content);
-			lst = lst->next;
-		}
-	}
+	t_list	*lst;
+
+	lst = malloc(sizeof(*lst));
+	if (lst == NULL)
+		return (NULL);
+	lst->token = content;
+	lst->next = NULL;
+	return (lst);
 }

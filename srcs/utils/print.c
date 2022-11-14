@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hugorecolet@gmail.com>           +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:36:07 by hrecolet          #+#    #+#             */
-/*   Updated: 2021/11/24 14:32:48 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:36:04 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-t_list	*ft_lstnew(void *content)
+void	print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		printf("|%s|\n", tab[i]);
+		i++;
+	}
+}
+
+void	print_lst(void)
 {
 	t_list	*lst;
 
-	lst = malloc(sizeof(*lst));
-	if (lst == NULL)
-		return (NULL);
-	lst->content = content;
-	lst->next = NULL;
-	return (lst);
+	lst = _list();
+	while (lst)
+	{
+		printf("------\n");
+		printf("|%s|\n", lst->token->cmd);
+		lst = lst->next;
+	}
 }

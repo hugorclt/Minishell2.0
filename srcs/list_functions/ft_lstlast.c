@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hugorecolet@gmail.com>           +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:35:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2021/11/24 14:32:32 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:35:54 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:31:47 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst && del)
+	while (lst)
 	{
-		(del)(lst->content);
-		free(lst);
+		if (lst->next == 0)
+			return (lst);
+		lst = lst->next;
 	}
+	return (lst);
 }

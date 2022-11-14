@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/14 22:33:42 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/15 00:28:41 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,17 @@ NAME 		= 	minishell
 FILES 		=	srcs/main.c\
 				lexer/lexer.c\
 				singleton/singleton.c\
+				utils/free.c\
+				utils/print.c\
+				list_functions/ft_lstadd_back.c\
+				list_functions/ft_lstadd_front.c\
+				list_functions/ft_lstclear.c\
+				list_functions/ft_lstdelone.c\
+				list_functions/ft_lstiter.c\
+				list_functions/ft_lstlast.c\
+				list_functions/ft_lstmap.c\
+				list_functions/ft_lstnew.c\
+				list_functions/ft_lstsize.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -40,6 +51,14 @@ $(OBJS_DIR)/%.o	: 	srcs/lexer/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/singleton/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/utils/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/list_functions/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 # End Multiple Directory

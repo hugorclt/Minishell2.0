@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/14 21:48:59 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:35:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	main(int ac, char **av, char **env)
 	{
 		cmd = readline("minishell$>");
 		lexer(cmd);
+		print_lst();
 	}
 }

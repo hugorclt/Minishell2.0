@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 00:33:48 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:35:19 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:31:17 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer(char *cmd)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	int	i;
+	t_list	*last_elem;
 
-	i = 0;
-	while (cmd[i])
+	if (alst)
 	{
-		
-		i++;
+		if (*alst)
+		{
+			last_elem = ft_lstlast(*alst);
+			last_elem->next = new;
+			new->next = 0;
+		}
+		else
+			*alst = new;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/14 22:52:35 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:36:40 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,23 @@
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
 /* -------------------------------------------------------------------------- */
-typedef struct s_data
-{
-	t_list	*grammar_list;
-}	t_data;
-
 typedef struct s_token
 {
 	int		id;
 	char	*cmd;
 }	t_token;
+
+typedef struct s_list
+{
+	t_token			*token;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_data
+{
+	t_list	*grammar_list;
+}	t_data;
+
 
 typedef struct s_tree
 {
@@ -90,5 +97,23 @@ void	lexer(char *cmd);
 /* -------------------------------- singleton ------------------------------- */
 t_data	*_data(void);
 t_list	*_list(void);
+
+/* ---------------------------------- free ---------------------------------- */
+void	free_all(void);
+
+/* ------------------------------ list_function ----------------------------- */
+void	ft_lstadd_back(t_list **alst, t_list *new);
+void	ft_lstadd_front(t_list **alst, t_list *new);
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstnew(void *content);
+int		ft_lstsize(t_list *lst);
+
+/* ---------------------------------- print --------------------------------- */
+void	print_tab(char **tab);
+void	print_lst(void);
 
 #endif

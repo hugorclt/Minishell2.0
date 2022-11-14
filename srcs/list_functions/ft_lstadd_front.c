@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hugorecolet@gmail.com>           +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:35:19 by hrecolet          #+#    #+#             */
-/*   Updated: 2021/11/24 14:32:20 by hrecolet         ###   ########.fr       */
+/*   Created: 2021/11/22 16:35:28 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 00:31:24 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_front(t_list **alst, t_list *new)
 {
-	t_list	*last_elem;
-
 	if (alst)
 	{
 		if (*alst)
-		{
-			last_elem = ft_lstlast(*alst);
-			last_elem->next = new;
-			new->next = 0;
-		}
-		else
-			*alst = new;
+			new->next = *alst;
+		*alst = new;
 	}
 }
