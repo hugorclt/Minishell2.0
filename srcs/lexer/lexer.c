@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/14 21:48:59 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/14 22:32:58 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+void	lexer(char *cmd)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
-	char *cmd;
-	
-	while (42)
-	{
-		cmd = readline("minishell$>");
-		lexer(cmd);
-	}
+	(void)cmd;
 }

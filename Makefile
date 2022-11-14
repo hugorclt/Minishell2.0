@@ -6,15 +6,17 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/14 21:44:41 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/14 22:33:42 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
 FILES 		=	srcs/main.c\
+				lexer/lexer.c\
+				singleton/singleton.c\
 
-INCL_DIR	=	includes
+INCL_DIR	=	-I./includes -I./Libft
 
 CC 			= 	cc
 CFLAGS 		= 	-Wall -Wextra -Werror
@@ -28,9 +30,19 @@ $(OBJS_DIR)		:
 					@mkdir -p $(OBJS_DIR)
 
 
-$(OBJS_DIR)/%.o	: 	srcs/%.c 
+# For Multiple Directory
+$(OBJS_DIR)/%.o	: 	srcs/%.c
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
-					@$(CC) $(CFLAGS) -c $< -o $@ -MMD -I./$(INCL_DIR)
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/lexer/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/singleton/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+# End Multiple Directory
 
 all 			: 	$(NAME)
 
@@ -56,5 +68,8 @@ re				:	fclean all
 
 .PHONY			:
 					all test clean fclean re
+
+.SECONDEXPANSION:
+
 
 -include $(DEP)

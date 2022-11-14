@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   singleton.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/14 21:48:59 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/14 22:27:20 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/14 22:38:32 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+t_data	*_data(void)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
-	char *cmd;
-	
-	while (42)
+	static t_data	data;
+	static int		init = 0;
+
+	if (init == 0)
 	{
-		cmd = readline("minishell$>");
-		lexer(cmd);
+		ft_bzero(&data, sizeof(t_data));
+		init++;
 	}
+	return (&data);
+}
+
+t_list	*_list(void)
+{
+	static t_list	*lst;
+
+	lst = _data()->grammar_list;
+	return (lst);
 }
