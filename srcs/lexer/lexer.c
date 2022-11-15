@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 17:59:30 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:18:25 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*create_new_token(char *token)
 		ft_strlen(data->token_list[i])))
 		i++;
 	new_tok->id = i;
-	new_tok->cmd = token;
+	new_tok->cmd = ft_strdup(token);
 	return (new_tok);
 }
 
@@ -66,7 +66,7 @@ void	insert_two_token(char *cmd, char *token, int start, int end)
 	lst = _list();
 	ft_lstadd_back(&lst, ft_lstnew(create_new_token(ft_substring(cmd, start, end))));
 	ft_lstadd_back(&lst, ft_lstnew(create_new_token(token)));
-
+	printf("lexer: %p\n", lst);
 }
 
 void	lexer(char *cmd)

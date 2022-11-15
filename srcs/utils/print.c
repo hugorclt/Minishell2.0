@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 17:59:38 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:18:30 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	print_lst(void)
 	t_list	*lst;
 
 	lst = _list();
+	printf("print: %p\n", lst);
 	while (lst)
 	{
 		printf("------\n");
