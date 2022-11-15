@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 00:36:40 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 04:15:06 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_list
 typedef struct s_data
 {
 	t_list	*grammar_list;
+	char	*token_list[8]; //pas a free
 }	t_data;
 
 
@@ -59,16 +60,17 @@ typedef struct s_tree
 /* -------------------------------------------------------------------------- */
 # define TRUE 1
 # define FALSE 0
+# define NB_TOKEN 7
 
 /* ------------------------------- token_type ------------------------------- */
-# define CMD 2
-# define PIPE 3
-# define INFILE 4
-# define HEREDOC 7
-# define OUTFILE 5
-# define OUTFILE_APND 6
-# define AND 7
-# define OR 8
+# define CMD 7
+# define PIPE 6
+# define INFILE 5
+# define HEREDOC 3
+# define OUTFILE 4
+# define OUTFILE_APND 2
+# define AND 0
+# define OR 1
 
 
 /* -------------------------------------------------------------------------- */
@@ -115,5 +117,8 @@ int		ft_lstsize(t_list *lst);
 /* ---------------------------------- print --------------------------------- */
 void	print_tab(char **tab);
 void	print_lst(void);
+
+/* ---------------------------------- utils --------------------------------- */
+char	*ft_substring(char const *s, unsigned int start, size_t end);
 
 #endif

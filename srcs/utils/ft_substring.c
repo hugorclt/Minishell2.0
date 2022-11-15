@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_substring.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:39:13 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 02:10:41 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/15 04:11:52 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/15 04:17:24 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *s)
+char	*ft_substring(char const *s, unsigned int start, size_t end)
 {
-	int	i;
+	char	*ret;
+	size_t	i;
+	size_t	j;
 
+	j = start;
 	i = 0;
-	while (s[i])
+	ret = malloc(sizeof(char) * (end - start + 1));
+	if (!s || !ret)
+		return (NULL);
+	while (j < end && s[start + i])
+	{
+		ret[i] = s[start + i];
+		j++;
 		i++;
-	return (i);
+	}
+	ret[i] = '\0';
+	return (ret);
 }

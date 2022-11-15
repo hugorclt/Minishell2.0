@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/15 00:28:41 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/15 04:15:33 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,12 @@ FILES 		=	srcs/main.c\
 				list_functions/ft_lstmap.c\
 				list_functions/ft_lstnew.c\
 				list_functions/ft_lstsize.c\
+				utils/ft_substring.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
 CC 			= 	cc
-CFLAGS 		= 	-Wall -Wextra -Werror
+CFLAGS 		= 	-Wall -Wextra -Werror -g3
 
 OBJS_DIR	=	.objs
 OBJS 		= 	$(addprefix $(OBJS_DIR)/, $(notdir $(FILES:%.c=%.o)))
