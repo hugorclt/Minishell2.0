@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/15 04:15:33 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/15 17:48:53 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME 		= 	minishell
 FILES 		=	srcs/main.c\
 				lexer/lexer.c\
 				singleton/singleton.c\
-				utils/free.c\
 				utils/print.c\
 				list_functions/ft_lstadd_back.c\
 				list_functions/ft_lstadd_front.c\
@@ -27,6 +26,7 @@ FILES 		=	srcs/main.c\
 				list_functions/ft_lstnew.c\
 				list_functions/ft_lstsize.c\
 				utils/ft_substring.c\
+				utils/free.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
