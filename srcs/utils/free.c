@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 17:55:12 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:59:54 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	free_lst(void)
 {
-	t_list	**lst;
+	t_list	*lst;
 
 	lst = _list();
-	while (*lst)
+	while (lst)
 	{
-		*lst = (*lst)->next;
+		lst = lst->next;
 	}
 }
 
