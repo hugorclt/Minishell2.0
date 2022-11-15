@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 18:18:25 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:04:36 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,31 @@ static char	*get_token(char *cmd, int index_start)
 	return (data->token_list[i]);
 }
 
-t_token	*create_new_token(char *token)
+int	get_id(char *token)
 {
-	t_token *new_tok;
-	int		i;
 	t_data	*data;
+	int		i;
 
 	i = 0;
-	new_tok = malloc(sizeof(t_token));
 	data = _data();
 	if (!token)
 		free_all();
 	while (data->token_list[i] && ft_strncmp(token, data->token_list[i], 
 		ft_strlen(data->token_list[i])))
 		i++;
-	new_tok->id = i;
-	new_tok->cmd = ft_strdup(token);
-	return (new_tok);
+	return (i);
 }
 
 void	insert_two_token(char *cmd, char *token, int start, int end)
 {
 	t_list	*lst;
+	char	*cmd_to_insert;
 
 	lst = _list();
-	ft_lstadd_back(&lst, ft_lstnew(create_new_token(ft_substring(cmd, start, end))));
-	ft_lstadd_back(&lst, ft_lstnew(create_new_token(token)));
-	printf("lexer: %p\n", lst);
+	cmd_to_insert = ft_substring(cmd, start, end);
+	ft_lstadd_back(&lst, ft_lstnew(get_id(cmd_to_insert), cmd_to_insert));
+	ft_lstadd_back(&lst, ft_lstnew(get_id(token), token));
+	printf("element inserted= %p\n", lst->token);
 }
 
 void	lexer(char *cmd)
@@ -75,6 +73,7 @@ void	lexer(char *cmd)
 	int		start;
 	char	*token;
 	t_list	*lst;
+	char	*cmd_to_insert;
 
 	i = 0;
 	start = 0;
@@ -93,5 +92,9 @@ void	lexer(char *cmd)
 			i++;
 	}
 	if (start != i)
-		ft_lstadd_back(&lst, ft_lstnew(create_new_token(ft_substring(cmd, start, i))));
+	{
+		cmd_to_insert = ft_substring(cmd, start, i);
+		ft_lstadd_back(&lst, ft_lstnew(get_id(cmd_to_insert), cmd_to_insert));
+		free(cmd_to_insert);
+	}
 }

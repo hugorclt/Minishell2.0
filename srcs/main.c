@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 17:55:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:52:54 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	char *cmd;
+	t_list	*lst;
 	
+	lst = _list();
 	while (42)
 	{
 		cmd = readline("minishell$>");
