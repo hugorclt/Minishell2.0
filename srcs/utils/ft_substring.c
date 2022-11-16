@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 04:11:52 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 04:17:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:40:01 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substring(char const *s, unsigned int start, size_t end)
 	i = 0;
 	ret = malloc(sizeof(char) * (end - start + 1));
 	if (!s || !ret)
-		return (NULL);
+		free_all();
 	while (j < end && s[start + i])
 	{
 		ret[i] = s[start + i];

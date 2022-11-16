@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/16 18:57:25 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:41:06 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	print_lst(void)
 	t_list	*lst;
 
 	lst = *_list();
-	printf("test4: %s\n", lst->token->cmd);
 	while (lst)
 	{
 		printf("------\n");
-		printf("|%s|\n", lst->token->cmd);
+		printf("*%s*\n", lst->token->cmd);
 		lst = lst->next;
 	}
 }

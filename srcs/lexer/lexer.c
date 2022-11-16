@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/16 18:59:16 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:54:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ static void	init_token_types(void)
 	t_data	*data;
 	
 	data = _data();
-	data->token_list[0] = "&&\0";
-	data->token_list[1] = "||\0";
-	data->token_list[2] = ">>\0";
-	data->token_list[3] = "<<\0";
-	data->token_list[4] = ">\0";
-	data->token_list[5] = "<\0";
-	data->token_list[6] = "|\0";
-	data->token_list[7] = NULL;
+//	data->token_tab = (char *[]){"&&", "||", ">>", "<<", ">", "<", "|", NULL};
+	data->token_tab[0] = "&&";
+	data->token_tab[1] = "||";
+	data->token_tab[2] = ">>";
+	data->token_tab[3] = "<<";
+	data->token_tab[4] = ">";
+	data->token_tab[5] = "<";
+	data->token_tab[6] = "|";
+	data->token_tab[7] = NULL;
 }
 
 static char	*get_token(char *cmd, int index_start)
@@ -34,25 +35,25 @@ static char	*get_token(char *cmd, int index_start)
 
 	i = 0;
 	data = _data();
-	while (data->token_list[i] && ft_strncmp(cmd + index_start, data->token_list[i], 
-		ft_strlen(data->token_list[i])))
+	while (data->token_tab[i] && ft_strncmp(cmd + index_start, data->token_tab[i], 
+		ft_strlen(data->token_tab[i])))
 		i++;
-	return (data->token_list[i]);
+	return (data->token_tab[i]);
 }
 
 t_token	*create_new_token(char *token)
 {
 	t_token *new_tok;
-	int		i;
 	t_data	*data;
+	int		i;
 
 	i = 0;
 	new_tok = malloc(sizeof(t_token));
 	data = _data();
 	if (!token)
 		free_all();
-	while (data->token_list[i] && ft_strncmp(token, data->token_list[i], 
-		ft_strlen(data->token_list[i])))
+	while (data->token_tab[i] && ft_strncmp(token, data->token_tab[i], 
+		ft_strlen(data->token_tab[i])))
 		i++;
 	new_tok->id = i;
 	new_tok->cmd = ft_strdup(token);
@@ -62,9 +63,17 @@ t_token	*create_new_token(char *token)
 void	insert_two_token(char *cmd, char *token, int start, int end)
 {
 	t_list	**lst;
+	char	*cmd_to_insert;
 
 	lst = _list();
-	ft_lstadd_back(lst, ft_lstnew(create_new_token(ft_substring(cmd, start, end))));
+	cmd_to_insert = ft_substring(cmd, start, end);
+	printf("%s, %d, %d\n", cmd_to_insert, start, end);
+	printf("isnull: %d\n", cmd_to_insert == NULL);
+	if (cmd_to_insert)
+	{
+		printf("wtf\n");
+		ft_lstadd_back(lst, ft_lstnew(create_new_token(cmd_to_insert)));
+	}
 	ft_lstadd_back(lst, ft_lstnew(create_new_token(token)));
 }
 
