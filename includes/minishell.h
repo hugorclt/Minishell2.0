@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 17:59:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:53:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_list
 typedef struct s_data
 {
 	char	*token_list[8]; //pas a free
+	t_list	*grammar_lst;
 }	t_data;
 
 
@@ -97,7 +98,7 @@ void	lexer(char *cmd);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data	*_data(void);
-t_list	*_list(void);
+t_list	**_list(void);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(void);
