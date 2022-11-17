@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/17 16:24:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:39:09 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ typedef struct	s_scanner
 }	t_scanner;
 
 typedef struct s_data
-{ //pas a free
+{
 	t_list		*grammar_lst;
 	t_scanner	scanner;
 }	t_data;
-
-
 
 typedef struct s_tree
 {
@@ -105,7 +103,7 @@ typedef struct s_tree
 
 
 /* ---------------------------------- lexer --------------------------------- */
-void	scan_token(void);
+t_token	*scan_token(void);
 char	*peek_token(void);
 void	init_scanner(char *cmd);
 

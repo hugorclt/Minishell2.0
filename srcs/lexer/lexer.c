@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/17 16:21:40 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:39:44 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,115 @@ void	init_scanner(char *cmd)
 	scanner->cmd = cmd;
 }
 
-static void	skip_space(char *cmd, int *index)
+// static void	skip_space(char *cmd, int *index)
+// {
+// 	while (cmd[*index] && cmd[*index] == ' ')
+// 		(*index)++;
+// }
+
+static int	is_token(char c)
 {
-	while (cmd[*index] && cmd[*index] == ' ')
-		(*index)++;
+	if (c == '>' || c == '<' || c == '|' || c == '&' || c == '(' || c == ')')
+		return (1);
+	return (0);
+}
+
+static int	find_token_id(char *token)
+{
+	t_scanner	*scanner;
+	int	i;
+
+	i = 0;
+	scanner = _scanner();
+	while (scanner->token_tab[i])
+	{
+		if (ft_strncmp(token, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+static int	is_quoted(int index, char *cmd)
+{
+	int	i;
+	int	nb_quotes;
+	int	nb_dquotes;
+
+	i = 0;
+	nb_quotes = 0;
+	nb_dquotes = 0;
+	while (i <= index)
+	{
+		if (cmd[i] == '\'')
+			nb_quotes++;
+		else if (cmd[i] == '"')
+			nb_dquotes++;
+		i++;
+	}
+	if (nb_quotes % 2 != 0)
+		return (1);
+	if (nb_dquotes % 2 != 0)
+		return (1);
+	return (0);
+}
+
+static int	find_end(void)
+{
+	t_scanner	*scanner;
+	int			i;
+	int			is_tok;
+	int			j;
+	
+	scanner = _scanner();
+	i = scanner->start_pos;
+	is_tok = is_token(scanner->cmd[i]);
+	while (scanner->cmd[i])
+	{
+		j = 0;
+		while (scanner->token_tab[j])
+		{
+			if (!ft_strncmp(scanner->cmd + i, scanner->token_tab[j], ft_strlen(scanner->token_tab[j]))
+			&& !is_quoted(i, scanner->cmd))
+			{
+				if (is_tok)
+					i += ft_strlen(scanner->token_tab[j]);
+				return (i);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (i);
 }
 
 char	*peek_token(void)
 {
-	
-}
-
-char	*scan_token(void)
-{
 	t_scanner	*scanner;
+	int			end;
+	char		*cmd;
 	
 	scanner = _scanner();
-	skip_space(cmd, &scanner->start_pos);
+	end = find_end();
+	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
+	return (cmd);
 }
 
-
+t_token	*scan_token(void)
+{
+	t_scanner	*scanner;
+	t_token		*token;
+	
+	token = malloc(sizeof(t_token));
+	if (!token)
+		free_all(); //ERROR_PARSING
+	scanner = _scanner();
+	scanner->end_pos = find_end();
+	token->cmd = ft_substring(scanner->cmd, scanner->start_pos, scanner->end_pos);
+	token->id = find_token_id(token->cmd);
+	scanner->start_pos = scanner->end_pos;
+	return (token);
+}
+   
 
 

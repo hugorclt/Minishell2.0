@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/17 14:33:08 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:38:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ int	main(int ac, char **av, char **env)
 		scan_token();
 		peek_token();
 		scan_token();
-		//lexer(cmd);
-		//print_lst();
 	}
 }
