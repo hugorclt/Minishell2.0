@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/16 19:50:53 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:24:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,20 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct s_data
+typedef struct	s_scanner
 {
-	char	*token_tab[8]; //pas a free
-	t_list	*grammar_lst;
+	char	*token_tab[10];
+	char	*cmd;
+	int		start_pos;
+	int		end_pos;
+}	t_scanner;
+
+typedef struct s_data
+{ //pas a free
+	t_list		*grammar_lst;
+	t_scanner	scanner;
 }	t_data;
+
 
 
 typedef struct s_tree
@@ -60,17 +69,19 @@ typedef struct s_tree
 /* -------------------------------------------------------------------------- */
 # define TRUE 1
 # define FALSE 0
-# define NB_TOKEN 7
+# define NB_TOKEN 10
 
 /* ------------------------------- token_type ------------------------------- */
-# define CMD 7
-# define PIPE 6
-# define INFILE 5
-# define HEREDOC 3
-# define OUTFILE 4
-# define OUTFILE_APND 2
 # define AND 0
 # define OR 1
+# define OUTFILE_APND 2
+# define HEREDOC 3
+# define OUTFILE 4
+# define INFILE 5
+# define PIPE 6
+# define CMD 7
+# define LPARENTH 8
+# define RPARENTH 9
 
 
 /* -------------------------------------------------------------------------- */
@@ -94,11 +105,14 @@ typedef struct s_tree
 
 
 /* ---------------------------------- lexer --------------------------------- */
-void	lexer(char *cmd);
+void	scan_token(void);
+char	*peek_token(void);
+void	init_scanner(char *cmd);
 
 /* -------------------------------- singleton ------------------------------- */
-t_data	*_data(void);
-t_list	**_list(void);
+t_data		*_data(void);
+t_list		**_list(void);
+t_scanner	*_scanner(void);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(void);
