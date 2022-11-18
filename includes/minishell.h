@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 18:01:55 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:20:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		ft_lstsize(t_list *lst);
 void	print_tab(char **tab);
 void	print_lst(void);
 void	print_tree(void);
+void	print_all_token(void);
 
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);

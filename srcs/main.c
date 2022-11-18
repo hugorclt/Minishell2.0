@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 19:14:00 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:47:48 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@ int	main(int ac, char **av, char **env)
 	{
 		cmd = readline("minishell$>");
 		init_scanner(cmd);
-		//printf("%s, %s, %s\n", scan_token()->cmd, scan_token()->cmd, scan_token()->cmd);
-		t_tree	**tree;
-
-		tree = _tree();
-		(*tree) = create_node(scan_token(), create_node(scan_token(), NULL, NULL ), create_node(scan_token(), NULL, NULL));
+		print_all_token();
+		//printf("%s, |%s|, %s\n", scan_token()->cmd, scan_token()->cmd, scan_token()->cmd);
 		//create_tree();
-		print_tree();
+		//print_tree();
 	}
 }

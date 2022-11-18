@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 17:50:44 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:27:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ t_token	*scan_token(void)
 	t_scanner	*scanner;
 	t_token		*token;
 	
+	scanner = _scanner();
+	// printf("%d, %d\n")
+	if (scanner->start_pos == ft_strlen(scanner->cmd))
+		return (NULL);
 	token = malloc(sizeof(t_token));
 	if (!token)
 		free_all(); //ERROR_PARSING
-	scanner = _scanner();
 	scanner->end_pos = find_end();
 	token->cmd = ft_substring(scanner->cmd, scanner->start_pos, scanner->end_pos);
 	token->id = find_token_id(token->cmd);

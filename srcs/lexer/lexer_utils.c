@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 17:50:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:45:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ int	is_quoted(int index, char *cmd)
 	return (0);
 }
 
+void	skip_whitespaces(char *cmd, int *i)
+{
+	while (cmd[*i] && ((cmd[*i] >= '\t' && cmd[*i] <= '\r') || cmd[*i] == ' '))
+		(*i)++;
+}
+
 int	find_end(void)
 {
 	t_scanner	*scanner;
@@ -88,6 +94,7 @@ int	find_end(void)
 	
 	scanner = _scanner();
 	i = scanner->start_pos;
+	skip_whitespaces(scanner->cmd, &i);
 	is_tok = is_token(scanner->cmd[i]);
 	while (scanner->cmd[i])
 	{
@@ -99,6 +106,7 @@ int	find_end(void)
 			{
 				if (is_tok)
 					i += ft_strlen(scanner->token_tab[j]);
+				printf("i = %d, is tok = %d, len tok = %d char = %c\n", i, is_tok, ft_strlen(scanner->token_tab[j]), scanner->cmd[i]);
 				return (i);
 			}
 			j++;
