@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 19:10:37 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/18 19:23:26 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,39 @@ void	print_lst(void)
 	t_list	*lst;
 
 	lst = *_list();
-	printf("test4: %s\n", lst->token->cmd);
 	while (lst)
 	{
 		printf("------\n");
-		printf("|%s|\n", lst->token->cmd);
+		printf("*%s*\n", lst->token->cmd);
 		lst = lst->next;
 	}
+}
+
+static void	print_tree_utils(t_tree *root, int space)
+{
+	int	i;
+
+	i = STEP_PRINT_TREE;
+	if (!root)
+		return ;
+	space += STEP_PRINT_TREE;
+	print_tree_utils(root->right, space);
+	printf("\n");
+	while (i < space)
+	{
+		printf(" ");
+		i++;
+	}
+	printf("%s\n", root->token->cmd);
+	print_tree_utils(root->left, space);
+}
+
+void	print_tree(void)
+{
+	t_tree	**tree;
+	t_tree	*tmp;
+
+	tree = _tree();
+	tmp = (*tree);
+	print_tree_utils(tmp, 0);
 }

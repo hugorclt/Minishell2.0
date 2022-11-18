@@ -3,92 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 19:10:18 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/18 19:24:24 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_token_types(void)
+char	*peek_token(void)
 {
-	t_data	*data;
+	t_scanner	*scanner;
+	int			end;
+	char		*cmd;
 	
-	data = _data();
-	data->token_list[0] = "&&\0";
-	data->token_list[1] = "||\0";
-	data->token_list[2] = ">>\0";
-	data->token_list[3] = "<<\0";
-	data->token_list[4] = ">\0";
-	data->token_list[5] = "<\0";
-	data->token_list[6] = "|\0";
-	data->token_list[7] = NULL;
+	scanner = _scanner();
+	end = find_end();
+	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
+	return (cmd);
 }
 
-static char	*get_token(char *cmd, int index_start)
+t_token	*scan_token(void)
 {
-	int		i;
-	t_data	*data;
-
-	i = 0;
-	data = _data();
-	while (data->token_list[i] && ft_strncmp(cmd + index_start, data->token_list[i], 
-		ft_strlen(data->token_list[i])))
-		i++;
-	return (data->token_list[i]);
-}
-
-int	get_id(char *token)
-{
-	t_data	*data;
-	int		i;
-
-	i = 0;
-	data = _data();
+	t_scanner	*scanner;
+	t_token		*token;
+	
+	token = malloc(sizeof(t_token));
 	if (!token)
-		free_all();
-	while (data->token_list[i] && ft_strncmp(token, data->token_list[i], 
-		ft_strlen(data->token_list[i])))
-		i++;
-	return (i);
-}
-
-void	insert_two_token(char *cmd, char *token, int start, int end)
-{
-	t_list	**lst;
-
-	lst = _list();
-	ft_lstadd_back(lst, ft_lstnew(create_new_token(ft_substring(cmd, start, end))));
-	ft_lstadd_back(lst, ft_lstnew(create_new_token(token)));
-}
-
-void	lexer(char *cmd)
-{
-	int		i;
-	int		start;
-	char	*token;
-	t_list	**lst;
-
-	i = 0;
-	start = 0;
-	lst	= _list();
-	init_token_types();
-	while (cmd[i])
-	{
-		token = get_token(cmd, i);
-		if (token)
-		{
-			insert_two_token(cmd, token, start, i);
-			i += ft_strlen(token);
-			start = i;
-		}
-		else
-			i++;
-	}
-	if (start != i)
-	{
-		ft_lstadd_back(lst, ft_lstnew(create_new_token(ft_substring(cmd, start, i))));
-	}
+		free_all(); //ERROR_PARSING
+	scanner = _scanner();
+	scanner->end_pos = find_end();
+	token->cmd = ft_substring(scanner->cmd, scanner->start_pos, scanner->end_pos);
+	token->id = find_token_id(token->cmd);
+	scanner->start_pos = scanner->end_pos;
+	return (token);
 }
