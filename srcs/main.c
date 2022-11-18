@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 18:10:47 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:14:00 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	create_pipeline()
 
 void	create_tree()
 {
-	t_tree	**tree;
+	t_tree	**root;
+	t_tree	*tree;
 
-	tree = _tree();
+	root = _tree();
+	tree = (*root);
 }
 
 int	main(int ac, char **av, char **env)
@@ -35,11 +37,12 @@ int	main(int ac, char **av, char **env)
 	{
 		cmd = readline("minishell$>");
 		init_scanner(cmd);
-		
-		t_tree *node1 = create_node(scan_token(), create_node(scan_token(), NULL, NULL), create_node(scan_token(), NULL, NULL));
-		t_tree	**tree = _tree();
-		(*tree) = node1;
-		print_tree();
+		//printf("%s, %s, %s\n", scan_token()->cmd, scan_token()->cmd, scan_token()->cmd);
+		t_tree	**tree;
+
+		tree = _tree();
+		(*tree) = create_node(scan_token(), create_node(scan_token(), NULL, NULL ), create_node(scan_token(), NULL, NULL));
 		//create_tree();
+		print_tree();
 	}
 }
