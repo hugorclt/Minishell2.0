@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 19:04:36 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:10:18 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,11 @@ int	get_id(char *token)
 
 void	insert_two_token(char *cmd, char *token, int start, int end)
 {
-	t_list	*lst;
-	char	*cmd_to_insert;
+	t_list	**lst;
 
 	lst = _list();
-	cmd_to_insert = ft_substring(cmd, start, end);
-	ft_lstadd_back(&lst, ft_lstnew(get_id(cmd_to_insert), cmd_to_insert));
-	ft_lstadd_back(&lst, ft_lstnew(get_id(token), token));
-	printf("element inserted= %p\n", lst->token);
+	ft_lstadd_back(lst, ft_lstnew(create_new_token(ft_substring(cmd, start, end))));
+	ft_lstadd_back(lst, ft_lstnew(create_new_token(token)));
 }
 
 void	lexer(char *cmd)
@@ -72,8 +69,7 @@ void	lexer(char *cmd)
 	int		i;
 	int		start;
 	char	*token;
-	t_list	*lst;
-	char	*cmd_to_insert;
+	t_list	**lst;
 
 	i = 0;
 	start = 0;
@@ -93,8 +89,6 @@ void	lexer(char *cmd)
 	}
 	if (start != i)
 	{
-		cmd_to_insert = ft_substring(cmd, start, i);
-		ft_lstadd_back(&lst, ft_lstnew(get_id(cmd_to_insert), cmd_to_insert));
-		free(cmd_to_insert);
+		ft_lstadd_back(lst, ft_lstnew(create_new_token(ft_substring(cmd, start, i))));
 	}
 }

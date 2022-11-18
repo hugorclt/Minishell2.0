@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/16 18:57:34 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
+/*   Updated: 2022/11/16 19:47:15 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_lst(void)
+void	error_parsing(char *msg)
 {
-	t_list	*lst;
-
-	lst = *_list();
-	while (lst)
-	{
-		lst = lst->next;
-	}
-}
-
-void	free_all(void)
-{
-	t_data	*data;
-
-	data = _data();
-	(void)data;
-	free_lst();
-	exit(0);
+	ft_putstr_fd("bash: syntax error near unexpected token " 
+				RED "'%s' \n" RESET, msg);
+	free_all();
 }

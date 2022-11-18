@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 18:53:02 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:10:37 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_lst(void)
 {
 	t_list	*lst;
 
-	lst = _list();
+	lst = *_list();
+	printf("test4: %s\n", lst->token->cmd);
 	while (lst)
 	{
 		printf("------\n");
