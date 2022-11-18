@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/17 17:39:09 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:01:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,20 @@ typedef struct	s_scanner
 	int		end_pos;
 }	t_scanner;
 
-typedef struct s_data
-{
-	t_list		*grammar_lst;
-	t_scanner	scanner;
-}	t_data;
 
 typedef struct s_tree
 {
-	int				id;
+	t_token			*token;
 	struct s_tree 	*left;
 	struct s_tree 	*right;
 }	t_tree;
 
+typedef struct s_data
+{
+	t_list		*grammar_lst;
+	t_scanner	scanner;
+	t_tree		*tree;
+}	t_data;
 /* -------------------------------------------------------------------------- */
 /*                                   define                                   */
 /* -------------------------------------------------------------------------- */
@@ -93,6 +94,8 @@ typedef struct s_tree
 # define C_ORANGE "\033[38:5:208m"
 # define C_RESET "\033[0m"
 
+# define STEP_PRINT_TREE 10
+
 /* -------------------------------------------------------------------------- */
 /*                                  prototype                                 */
 /* -------------------------------------------------------------------------- */
@@ -106,11 +109,16 @@ typedef struct s_tree
 t_token	*scan_token(void);
 char	*peek_token(void);
 void	init_scanner(char *cmd);
+int		is_token(char c);
+int		find_token_id(char *token);
+int		is_quoted(int index, char *cmd);
+int		find_end(void);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
 t_list		**_list(void);
 t_scanner	*_scanner(void);
+t_tree		**_tree(void);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(void);
@@ -129,8 +137,12 @@ int		ft_lstsize(t_list *lst);
 /* ---------------------------------- print --------------------------------- */
 void	print_tab(char **tab);
 void	print_lst(void);
+void	print_tree(void);
 
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
+
+/* ---------------------------------- tree ---------------------------------- */
+t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 #endif

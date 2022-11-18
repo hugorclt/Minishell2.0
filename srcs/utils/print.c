@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/16 20:41:06 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:10:28 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,33 @@ void	print_lst(void)
 		printf("*%s*\n", lst->token->cmd);
 		lst = lst->next;
 	}
+}
+
+static void	print_tree_utils(t_tree *root, int space)
+{
+	int	i;
+
+	i = STEP_PRINT_TREE;
+	if (!root)
+		return ;
+	space += STEP_PRINT_TREE;
+	print_tree_utils(root->right, space);
+	printf("\n");
+	while (i < space)
+	{
+		printf(" ");
+		i++;
+	}
+	printf("%s\n", root->token->cmd);
+	print_tree_utils(root->left, space);
+}
+
+void	print_tree(void)
+{
+	t_tree	**tree;
+	t_tree	*tmp;
+
+	tree = _tree();
+	tmp = (*tree);
+	print_tree_utils(tmp, 0);
 }

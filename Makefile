@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/15 17:48:53 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/18 17:48:38 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME 		= 	minishell
 
 FILES 		=	srcs/main.c\
 				lexer/lexer.c\
+				lexer/lexer_utils.c\
 				singleton/singleton.c\
 				utils/print.c\
 				list_functions/ft_lstadd_back.c\
@@ -27,6 +28,7 @@ FILES 		=	srcs/main.c\
 				list_functions/ft_lstsize.c\
 				utils/ft_substring.c\
 				utils/free.c\
+				tree_functions/create_node.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -60,6 +62,10 @@ $(OBJS_DIR)/%.o	: 	srcs/utils/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/list_functions/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+		
+$(OBJS_DIR)/%.o	: 	srcs/tree_functions/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 # End Multiple Directory

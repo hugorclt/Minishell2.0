@@ -1,50 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   singleton.c                                        :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 22:27:20 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 17:34:20 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/18 17:47:25 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/18 17:47:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	*_data(void)
+t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child)
 {
-	static t_data	data;
-	static int		init = 0;
+	t_tree	*node;
 
-	if (init == 0)
-	{
-		ft_bzero(&data, sizeof(t_data));
-		init++;
-	}
-	return (&data);
-}
-
-t_list	**_list(void)
-{
-	t_data	*data;
-
-	data = _data();
-	return (&data->grammar_lst);
-}
-
-t_scanner	*_scanner(void)
-{
-	t_data	*data;
-
-	data = _data();
-	return (&data->scanner);
-}
-
-t_tree	**_tree(void)
-{
-	t_data	*data;
-
-	data = _data();
-	return (&data->tree);
+	node = malloc(sizeof(t_tree));
+	if (!node)
+		free_all();
+	node->token = token;
+	node->left = l_child;
+	node->right = r_child;
+	return (node);
 }
