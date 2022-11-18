@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/18 17:48:38 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/18 19:24:33 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ FILES 		=	srcs/main.c\
 				list_functions/ft_lstdelone.c\
 				list_functions/ft_lstiter.c\
 				list_functions/ft_lstlast.c\
-				list_functions/ft_lstmap.c\
 				list_functions/ft_lstnew.c\
 				list_functions/ft_lstsize.c\
 				utils/ft_substring.c\

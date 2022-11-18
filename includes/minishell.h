@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 20:20:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:49:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,34 @@ typedef struct s_data
 # define LPARENTH 8
 # define RPARENTH 9
 
+/* ------------------------------- error_type ------------------------------- */
+# define CD_ERROR				1
+# define CWD_ERROR				1
+# define MALLOC_ERROR			1
+# define SYNTAX_ERROR			2
+# define CMD_NOT_FOUND			127
+# define EXIT_TOO_MANY_ARGS		1
+# define EXIT_NUM_ARG_REQUIRED	2
+/* exit with numeric value -> 
+return the numeric value 
+OU si >= à 256 et < 0 return value %2 */
 
 /* -------------------------------------------------------------------------- */
 /*                                    color                                   */
 /* -------------------------------------------------------------------------- */
-# define C_RED "\033[1;31m"
-# define C_GREEN "\033[1;32m"
-# define C_BLUE "\033[1;33m"
-# define C_WHITE "\033[97m"
-# define C_PURPLE "\033[1;35m"
-# define C_ORANGE "\033[38:5:208m"
-# define C_RESET "\033[0m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define BLUE "\033[1;34m"
+# define PINK "\033[1;95m"
+# define WHITE "\033[97m"
+# define PURPLE "\033[1;35m"
+# define ORANGE "\033[38:5:208m"
+# define RESET "\033[0m"
 
 # define STEP_PRINT_TREE 10
 
 /* -------------------------------------------------------------------------- */
-/*                                  prototype                                 */
+/*                                  prototypes                                */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------- execution ------------------------------- */
 
@@ -120,6 +132,9 @@ t_list		**_list(void);
 t_scanner	*_scanner(void);
 t_tree		**_tree(void);
 
+/* ---------------------------------- error --------------------------------- */
+void	error_parsing(char *msg);
+
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(void);
 
@@ -131,7 +146,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew(int id, char *cmd);
 int		ft_lstsize(t_list *lst);
 
 /* ---------------------------------- print --------------------------------- */
