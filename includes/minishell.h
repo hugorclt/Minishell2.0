@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:44:58 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:43:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_token
 
 typedef struct s_list
 {
-	t_token			*token;
+	char			*key;
+	char			*value;
 	struct s_list	*next;
 }					t_list;
 
@@ -59,7 +60,7 @@ typedef struct s_tree
 
 typedef struct s_data
 {
-	t_list		*grammar_lst;
+	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
 }	t_data;
@@ -113,6 +114,9 @@ OU si >= à 256 et < 0 return value %2 */
 /* -------------------------------------------------------------------------- */
 /*                                  prototypes                                */
 /* -------------------------------------------------------------------------- */
+/* ----------------------------------- env ---------------------------------- */
+void	convert_to_list(char **env);
+
 /* -------------------------------- execution ------------------------------- */
 
 
@@ -148,7 +152,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstnew(int id, char *cmd);
+t_list	*ft_lstnew(char *key, char *value);
 int		ft_lstsize(t_list *lst);
 
 /* ---------------------------------- print --------------------------------- */

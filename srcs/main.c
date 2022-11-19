@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:51:02 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:45:08 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int ac, char **av, char **env)
 	char *cmd;
 	
 	using_history();
+	convert_to_list(env);
+	// print_lst();
 	while (42)
 	{
 		cmd = readline(PINK "mimishell $>" RESET);

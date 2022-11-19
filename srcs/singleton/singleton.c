@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 22:27:20 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 19:23:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:42:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	**_list(void)
 	t_data	*data;
 
 	data = _data();
-	return (&data->grammar_lst);
+	return (&data->env);
 }
 
 t_scanner	*_scanner(void)

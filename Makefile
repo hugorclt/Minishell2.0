@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/18 19:24:33 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/19 11:35:18 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES 		=	srcs/main.c\
 				utils/ft_substring.c\
 				utils/free.c\
 				tree_functions/create_node.c\
+				utils/convert_to_list.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
