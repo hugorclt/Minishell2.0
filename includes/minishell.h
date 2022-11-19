@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:32:45 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:44:58 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_data
 # define CMD_NOT_FOUND			127
 # define EXIT_TOO_MANY_ARGS		1
 # define EXIT_NUM_ARG_REQUIRED	2
+# define QUIT					1
+# define FREE					2
 /* exit with numeric value -> 
 return the numeric value 
 OU si >= à 256 et < 0 return value %2 */
@@ -136,7 +138,7 @@ t_tree		**_tree(void);
 void	error_parsing(char *msg);
 
 /* ---------------------------------- free ---------------------------------- */
-void	free_all(void);
+void	free_all(int flag);
 
 /* ------------------------------ list_function ----------------------------- */
 void	ft_lstadd_back(t_list **alst, t_list *new);

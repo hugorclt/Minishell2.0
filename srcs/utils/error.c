@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/16 19:47:15 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/19 10:46:40 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_parsing(char *msg)
 {
-	ft_putstr_fd("bash: syntax error near unexpected token " 
+	ft_putstr_fd("mimishell: syntax error near unexpected token " 
 				RED "'%s' \n" RESET, msg);
-	free_all();
+	free_all(FREE);
 }

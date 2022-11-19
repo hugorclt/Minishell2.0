@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 20:52:29 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:45:43 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ int	main(int ac, char **av, char **env)
 	(void)env;
 	char *cmd;
 	
+	using_history();
 	while (42)
 	{
 		cmd = readline(PINK "mimishell $>" RESET);
+		add_history(cmd);
 		init_scanner(cmd);
 		print_all_token();
-		//printf("%s, |%s|, %s\n", scan_token()->cmd, scan_token()->cmd, scan_token()->cmd);
+		free(cmd);
+		free_all(FREE);
 		//create_tree();
 		//print_tree();
 	}

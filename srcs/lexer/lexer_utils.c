@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:35:01 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:37:16 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	find_end(void)
 			{
 				if (is_tok)
 					i += ft_strlen(scanner->token_tab[j]);
-				//printf("i = %d, is tok = %d, len tok = %d char = %c\n", i, is_tok, ft_strlen(scanner->token_tab[j]), scanner->cmd[i]);
 				return (i);
 			}
 			j++;

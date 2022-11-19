@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 17:47:25 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 17:47:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:46:10 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child)
 
 	node = malloc(sizeof(t_tree));
 	if (!node)
-		free_all();
+		free_all(QUIT);
 	node->token = token;
 	node->left = l_child;
 	node->right = r_child;
