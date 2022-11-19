@@ -6,25 +6,11 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 20:49:39 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:52:29 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	create_pipeline()
-{
-	
-}
-
-void	create_tree()
-{
-	t_tree	**root;
-	t_tree	*tree;
-
-	root = _tree();
-	tree = (*root);
-}
 
 int	main(int ac, char **av, char **env)
 {

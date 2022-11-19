@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 20:45:13 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:35:01 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,20 @@ void	init_scanner(char *cmd)
 	scanner->cmd = cmd;
 }
 
-int	is_token(char c)
+int	is_token(char *str, int index)
 {
-	if (c == '>' || c == '<' || c == '|' || c == '&' || c == '(' || c == ')')
-		return (1);
-	return (0);
+	int			i;
+	t_scanner	*scanner;
+	
+	i = 0;
+	scanner = _scanner();
+	while (scanner->token_tab[i])
+	{
+		if (!ft_strncmp(str + index, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
 }
 
 int	find_token_id(char *token)
@@ -73,10 +82,10 @@ int	is_quoted(int index, char *cmd)
 		i++;
 	}
 	if (nb_quotes % 2 != 0)
-		return (1);
+		return (TRUE);
 	if (nb_dquotes % 2 != 0)
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 void	skip_whitespaces(char *cmd, int *i)
@@ -95,7 +104,7 @@ int	find_end(void)
 	scanner = _scanner();
 	i = scanner->start_pos;
 	skip_whitespaces(scanner->cmd, &i);
-	is_tok = is_token(scanner->cmd[i]);
+	is_tok = is_token(scanner->cmd, i);
 	while (scanner->cmd[i])
 	{
 		j = 0;
@@ -106,7 +115,7 @@ int	find_end(void)
 			{
 				if (is_tok)
 					i += ft_strlen(scanner->token_tab[j]);
-				printf("i = %d, is tok = %d, len tok = %d char = %c\n", i, is_tok, ft_strlen(scanner->token_tab[j]), scanner->cmd[i]);
+				//printf("i = %d, is tok = %d, len tok = %d char = %c\n", i, is_tok, ft_strlen(scanner->token_tab[j]), scanner->cmd[i]);
 				return (i);
 			}
 			j++;

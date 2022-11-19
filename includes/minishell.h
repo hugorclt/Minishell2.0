@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/18 20:49:20 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:32:45 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ OU si >= à 256 et < 0 return value %2 */
 t_token	*scan_token(void);
 char	*peek_token(void);
 void	init_scanner(char *cmd);
-int		is_token(char c);
+int		is_token(char *str, int i);
 int		find_token_id(char *token);
 int		is_quoted(int index, char *cmd);
 int		find_end(void);
