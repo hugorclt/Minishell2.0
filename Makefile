@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/19 11:35:18 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/20 00:00:11 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ FILES 		=	srcs/main.c\
 				utils/ft_substring.c\
 				utils/free.c\
 				tree_functions/create_node.c\
-				utils/convert_to_list.c\
+				utils/env_utils.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
