@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 11:43:57 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:48:52 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ typedef struct s_data
 # define OUTFILE 4
 # define INFILE 5
 # define PIPE 6
-# define CMD 7
-# define LPARENTH 8
-# define RPARENTH 9
+# define CMD 9
+# define LPARENTH 7
+# define RPARENTH 8
 
 /* ------------------------------- error_type ------------------------------- */
 # define CD_ERROR				1

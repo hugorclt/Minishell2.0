@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:37:16 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:47:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,26 @@ int	is_token(char *str, int index)
 	return (FALSE);
 }
 
+
+void	skip_whitespaces(char *cmd, int *i)
+{
+	while (cmd[*i] && ((cmd[*i] >= '\t' && cmd[*i] <= '\r') || cmd[*i] == ' '))
+		(*i)++;
+}
+
 int	find_token_id(char *token)
 {
 	t_scanner	*scanner;
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	scanner = _scanner();
+	skip_whitespaces(token, &j);
 	while (scanner->token_tab[i])
 	{
-		if (ft_strncmp(token, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
+		if (!ft_strncmp(token + j, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
 			break ;
 		i++;
 	}
@@ -86,12 +96,6 @@ int	is_quoted(int index, char *cmd)
 	if (nb_dquotes % 2 != 0)
 		return (TRUE);
 	return (FALSE);
-}
-
-void	skip_whitespaces(char *cmd, int *i)
-{
-	while (cmd[*i] && ((cmd[*i] >= '\t' && cmd[*i] <= '\r') || cmd[*i] == ' '))
-		(*i)++;
 }
 
 int	find_end(void)
