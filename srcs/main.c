@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/20 00:02:04 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/21 13:54:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_token	*get_token()
+{
+	t_token	*token;
+	char	*cmd;
+
+	token	= malloc(sizeof(t_token));
+	if (!token)
+		free_all(QUIT);
+	cmd = scan_token();
+	token->id = find_token_id(cmd);
+	
+	//EXPAND to add
+
+	token->cmd = split_quoted(cmd);
+	token->cmd = unquote(token->cmd);
+	return (free(cmd), token);
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -21,16 +39,18 @@ int	main(int ac, char **av, char **env)
 	
 	using_history();
 	env_init_list(env);
-	// print_lst();
 	while (42)
 	{
+		//init
 		cmd = readline(PINK "mimishell $>" RESET);
-		add_history(cmd);
+		if (!cmd)
+			free_all(QUIT);
 		init_scanner(cmd);
-		print_all_token();
+		add_history(cmd);
+		get_token();
+
+		//free to continue the loop
 		free(cmd);
 		free_all(FREE);
-		//create_tree();
-		//print_tree();
 	}
 }

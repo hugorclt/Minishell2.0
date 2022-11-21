@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/20 00:55:29 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/21 13:51:27 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef unsigned char u_char;
 typedef struct s_token
 {
 	int		id;
-	char	*cmd;
+	char	**cmd;
 }	t_token;
 
 typedef struct s_list
@@ -139,7 +139,7 @@ int		is_quoted(int index, char *cmd);
 int		find_end(void);
 char	*peek_token(void);
 void	init_scanner(char *cmd);
-t_token	*scan_token(void);
+char	*scan_token(void);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -153,6 +153,9 @@ void	error_parsing(char *msg);
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(int flag);
 void	free_matrix(char **matrix);
+
+/* ----------------------------------- len ---------------------------------- */
+int	tab_len(char **cmd);
 
 /* ------------------------------ list_function ----------------------------- */
 int		ft_lstsize(t_list *lst);
@@ -169,7 +172,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	print_tab(char **tab);
 void	print_lst(void);
 void	print_tree(void);
-void	print_all_token(void);
 
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
@@ -177,5 +179,10 @@ void	update_last_cmd_status(int status);
 
 /* ---------------------------------- tree ---------------------------------- */
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
+
+/* ----------------------------- transformation ----------------------------- */
+char	**split_quoted(char *cmd);
+char	*unquote_line(char *cmd);
+char	**unquote(char **cmd);
 
 #endif
