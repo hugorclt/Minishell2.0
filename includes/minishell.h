@@ -138,8 +138,9 @@ int		find_token_id(char *token);
 int		is_quoted(int index, char *cmd);
 int		find_end(void);
 char	*peek_token(void);
-void	init_scanner(char *cmd);
 char	*scan_token(void);
+void	init_scanner(char *cmd);
+void	skip_whitespaces(char *cmd, int *i);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -181,8 +182,8 @@ void	update_last_cmd_status(int status);
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
-char	**split_quoted(char *cmd);
 char	*unquote_line(char *cmd);
+char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
 
 #endif

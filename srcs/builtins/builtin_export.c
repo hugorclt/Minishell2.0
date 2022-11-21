@@ -6,30 +6,47 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/20 01:11:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/21 22:15:12 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_export_env(void)
+void	check_export_error(char **arg)
 {
-	t_list	*env;
-
-	env = *_list();
-	while (env)
+	if (!arg[1])
+		return ;
+	if (ft_isdigit(arg[1][0]) == TRUE)
 	{
-		printf("export %s=%s\n", env->key, env->value);
-		env = env->next;
+		dprintf(STDERR, "export: not an identifier: %c\n", arg[1][0]);
+		update_last_cmd_status(FAILURE);
 	}
 }
 
 void	builtin_export(char **arg)
 {
+	int		i;
+	int		j;
+	char	**export_var;
+	t_data	*data;
+	
+	i = 0;
+	data = _data();
 	if (!arg[1])
-	{
-		print_export_env();
 		return ;
+	check_export_error(arg);
+	if (data->last_cmd_status == EXIT_TOO_MANY_ARGS)
+		return;
+	while (arg[i])
+	{
+		j = 0;
+		export_var = ft_split(arg[i], '=');
+		if (!export_var || !export_var[0])
+			free_all(QUIT);
+		while (export_var[j])
+		{
+			
+		}
+		i++;
 	}
-	env_add_node(arg[1], arg[2]);
 }
