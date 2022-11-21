@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/19 11:35:18 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/21 08:22:43 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ FILES 		=	srcs/main.c\
 				utils/ft_substring.c\
 				utils/free.c\
 				tree_functions/create_node.c\
-				utils/convert_to_list.c\
+				utils/env_utils.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -66,6 +66,10 @@ $(OBJS_DIR)/%.o	: 	srcs/list_functions/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 		
 $(OBJS_DIR)/%.o	: 	srcs/tree_functions/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+				
+$(OBJS_DIR)/%.o	: 	srcs/transformation/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 # End Multiple Directory
