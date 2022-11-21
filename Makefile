@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/21 08:38:31 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/21 13:01:18 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ FILES 		=	srcs/main.c\
 				transformation/expand.c\
 				transformation/split_quoted.c\
 				transformation/unquoting.c\
+				utils/len.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 

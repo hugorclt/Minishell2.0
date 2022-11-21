@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 08:58:18 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:05:50 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,42 +36,23 @@ int	is_token(char *str, int index)
 {
 	int			i;
 	t_scanner	*scanner;
-	
+
 	i = 0;
 	scanner = _scanner();
 	while (scanner->token_tab[i])
 	{
-		if (!ft_strncmp(str + index, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
+		if (!ft_strncmp(str + index, scanner->token_tab[i],
+				ft_strlen(scanner->token_tab[i])))
 			return (TRUE);
 		i++;
 	}
 	return (FALSE);
 }
 
-
 void	skip_whitespaces(char *cmd, int *i)
 {
 	while (cmd[*i] && ((cmd[*i] >= '\t' && cmd[*i] <= '\r') || cmd[*i] == ' '))
 		(*i)++;
-}
-
-int	find_token_id(char *token)
-{
-	t_scanner	*scanner;
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	scanner = _scanner();
-	skip_whitespaces(token, &j);
-	while (scanner->token_tab[i])
-	{
-		if (!ft_strncmp(token + j, scanner->token_tab[i], ft_strlen(scanner->token_tab[i])))
-			break ;
-		i++;
-	}
-	return (i);
 }
 
 int	is_quoted(int index, char *cmd)
@@ -104,7 +85,7 @@ int	find_end(void)
 	int			i;
 	int			is_tok;
 	int			j;
-	
+
 	scanner = _scanner();
 	i = scanner->start_pos;
 	skip_whitespaces(scanner->cmd, &i);
@@ -114,8 +95,9 @@ int	find_end(void)
 		j = 0;
 		while (scanner->token_tab[j])
 		{
-			if (!ft_strncmp(scanner->cmd + i, scanner->token_tab[j], ft_strlen(scanner->token_tab[j]))
-			&& !is_quoted(i, scanner->cmd))
+			if (!ft_strncmp(scanner->cmd + i, scanner->token_tab[j],
+					ft_strlen(scanner->token_tab[j]))
+				&& !is_quoted(i, scanner->cmd))
 			{
 				if (is_tok)
 					i += ft_strlen(scanner->token_tab[j]);
