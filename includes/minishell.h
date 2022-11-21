@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 08:20:53 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:36:50 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,8 @@ void	update_last_cmd_status(int status);
 
 /* ---------------------------------- tree ---------------------------------- */
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
+
+/* ----------------------------- transformation ----------------------------- */
+char	**split_quoted(char *cmd);
 
 #endif

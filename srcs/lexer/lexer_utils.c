@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 08:23:15 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/21 08:58:18 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	is_quoted(int index, char *cmd)
 	nb_dquotes = 0;
 	while (i <= index)
 	{
-		if (cmd[i] == '\'')
+		if (cmd[i] == '\'' && nb_dquotes % 2 == 0)
 			nb_quotes++;
-		else if (cmd[i] == '"')
+		else if (cmd[i] == '"' && nb_quotes % 2 == 0)
 			nb_dquotes++;
 		i++;
 	}

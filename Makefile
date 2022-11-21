@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/21 08:22:43 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/21 08:38:31 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ FILES 		=	srcs/main.c\
 				utils/free.c\
 				tree_functions/create_node.c\
 				utils/env_utils.c\
+				transformation/expand.c\
+				transformation/split_quoted.c\
+				transformation/unquoting.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
