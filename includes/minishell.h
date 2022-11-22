@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 13:51:27 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:31:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@
 
 /* ------------------------------- token_type ------------------------------- */
 # define OR						1
-# define CMD					7
+# define CMD					9
 # define AND					0
 # define PIPE					6
 # define INFILE					5
 # define HEREDOC				3
 # define OUTFILE				4
-# define LPARENTH				8
-# define RPARENTH				9
+# define LPARENTH				7
+# define RPARENTH				8
 # define OUTFILE_APND			2
 
 /* ------------------------------- error_type ------------------------------- */
@@ -81,10 +81,11 @@ typedef unsigned char u_char;
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
 /* -------------------------------------------------------------------------- */
+
 typedef struct s_token
 {
-	int		id;
-	char	**cmd;
+	int			id;
+	char		**cmd;
 }	t_token;
 
 typedef struct s_list
@@ -127,19 +128,22 @@ void	env_init_list(char **env);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
-
+void	create_tree(void);
+t_token	*append_two_token(t_token *tokone, t_token *toketwo);
+t_tree 	*create_and_or(void);
 
 /* --------------------------------- parser --------------------------------- */
-
+t_token	*get_token();
 
 /* ---------------------------------- lexer --------------------------------- */
 int		is_token(char *str, int i);
 int		find_token_id(char *token);
 int		is_quoted(int index, char *cmd);
 int		find_end(void);
-char	*peek_token(void);
+int		peek_token(void);
 void	init_scanner(char *cmd);
 char	*scan_token(void);
+void	skip_whitespaces(char *cmd, int *i);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);

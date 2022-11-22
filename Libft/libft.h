@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 00:26:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:23:19 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+#define QUIT 1
 
 
 int	ft_strcmp(char *s1, char *s2);
@@ -53,5 +55,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void	free_all(int flag);
 
 #endif

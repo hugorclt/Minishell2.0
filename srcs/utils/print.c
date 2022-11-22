@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:47:57 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 13:53:54 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:43:40 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	print_tree_utils(t_tree *root, int space)
 		printf(" ");
 		i++;
 	}
-	printf("%d\n", root->token->id);
+	if (root->token && root->token->cmd)
+		print_tab(root->token->cmd);
 	print_tree_utils(root->left, space);
 }
 

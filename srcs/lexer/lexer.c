@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 14:04:58 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:40:56 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	find_token_id(char *token)
 
 	i = 0;
 	j = 0;
+	if (!token[0] || !token)
+		return (10);
 	scanner = _scanner();
 	skip_whitespaces(token, &j);
 	while (scanner->token_tab[i])
@@ -32,16 +34,18 @@ int	find_token_id(char *token)
 	return (i);
 }
 
-char	*peek_token(void)
+int 	peek_token(void)
 {
 	t_scanner	*scanner;
 	int			end;
 	char		*cmd;
+	int 		type;
 
 	scanner = _scanner();
 	end = find_end();
 	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
-	return (cmd);
+	type = find_token_id(cmd);
+	return (free(cmd), type);
 }
 
 char	*scan_token(void)
