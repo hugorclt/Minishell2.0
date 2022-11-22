@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/22 01:40:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/22 07:54:02 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tree 	*create_simple_cmd(void)
 	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
 		node->left = create_redirection();
 	node->token = get_token();
-	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND) /// error si y'a {echo > in bjr}
+	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
 		node->right = create_redirection();
 	if (peek_token() == CMD)
 		node->token = append_two_token(node->token, get_token());
@@ -54,14 +54,13 @@ t_tree 	*create_pipeline(void)
 	if (peek_token() == PIPE)
 	{
 		node->token = get_token();
-		node->right = create_simple_cmd();
+		node->right = create_pipeline();
 	}
 	else if (peek_token() == AND || peek_token() == OR || peek_token() == RPARENTH)
 	{
 		node->token = get_token();
 		node->right = create_and_or();
 	}
-			
 	return (node);
 }
 
