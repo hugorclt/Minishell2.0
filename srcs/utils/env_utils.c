@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/21 21:33:09 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:04:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ void	env_change_value(char *key, char *new_value)
 		free(env->value);
 		env->value = ft_strdup(new_value);
 	}
+}
+
+void	env_unset_key(char *key)
+{
+	t_list	**env;
+
+	env = _list();
+	ft_lst_remove_if(env, key);
 }
 
 char	*env_get_value(char	*key)

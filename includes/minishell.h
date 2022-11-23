@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 13:51:27 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:05:06 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_data
 /* ----------------------------------- env ---------------------------------- */
 char	*env_get_value(char	*key);
 void	env_init_list(char **env);
+void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
@@ -141,6 +142,15 @@ char	*peek_token(void);
 char	*scan_token(void);
 void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
+
+/* -------------------------------- builtins -------------------------------- */
+void	builtin_cd(char **arg);
+void	builtin_echo(char **arg);
+void	builtin_env(char **arg);
+void	builtin_exit(char **arg);
+void	builtin_export(char **arg);
+void	builtin_pwd(char **arg);
+void	builtin_unset(char **arg);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -165,6 +175,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lst_remove_if(t_list **begin_list, void *key_ref);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(char *key, char *value);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));

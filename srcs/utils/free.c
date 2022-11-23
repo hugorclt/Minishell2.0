@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/20 00:55:13 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:15:12 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 void	free_all(int flag)
 {
-	t_data	*data;
+	// t_data	*data;
 	
-	data = _data();
+	// data = _data();
 	//free_tree(&(data->tree));
 	if (flag == QUIT)
 	{

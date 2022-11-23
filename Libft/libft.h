@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/15 00:26:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:17:52 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# include "../includes/minishell.h"
+
+# define QUIT	1
+# define FREE	2
 
 int	ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
@@ -42,6 +46,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substring(char const *s, unsigned int start, size_t end);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);

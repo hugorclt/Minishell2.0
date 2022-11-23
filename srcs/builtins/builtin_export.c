@@ -6,47 +6,49 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/21 22:15:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 01:16:37 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_export_error(char **arg)
+static void	check_export_error(char **arg)
 {
 	if (!arg[1])
-		return ;
-	if (ft_isdigit(arg[1][0]) == TRUE)
+		update_last_cmd_status(FAILURE);
+	if (ft_isalpha(arg[1][0]) == FALSE && arg[1][0] != '_')
 	{
-		dprintf(STDERR, "export: not an identifier: %c\n", arg[1][0]);
+		dprintf(STDERR, "mimishell: export: '%c': not a valiid identifier \n",
+						arg[1][0]);
 		update_last_cmd_status(FAILURE);
 	}
+}
+
+static void	export_key_and_value(char *str)
+{
+	int		equal_index;
+	char	*key;
+	char	*value;
+
+	equal_index = ft_strchr(str, '=');
+	key = ft_substring(str, 0, equal_index);
+	value = ft_substring(str, equal_index, ft_strlen(str[equal_index]));
+	env_add_node(key, value);
 }
 
 void	builtin_export(char **arg)
 {
 	int		i;
-	int		j;
-	char	**export_var;
 	t_data	*data;
 	
-	i = 0;
+	i = 1;
 	data = _data();
-	if (!arg[1])
-		return ;
 	check_export_error(arg);
-	if (data->last_cmd_status == EXIT_TOO_MANY_ARGS)
+	if (data->last_cmd_status == FAILURE)
 		return;
 	while (arg[i])
 	{
-		j = 0;
-		export_var = ft_split(arg[i], '=');
-		if (!export_var || !export_var[0])
-			free_all(QUIT);
-		while (export_var[j])
-		{
-			
-		}
+		export_key_and_value(arg[i]);
 		i++;
 	}
 }

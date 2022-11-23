@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substring.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 04:11:52 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/19 10:46:28 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:15:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
 char	*ft_substring(char const *s, unsigned int start, size_t end)
 {
