@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 15:05:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:25:54 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_data
 /* -------------------------------------------------------------------------- */
 /* ----------------------------------- env ---------------------------------- */
 char	*env_get_value(char	*key);
+void	env_unset_key(char *key);
 void	env_init_list(char **env);
 void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
@@ -175,7 +176,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lst_remove_if(t_list **begin_list, void *key_ref);
+void 	ft_lst_remove_if(t_list **begin_list, void *key_ref);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(char *key, char *value);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
