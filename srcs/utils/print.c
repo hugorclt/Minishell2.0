@@ -54,7 +54,7 @@ static void	print_tree_utils(t_tree *root, int space)
 		i++;
 	}
 	if (root->token && root->token->cmd)
-		print_tab(root->token->cmd);
+		printf("%s\n", root->token->cmd[0]);
 	print_tree_utils(root->left, space);
 }
 

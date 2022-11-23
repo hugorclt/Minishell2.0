@@ -69,7 +69,6 @@ char	**split_quoted(char *cmd)
 			break ;
 		word_len = count_word_len(cmd, i);
 		ret[j] = ft_substr(cmd, i, word_len);
-		printf("j = %d\n", j);
 		j++;
 		i += word_len;
 	}

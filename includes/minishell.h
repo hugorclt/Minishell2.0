@@ -132,6 +132,7 @@ void	env_change_value(char *key, char *new_value);
 /* -------------------------------- execution ------------------------------- */
 void	create_tree(void);
 t_token	*append_two_token(t_token *tokone, t_token *toketwo);
+t_tree 	*create_and_or(void);
 
 /* --------------------------------- parser --------------------------------- */
 
