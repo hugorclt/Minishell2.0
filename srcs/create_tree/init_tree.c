@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/22 07:54:02 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:33:04 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ t_tree 	*create_pipeline(void)
 	{
 		node->token = get_token();
 		node->right = create_pipeline();
-	}
-	else if (peek_token() == AND || peek_token() == OR || peek_token() == RPARENTH)
-	{
-		node->token = get_token();
-		node->right = create_and_or();
 	}
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/22 01:40:56 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:22:11 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	find_token_id(char *token)
 
 	i = 0;
 	j = 0;
-	if (!token[0] || !token)
+	if (!token || !token[0])
 		return (10);
 	scanner = _scanner();
 	skip_whitespaces(token, &j);

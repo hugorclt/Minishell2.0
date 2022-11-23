@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/22 01:31:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:17:11 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ typedef struct s_token
 
 typedef struct s_list
 {
-	char			*key;
-	char			*value;
 	struct s_list	*next;
+	char			*value;
+	char			*key;
 }					t_list;
 
 typedef struct	s_scanner
@@ -106,17 +106,17 @@ typedef struct	s_scanner
 
 typedef struct s_tree
 {
-	t_token			*token;
 	struct s_tree 	*left;
 	struct s_tree 	*right;
+	t_token			*token;
 }	t_tree;
 
 typedef struct s_data
 {
-	u_char		last_cmd_status;
-	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
+	t_list		*env;
+	u_char		last_cmd_status;
 }	t_data;
 
 /* -------------------------------------------------------------------------- */
@@ -176,13 +176,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	print_tab(char **tab);
 void	print_lst(void);
 void	print_tree(void);
+void print_tree(void);
 
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
 void	update_last_cmd_status(int status);
 
 /* ---------------------------------- tree ---------------------------------- */
-t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
+// t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
 char	**split_quoted(char *cmd);
