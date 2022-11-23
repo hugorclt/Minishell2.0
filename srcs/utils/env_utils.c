@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/21 08:25:58 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:04:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	env_init_list(char **env)
 		env_add_node(splited_env[0], splited_env[1]);
 		i++;
 	}
-	//free_splited_env(splited_env);
+	//free_matrix(splited_env);
 }
 
 void	env_change_value(char *key, char *new_value)
@@ -49,6 +49,14 @@ void	env_change_value(char *key, char *new_value)
 		free(env->value);
 		env->value = ft_strdup(new_value);
 	}
+}
+
+void	env_unset_key(char *key)
+{
+	t_list	**env;
+
+	env = _list();
+	ft_lst_remove_if(env, key);
 }
 
 char	*env_get_value(char	*key)

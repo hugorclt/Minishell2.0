@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/22 01:18:57 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/23 15:23:39 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FILES 		=	srcs/main.c\
 				list_functions/ft_lstlast.c\
 				list_functions/ft_lstnew.c\
 				list_functions/ft_lstsize.c\
-				utils/ft_substring.c\
+				list_functions/ft_lst_remove_if.c\
 				utils/free.c\
 				tree_functions/create_node.c\
 				utils/env_utils.c\

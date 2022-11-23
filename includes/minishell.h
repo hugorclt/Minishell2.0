@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 13:17:11 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:25:54 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define LPARENTH				7
 # define RPARENTH				8
 # define CMD					9
-# define EOF					10
+# define EOL					10
 
 /* ------------------------------- error_type ------------------------------- */
 # define QUIT					1
@@ -82,18 +82,17 @@ typedef unsigned char u_char;
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
 /* -------------------------------------------------------------------------- */
-
 typedef struct s_token
 {
-	int			id;
-	char		**cmd;
+	int		id;
+	char	**cmd;
 }	t_token;
 
 typedef struct s_list
 {
-	struct s_list	*next;
-	char			*value;
 	char			*key;
+	char			*value;
+	struct s_list	*next;
 }					t_list;
 
 typedef struct	s_scanner
@@ -107,17 +106,17 @@ typedef struct	s_scanner
 
 typedef struct s_tree
 {
+	t_token			*token;
 	struct s_tree 	*left;
 	struct s_tree 	*right;
-	t_token			*token;
 }	t_tree;
 
 typedef struct s_data
 {
+	u_char		last_cmd_status;
+	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
-	t_list		*env;
-	u_char		last_cmd_status;
 }	t_data;
 
 /* -------------------------------------------------------------------------- */
@@ -125,16 +124,17 @@ typedef struct s_data
 /* -------------------------------------------------------------------------- */
 /* ----------------------------------- env ---------------------------------- */
 char	*env_get_value(char	*key);
+void	env_unset_key(char *key);
 void	env_init_list(char **env);
+void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
 void	create_tree(void);
 t_token	*append_two_token(t_token *tokone, t_token *toketwo);
-t_tree 	*create_and_or(void);
 
 /* --------------------------------- parser --------------------------------- */
-t_token	*get_token();
+
 
 /* ---------------------------------- lexer --------------------------------- */
 int		is_token(char *str, int i);
@@ -142,9 +142,19 @@ int		find_token_id(char *token);
 int		is_quoted(int index, char *cmd);
 int		find_end(void);
 int		peek_token(void);
-void	init_scanner(char *cmd);
 char	*scan_token(void);
+void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
+t_token	*get_token(void);
+
+/* -------------------------------- builtins -------------------------------- */
+void	builtin_cd(char **arg);
+void	builtin_echo(char **arg);
+void	builtin_env(char **arg);
+void	builtin_exit(char **arg);
+void	builtin_export(char **arg);
+void	builtin_pwd(char **arg);
+void	builtin_unset(char **arg);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -169,6 +179,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void 	ft_lst_remove_if(t_list **begin_list, void *key_ref);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(char *key, char *value);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
@@ -177,18 +188,17 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	print_tab(char **tab);
 void	print_lst(void);
 void	print_tree(void);
-void print_tree(void);
 
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
 void	update_last_cmd_status(int status);
 
 /* ---------------------------------- tree ---------------------------------- */
-// t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
+t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
-char	**split_quoted(char *cmd);
 char	*unquote_line(char *cmd);
+char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
 
 #endif

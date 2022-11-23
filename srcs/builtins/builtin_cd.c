@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/19 23:52:57 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/21 21:20:43 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	check_cd_error(char **arg)
 {
 	if (arg[1] && arg[2])
 		too_many_arg();
-	else if (chdir(arg[1]) != 0)
+	else if (chdir(arg[1]) == FAILURE)
 		erno_error(arg[1]);
 	else
 		update_last_cmd_status(SUCCESS);
