@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 16:23:05 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 17:32:56 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	export_key_and_value(char *str)
 	char	*key;
 	char	*value;
 
-	equal_index = ft_strchr(str, '=');
-	key = ft_substring(str, 0, equal_index);
-	value = ft_substring(str, equal_index, ft_strlen(str[equal_index]));
+	equal_index = ft_strchr_index(str, '=');
+	key = ft_substr(str, 0, equal_index);
+	value = ft_substr(str, equal_index + 1, ft_strlen(str + equal_index + 1));
 	env_add_node(key, value);
 }
 
