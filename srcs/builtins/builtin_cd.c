@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/21 21:20:43 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:22:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void	check_cd_error(char **arg)
 		too_many_arg();
 	else if (chdir(arg[1]) == FAILURE)
 		erno_error(arg[1]);
-	else
-		update_last_cmd_status(SUCCESS);
 }
 
 static void	update_pwds(char **arg)
@@ -58,4 +56,5 @@ void	builtin_cd(char **arg)
 		chdir(getenv("HOME"));
 	else
 		update_pwds(arg);
+	update_last_cmd_status(SUCCESS);
 }

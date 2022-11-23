@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 01:16:37 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:23:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	builtin_export(char **arg)
 		export_key_and_value(arg[i]);
 		i++;
 	}
+	update_last_cmd_status(SUCCESS);
 }

@@ -6,21 +6,35 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:23:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/20 00:44:29 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:21:24 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	check_env_error(char **arg)
+{
+	if (arg[1])
+	{
+		dprintf(STDERR, "env: '%s': No such file or directory\n");
+		update_last_cmd_status(NOT_FOUND);
+	}
+}
+
 void	builtin_env(char **arg)
 {
-	t_list *env;
+	t_list	*env;
+	t_data	*data;
 
-	(void)arg; /* si on envoie env 3 doit on afficher une erreur ?*/
 	env = *_list();
+	data = _data();
+	check_env_error(arg);
+	if (data->last_cmd_status == NOT_FOUND)
+		return ;
 	while (env)
 	{
 		printf("%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
+	update_last_cmd_status(SUCCESS);
 }

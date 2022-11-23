@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 15:25:54 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:20:34 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define CD_ERROR				1
 # define MALLOC_ERROR			1
 # define SYNTAX_ERROR			2
-# define CMD_NOT_FOUND			127
+# define NOT_FOUND				127
 # define EXIT_TOO_MANY_ARGS		1
 # define EXIT_NUM_ARG_REQUIRED	2
 
