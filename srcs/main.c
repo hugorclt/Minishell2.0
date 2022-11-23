@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 12:58:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:54:09 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int	main(int ac, char **av, char **env)
 			free_all(QUIT);
 		init_scanner(cmd);
 		add_history(cmd);
-		create_tree();
-		print_tree();
+		peek_token();
+		printf("%d\n", peek_token());
+		//create_tree();
+		//print_tree();
 
 		//free to continue the loop
 		free(cmd);

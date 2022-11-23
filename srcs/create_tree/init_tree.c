@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 13:33:04 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:55:45 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,38 +42,42 @@ t_tree 	*create_simple_cmd(void)
 	return (node);
 }
 
-t_tree 	*create_pipeline(void)
+t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 {
 	t_tree	*node;
 
-	node = malloc(sizeof(t_tree));
+	node = calloc(1, sizeof(t_tree));
 	if (!node)
 		free_all(QUIT);
-	ft_bzero(node, sizeof(t_tree));
-	node->left = create_simple_cmd();
-	if (peek_token() == PIPE)
-	{
-		node->token = get_token();
-		node->right = create_pipeline();
-	}
-	return (node);
+	node->token = token;
+	node->left = left;
+	node->right = right;
+	return (node->left);
+}
+
+t_tree	*create_pipeline(void)
+{
+	return (NULL);
 }
 
 t_tree 	*create_and_or(void)
 {
-	t_tree	*node;
-
-	node = malloc(sizeof(t_tree));
-	if (!node)
-		free_all(QUIT);
-	ft_bzero(node, sizeof(t_tree));
-	node->left = create_pipeline();
-	if (peek_token() == AND || peek_token() == OR)
+	t_token	*token;
+	t_tree	*left;
+	t_tree	*right;
+	
+	left = create_pipeline();
+	while (42)
 	{
-		node->token = get_token();
-		node->right = create_pipeline();
+		if (peek_token() == 12)
+			return (left);
+		if (peek_token() == AND || peek_token() == OR)
+		{
+			token = get_token();
+			right = create_pipeline();
+			left = add_node(token, left, right);
+		}
 	}
-	return (node);
 }
 
 void	create_tree(void)
