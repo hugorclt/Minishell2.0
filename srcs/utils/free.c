@@ -25,9 +25,9 @@
 
 void	free_all(int flag)
 {
-	t_data	*data;
+	//t_data	*data;
 	
-	data = _data();
+	//data = _data();
 	//free_tree(&(data->tree));
 	if (flag == QUIT)
 	{

@@ -69,7 +69,7 @@ t_tree 	*create_and_or(void)
 	left = create_pipeline();
 	while (42)
 	{
-		if (peek_token() == 12)
+		if (peek_token() == EOF)
 			return (left);
 		if (peek_token() == AND || peek_token() == OR)
 		{

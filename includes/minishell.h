@@ -40,16 +40,17 @@
 # define STEP_PRINT_TREE		10
 
 /* ------------------------------- token_type ------------------------------- */
-# define OR						1
-# define CMD					9
 # define AND					0
-# define PIPE					6
-# define INFILE					5
+# define OR						1
+# define OUTFILE_APND			2
 # define HEREDOC				3
 # define OUTFILE				4
+# define INFILE					5
+# define PIPE					6
 # define LPARENTH				7
 # define RPARENTH				8
-# define OUTFILE_APND			2
+# define CMD					9
+# define EOF					10
 
 /* ------------------------------- error_type ------------------------------- */
 # define QUIT					1
