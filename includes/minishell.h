@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 15:25:54 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:52:44 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ char	*scan_token(void);
 void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
 t_token	*get_token(void);
+int		check_cmd(char *cmd);
 
 /* -------------------------------- builtins -------------------------------- */
 void	builtin_cd(char **arg);
@@ -169,6 +170,7 @@ void	error_parsing(char *msg);
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(int flag);
 void	free_matrix(char **matrix);
+void	free_token(t_token *token);
 
 /* ----------------------------------- len ---------------------------------- */
 int	tab_len(char **cmd);

@@ -46,7 +46,7 @@ t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 {
 	t_tree	*node;
 
-	node = calloc(1, sizeof(t_tree));
+	node = ft_calloc(1, sizeof(t_tree));
 	if (!node)
 		free_all(QUIT);
 	node->token = token;
@@ -83,6 +83,8 @@ t_tree	*create_pipeline(void)
 			right = create_command();
 			left = add_node(token, left, right);
 		}
+		else if (peek_token() == RPARENTH)
+			free(get_token());
 		else
 			return (left);
 	}
@@ -106,7 +108,7 @@ t_tree 	*create_and_or(void)
 			right = create_pipeline();
 			left = add_node(token, left, right);
 		}
-		else if (peek_token() == (RPARENTH))
+		else if (peek_token() == RPARENTH)
 			free(get_token());
 	}
 }
