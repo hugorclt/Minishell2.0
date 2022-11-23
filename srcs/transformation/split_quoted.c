@@ -65,6 +65,8 @@ char	**split_quoted(char *cmd)
 	{
 		while (cmd[i] && cmd[i] == ' ' && !is_quoted(i, cmd))
 			i++;
+		if (!cmd[i])
+			break ;
 		word_len = count_word_len(cmd, i);
 		ret[j] = ft_substr(cmd, i, word_len);
 		j++;

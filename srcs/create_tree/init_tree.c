@@ -52,11 +52,40 @@ t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 	node->token = token;
 	node->left = left;
 	node->right = right;
-	return (node->left);
+	return (node);
+}
+
+t_tree	*create_command(void)
+{
+	if (peek_token() == CMD)
+		return (create_simple_cmd());
+	else
+	{
+		free(get_token());
+		return (create_and_or());
+	}
 }
 
 t_tree	*create_pipeline(void)
 {
+	t_token	*token;
+	t_tree	*left;
+	t_tree	*right;
+
+	left = create_command();
+	while (42)
+	{
+		if (peek_token() == EOL)
+			return (left);
+		else if (peek_token() == PIPE)
+		{
+			token = get_token();
+			right = create_command();
+			left = add_node(token, left, right);
+		}
+		else
+			return (left);
+	}
 	return (NULL);
 }
 
@@ -69,14 +98,16 @@ t_tree 	*create_and_or(void)
 	left = create_pipeline();
 	while (42)
 	{
-		if (peek_token() == EOF)
+		if (peek_token() == EOL)
 			return (left);
-		if (peek_token() == AND || peek_token() == OR)
+		else if (peek_token() == AND || peek_token() == OR)
 		{
 			token = get_token();
 			right = create_pipeline();
 			left = add_node(token, left, right);
 		}
+		else if (peek_token() == (RPARENTH))
+			free(get_token());
 	}
 }
 

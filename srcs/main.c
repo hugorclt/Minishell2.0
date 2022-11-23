@@ -45,11 +45,8 @@ int	main(int ac, char **av, char **env)
 			free_all(QUIT);
 		init_scanner(cmd);
 		add_history(cmd);
-		get_token();
-				get_token();
-						get_token();
-		//create_tree();
-		//print_tree();
+		create_tree();
+		print_tree();
 
 		//free to continue the loop
 		//free(cmd);
