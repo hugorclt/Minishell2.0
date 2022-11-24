@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 16:22:28 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:25:51 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	check_cd_error(char **arg)
 		erno_error(arg[1]);
 }
 
-static void	update_pwds(char **arg)
+static void	update_pwds(char *arg)
 {
-	char	*cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 	
 	chdir(arg);
 	env_change_value("OLDPWD", env_get_value("PWD"));
@@ -49,12 +49,12 @@ void	builtin_cd(char **arg)
 	t_data	*data;
 	
 	data = _data();
-	check_error_cd(arg);
+	check_cd_error(arg);
 	if (data->last_cmd_status == FAILURE)
 		return ;
 	if (!arg[1])
-		chdir(getenv("HOME"));
+		chdir((const char*)getenv("HOME"));
 	else
-		update_pwds(arg);
+		update_pwds(*arg);
 	update_last_cmd_status(SUCCESS);
 }

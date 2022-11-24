@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 16:20:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:18:26 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,6 @@ t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 char	*unquote_line(char *cmd);
 char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
+void	expand(char **args);
 
 #endif

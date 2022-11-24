@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 15:54:09 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:09:43 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_token	*get_token(void)
 	cmd = scan_token();
 	token->id = find_token_id(cmd);
 	token->cmd = split_quoted(cmd);
-	//EXPAND to add here
+	// print_tab(token->cmd);
+	expand(token->cmd);
+	// builtin_echo(token->cmd + 1);
 	token->cmd = unquote(token->cmd);
 	return (free(cmd), token);
 }
@@ -46,7 +48,7 @@ int	main(int ac, char **av, char **env)
 		init_scanner(cmd);
 		add_history(cmd);
 		create_tree();
-		print_tree();
+		//print_tree();
 
 		//free to continue the loop
 		//free(cmd);

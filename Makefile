@@ -6,35 +6,43 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/23 15:23:39 by lbisson          ###   ########.fr        #
+#    Updated: 2022/11/23 19:28:21 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
-FILES 		=	srcs/main.c\
-				lexer/lexer.c\
-				lexer/lexer_utils.c\
-				singleton/singleton.c\
-				utils/print.c\
-				list_functions/ft_lstadd_back.c\
-				list_functions/ft_lstadd_front.c\
-				list_functions/ft_lstclear.c\
-				list_functions/ft_lstdelone.c\
-				list_functions/ft_lstiter.c\
-				list_functions/ft_lstlast.c\
-				list_functions/ft_lstnew.c\
-				list_functions/ft_lstsize.c\
-				list_functions/ft_lst_remove_if.c\
-				utils/free.c\
-				tree_functions/create_node.c\
-				utils/env_utils.c\
-				transformation/expand.c\
-				transformation/split_quoted.c\
-				transformation/unquoting.c\
-				utils/len.c\
-				create_tree/init_tree.c\
-				create_tree/tree_utils.c\
+FILES 		=	builtins/builtin_cd.c				\
+				builtins/builtin_echo.c				\
+				builtins/builtin_env.c				\
+				builtins/builtin_exit.c				\
+				builtins/builtin_export.c			\
+				builtins/builtin_pwd.c				\
+				builtins/builtin_unset.c			\
+				create_tree/init_tree.c				\
+				create_tree/tree_utils.c			\
+				lexer/lexer_utils.c					\
+				lexer/lexer.c						\
+				list_functions/ft_lst_remove_if.c	\
+				list_functions/ft_lstadd_back.c		\
+				list_functions/ft_lstadd_front.c	\
+				list_functions/ft_lstclear.c		\
+				list_functions/ft_lstdelone.c		\
+				list_functions/ft_lstiter.c			\
+				list_functions/ft_lstlast.c			\
+				list_functions/ft_lstnew.c			\
+				list_functions/ft_lstsize.c			\
+				singleton/singleton.c				\
+				srcs/main.c							\
+				transformation/expand.c				\
+				transformation/split_quoted.c		\
+				transformation/unquoting.c			\
+				tree_functions/create_node.c		\
+				utils/env_utils.c					\
+				utils/free.c						\
+				utils/len.c							\
+				utils/print.c						\
+				utils/update_last_cmd_status.c		\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -52,6 +60,10 @@ $(OBJS_DIR)		:
 
 # For Multiple Directory
 $(OBJS_DIR)/%.o	: 	srcs/%.c
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/builtins/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 

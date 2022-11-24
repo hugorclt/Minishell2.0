@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 15:04:05 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/11/23 21:11:20 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	env_init_list(char **env)
 	while (env[i])
 	{
 		splited_env = ft_split(env[i], '=');
-		if (splited_env || splited_env[0] || splited_env[1])
+		if (!splited_env || !splited_env[0])
 			break ;
 		env_add_node(splited_env[0], splited_env[1]);
 		i++;
@@ -64,9 +64,11 @@ char	*env_get_value(char	*key)
 	t_list	*env;
 
 	env = *_list();
-	while (env && ft_strncmp(env->key, key, ft_strlen(key)))
+	while (env && ft_strncmp(env->key, key, ft_strlen(key)) != 0)
 		env = env->next;
-	if (ft_strncmp(env->key, key, ft_strlen(key)) == 0)
+	if (!env)
+		return (NULL);
+	else if (ft_strncmp(env->key, key, ft_strlen(key)) == 0)
 		return (env->value);
 	return (NULL);
 }

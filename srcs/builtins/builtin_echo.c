@@ -3,33 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 00:05:05 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/21 12:47:57 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:14:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	skip_no_nl(char **arg)
+static int	is_nl_flag(char *arg)
 {
 	int	i;
-	int	j;
 
-	i = 1;
-	while (arg[i])
-	{
-		j = 0;
-		if (ft_strncmp(arg[i], "-n", 2) == 0)
-			j = 1;
-		while (arg[i][j] && arg[i][j] == 'n')
-			j++;
-		if (arg[i][j] != '\0')
-			return(i);
+	i = 0;
+	if (ft_strncmp(arg, "-n", 2) == 0)
+		i = 1;
+	while (arg[i] == 'n')
 		i++;
-	}
-	return (i);
+	if (arg[i] == '\0')
+		return (TRUE);
+	return (FALSE);
 }
 
 void	builtin_echo(char **arg)
@@ -39,9 +33,12 @@ void	builtin_echo(char **arg)
 
 	i = 0;
 	print_nl = TRUE;
-	i = skip_no_nl(arg);
-	if (i > 1)
+	while (arg[i] && is_nl_flag(arg[i]))
+	{
+		printf("here\n");
+		i++;
 		print_nl = FALSE;
+	}
 	while (arg[i])
 	{
 		printf("%s", arg[i]);
