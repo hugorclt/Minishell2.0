@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 10:50:15 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:59:51 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	free_all(int flag);
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_dfree(char *s1, char *s2);
 char	*ft_strjoin_char(char *cmd, char c);
+int		ft_iswhitespaces(char c);
 
 #endif

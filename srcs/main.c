@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 11:33:12 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:00:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	main(int ac, char **av, char **env)
 		{
 			init_scanner(cmd);
 			add_history(cmd);
-			//if (create_tree() == SUCCESS)
-			//{
+			if (create_tree() == SUCCESS)
+			{
 
-			//	print_tree();
-			//}
+				print_tree();
+			}
 		}
 		free_all(FREE);
 	}
