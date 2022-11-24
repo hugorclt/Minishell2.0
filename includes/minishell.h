@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:19:43 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:06 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ t_token	*get_token(void);
 int		check_cmd(char *cmd);
 int		is_redir(int id);
 int		strjoin_redir(t_token **token, char **cmd);
+int 	peek_token_tree(void);
 
 /* -------------------------------- builtins -------------------------------- */
 void	builtin_cd(char **arg);

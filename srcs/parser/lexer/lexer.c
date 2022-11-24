@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:45:23 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:59:43 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ int 	peek_token(void)
 	return (free(cmd), type);
 }
 
+int 	peek_token_tree(void)
+{
+	t_scanner	*scanner;
+	int			end;
+	char		*cmd;
+	int 		type;
+
+	scanner = _scanner();
+	end = find_end();
+	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
+	type = find_token_id(cmd);
+	if (type >= OUTFILE_APND && type <= INFILE)
+		return (CMD);
+	return (free(cmd), type);
+}
+
 char	*scan_token(void)
 {
 	t_scanner	*scanner;
@@ -75,7 +91,7 @@ t_token	*get_token(void)
 	if (strjoin_redir(&token, &cmd) == FAILURE)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
-	//EXPAND to add here
+		//Expand here
 	token->cmd = unquote(token->cmd);
 	if (!token->cmd)
 		return (free(cmd), free_token(token), NULL);

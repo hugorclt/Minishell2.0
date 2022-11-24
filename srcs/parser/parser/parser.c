@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:48:02 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:32 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 
 t_tree	*create_command(void)
 {
-	if (peek_token() == CMD)
+	if (peek_token_tree() == CMD)
 		return (create_simple_cmd());
-	else if (peek_token() != EOL)
+	else if (peek_token_tree() != EOL)
 	{
 		free(get_token());
 		return (create_and_or());
@@ -60,9 +60,9 @@ t_tree	*create_pipeline(void)
 	left = create_command();
 	while (42)
 	{
-		if (peek_token() == EOL)
+		if (peek_token_tree() == EOL)
 			return (left);
-		else if (peek_token() == PIPE)
+		else if (peek_token_tree() == PIPE)
 		{
 			token = get_token();
 			if (!token)
@@ -70,7 +70,7 @@ t_tree	*create_pipeline(void)
 			right = create_command();
 			left = add_node(token, left, right);
 		}
-		else if (peek_token() == RPARENTH)
+		else if (peek_token_tree() == RPARENTH)
 			free(get_token());
 		else
 			return (left);
@@ -87,9 +87,9 @@ t_tree 	*create_and_or(void)
 	left = create_pipeline();
 	while (42)
 	{
-		if (peek_token() == EOL)
+		if (peek_token_tree() == EOL)
 			return (left);
-		else if (peek_token() == AND || peek_token() == OR)
+		else if (peek_token_tree() == AND || peek_token_tree() == OR)
 		{
 			token = get_token();
 			if (!token)
@@ -97,7 +97,7 @@ t_tree 	*create_and_or(void)
 			right = create_pipeline();
 			left = add_node(token, left, right);
 		}
-		else if (peek_token() == RPARENTH)
+		else if (peek_token_tree() == RPARENTH)
 			free(get_token());
 	}
 }
