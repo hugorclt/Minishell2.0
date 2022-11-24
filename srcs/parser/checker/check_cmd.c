@@ -6,11 +6,29 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 11:05:27 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:19:39 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_token	*get_token_check(void)
+{
+	t_token	*token;
+	char	*cmd;
+
+	token	= malloc(sizeof(t_token));
+	if (!token)
+		free_all(QUIT);
+	cmd = scan_token();
+	token->id = find_token_id(cmd);
+	if (strjoin_redir(&token, &cmd) == FAILURE)
+		return (free(cmd), free(token), NULL);
+	token->cmd = split_quoted(cmd);
+	if (!token->cmd)
+		return (free(cmd), free_token(token), NULL);
+	return (free(cmd), token);
+}
 
 void	print_error_unexpected(char *cmd)
 {
@@ -36,7 +54,7 @@ static int	check_first_token(void)
 
 	if (peek_token() != CMD && !is_redir(peek_token()))
 	{
-		token = get_token();
+		token = get_token_check();
 		if (!token)
 			return (FAILURE);
 		print_error_unexpected(token->cmd[0]);
@@ -57,7 +75,7 @@ int	check_cmd(char *cmd)
 		return (FAILURE);
 	while (peek_token() != EOL)
 	{
-		token = get_token();
+		token = get_token_check();
 		if (!token)
 			return (FAILURE);
 		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1 || peek_token() == EOL))

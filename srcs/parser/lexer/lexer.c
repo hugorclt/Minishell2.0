@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:59:43 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:24:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_token	*get_token(void)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
 		//Expand here
+	parse_redirection(&token, token->cmd);
 	token->cmd = unquote(token->cmd);
 	if (!token->cmd)
 		return (free(cmd), free_token(token), NULL);

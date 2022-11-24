@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 13:00:06 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:03:19 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
 # include "../Libft/libft.h"
 
@@ -62,6 +66,11 @@
 # define EXIT_TOO_MANY_ARGS		1
 # define EXIT_NUM_ARG_REQUIRED	2
 
+/* -------------------------------- sig_type -------------------------------- */
+# define SIG_PARSE				0
+# define SIG_EXEC				1
+# define SIG_HEREDOC			2
+
 /* -------------------------------------------------------------------------- */
 /*                                    color                                   */
 /* -------------------------------------------------------------------------- */
@@ -84,16 +93,20 @@ typedef unsigned char u_char;
 /* -------------------------------------------------------------------------- */
 typedef struct s_file
 {
-	int		type;
 	char	*file;
+	int		type;
 }	t_file;
 
 typedef struct s_token
 {
-	int		id;
-	char	**cmd;
 	t_file	*infile;
 	t_file	*outfile;
+	char	**cmd;
+	int		id;
+	int		fd_in;
+	int		fd_out;
+	int		nb_file_in;
+	int		nb_file_out;
 }	t_token;
 
 typedef struct s_list
@@ -125,6 +138,7 @@ typedef struct s_data
 	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
+	int			nb_heredoc;
 }	t_data;
 
 /* -------------------------------------------------------------------------- */
@@ -138,15 +152,15 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
+
+/* --------------------------------- parser --------------------------------- */
 int		create_tree(void);
 t_token	*append_two_token(t_token *tokone, t_token *toketwo);
 t_tree 	*create_and_or(void);
 
-/* --------------------------------- parser --------------------------------- */
-
 /* ---------------------------- parse_redirection --------------------------- */
-int	count_outfile(char **cmd);
-int	count_infile(char **cmd);
+void	create_temp_file(t_token **token, char *delimiter, int index);
+void	parse_redirection(t_token **token, char **cmd);
 
 /* ---------------------------------- lexer --------------------------------- */
 int		is_token(char *str, int i);
@@ -210,6 +224,7 @@ void	print_tree(void);
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
 void	update_last_cmd_status(int status);
+void	sig_choice(int choice);
 
 /* ---------------------------------- tree ---------------------------------- */
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);

@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/24 12:15:39 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/24 14:35:12 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ FILES 		=	srcs/main.c\
 				srcs/utils/update_last_cmd_status.c\
 				srcs/parser/lexer/join_redir.c\
 				srcs/exec/redirection/parse_redirection.c\
+				srcs/exec/redirection/create_heredoc.c\
+				srcs/utils/signal.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
