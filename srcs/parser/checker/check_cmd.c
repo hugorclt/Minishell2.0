@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 19:06:22 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:18:32 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int	check_first_token(void)
 	if (peek_token() != CMD)
 	{
 		token = get_token();
+		if (!token)
+			return (FAILURE);
 		print_error_unexpected(token->cmd);
 		free_token(token);
 		return (FAILURE);
@@ -56,6 +58,8 @@ int	check_cmd(char *cmd)
 	while (peek_token() != EOL)
 	{
 		token = get_token();
+		if (!token)
+			return (FAILURE);
 		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1 || peek_token() == EOL))
 		{
 			print_error_unexpected(token->cmd);

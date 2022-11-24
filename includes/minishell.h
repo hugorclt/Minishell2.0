@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 18:52:44 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:14:51 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
-void	create_tree(void);
+int		create_tree(void);
 t_token	*append_two_token(t_token *tokone, t_token *toketwo);
 t_tree 	*create_and_or(void);
 

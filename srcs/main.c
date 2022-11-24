@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 18:52:50 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:15:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_token	*get_token(void)
 	token->cmd = split_quoted(cmd);
 	//EXPAND to add here
 	token->cmd = unquote(token->cmd);
+	if (!token->cmd)
+		return (NULL);
 	return (free(cmd), token);
 }
 
@@ -47,10 +49,12 @@ int	main(int ac, char **av, char **env)
 		{
 			init_scanner(cmd);
 			add_history(cmd);
-			create_tree();
-			print_tree();
-		}
+			if (create_tree() == SUCCESS)
+			{
 
+				print_tree();
+			}
+		}
 		free_all(FREE);
 	}
 }
