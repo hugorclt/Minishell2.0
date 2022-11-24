@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:33:13 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 11:33:23 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:40:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,22 @@ int	is_redir(int id)
 
 int	strjoin_redir_redir(t_token **token, char **cmd)
 {
-	if (is_redir((*token)->id))
+	while (is_redir((*token)->id))
 	{
 		if (peek_token() == CMD)
 		{
 			*cmd = ft_strjoin_char(*cmd, ' ');
 			*cmd = ft_strjoin_dfree(*cmd, scan_token());
-			(*token)->id = CMD;
+			if (!is_redir(peek_token()))
+				(*token)->id = CMD;
+			else
+				*cmd = ft_strjoin_dfree(*cmd, scan_token());
 		}
 		else
+		{
 			print_error_unexpected(*cmd);
+			return (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }
@@ -41,7 +47,7 @@ int	strjoin_redir_cmd(t_token **token, char **cmd)
 	
 	if ((*token)->id == CMD)
 	{
-		if (is_redir(peek_token()))
+		while (is_redir(peek_token()))
 		{
 			*cmd = ft_strjoin_char(*cmd, ' ');
 			*cmd = ft_strjoin_dfree(*cmd, scan_token());

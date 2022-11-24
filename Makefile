@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/24 11:34:37 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/24 12:15:39 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FILES 		=	srcs/main.c\
 				srcs/parser/checker/check_cmd.c\
 				srcs/utils/update_last_cmd_status.c\
 				srcs/parser/lexer/join_redir.c\
+				srcs/exec/redirection/parse_redirection.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -90,6 +91,10 @@ $(OBJS_DIR)/%.o	: 	srcs/exec/builtins/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/parser/checker/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/exec/redirection/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 

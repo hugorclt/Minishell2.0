@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 11:32:47 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:19:43 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,18 @@ typedef unsigned char u_char;
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
 /* -------------------------------------------------------------------------- */
+typedef struct s_file
+{
+	int		type;
+	char	*file;
+}	t_file;
+
 typedef struct s_token
 {
 	int		id;
 	char	**cmd;
+	t_file	*infile;
+	t_file	*outfile;
 }	t_token;
 
 typedef struct s_list
@@ -136,6 +144,9 @@ t_tree 	*create_and_or(void);
 
 /* --------------------------------- parser --------------------------------- */
 
+/* ---------------------------- parse_redirection --------------------------- */
+int	count_outfile(char **cmd);
+int	count_infile(char **cmd);
 
 /* ---------------------------------- lexer --------------------------------- */
 int		is_token(char *str, int i);
@@ -148,6 +159,8 @@ void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
 t_token	*get_token(void);
 int		check_cmd(char *cmd);
+int		is_redir(int id);
+int		strjoin_redir(t_token **token, char **cmd);
 
 /* -------------------------------- builtins -------------------------------- */
 void	builtin_cd(char **arg);
@@ -205,8 +218,4 @@ char	*unquote_line(char *cmd);
 char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
 
-
-
-int	is_redir(int id);
-int	strjoin_redir(t_token **token, char **cmd);
 #endif

@@ -1,40 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:44:46 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/24 12:18:36 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	count_infile(char **cmd)
 {
-	(void)ac;
-	(void)av;
-	char *cmd;
-	
-	using_history();
-	env_init_list(env);
-	while (42)
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (cmd[i])
 	{
-		cmd = readline(PINK "mimishell $>" RESET);
-		if (!cmd)
-			free_all(QUIT);
-		add_history(cmd);
-		if (check_cmd(cmd) == SUCCESS)
+		if (!ft_strncmp(cmd[i], "<<", 2))
 		{
-			init_scanner(cmd);
-			if (create_tree() == SUCCESS)
-			{
-				
-				print_tree();
-			}
+			i+= 1;
+			len++;
 		}
-		free_all(FREE);
+		else if (!ft_strncmp(cmd[i], "<", 1))
+			len++;
+		i++;
 	}
+	return (len);
+}
+
+int	count_outfile(char **cmd)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (cmd[i])
+	{
+		if (!ft_strncmp(cmd[i], ">>", 2))
+		{
+			i+= 1;
+			len++;
+		}
+		else if (!ft_strncmp(cmd[i], ">", 1))
+			len++;
+		i++;
+	}
+	return (len);
 }

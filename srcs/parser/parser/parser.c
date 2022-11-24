@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_tree.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:36:57 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:48:02 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ t_tree	*create_command(void)
 {
 	if (peek_token() == CMD)
 		return (create_simple_cmd());
-	else
+	else if (peek_token() != EOL)
 	{
 		free(get_token());
 		return (create_and_or());
 	}
+	return (NULL);
 }
 
 t_tree	*create_pipeline(void)
