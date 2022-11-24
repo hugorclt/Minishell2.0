@@ -6,29 +6,11 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:15:07 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:33:12 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_token	*get_token(void)
-{
-	t_token	*token;
-	char	*cmd;
-
-	token	= malloc(sizeof(t_token));
-	if (!token)
-		free_all(QUIT);
-	cmd = scan_token();
-	token->id = find_token_id(cmd);
-	token->cmd = split_quoted(cmd);
-	//EXPAND to add here
-	token->cmd = unquote(token->cmd);
-	if (!token->cmd)
-		return (NULL);
-	return (free(cmd), token);
-}
 
 int	main(int ac, char **av, char **env)
 {
@@ -49,11 +31,11 @@ int	main(int ac, char **av, char **env)
 		{
 			init_scanner(cmd);
 			add_history(cmd);
-			if (create_tree() == SUCCESS)
-			{
+			//if (create_tree() == SUCCESS)
+			//{
 
-				print_tree();
-			}
+			//	print_tree();
+			//}
 		}
 		free_all(FREE);
 	}

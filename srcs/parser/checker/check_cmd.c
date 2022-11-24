@@ -6,20 +6,20 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:18:32 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:05:27 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_error_unexpected(char **cmd)
+void	print_error_unexpected(char *cmd)
 {
 	char	*error_type;
 
 	if (peek_token() == EOL)
 		error_type = ft_strdup("newline");
 	else
-		error_type = ft_strdup(cmd[0]);
+		error_type = ft_strdup(cmd);
 	ft_putstr_fd(PINK "mimishell" RESET, 2);
 	ft_putstr_fd(": syntax error near unexpected token `", 2);
 	ft_putstr_fd(RED, 2);
@@ -34,12 +34,12 @@ static int	check_first_token(void)
 {
 	t_token	*token;
 
-	if (peek_token() != CMD)
+	if (peek_token() != CMD && !is_redir(peek_token()))
 	{
 		token = get_token();
 		if (!token)
 			return (FAILURE);
-		print_error_unexpected(token->cmd);
+		print_error_unexpected(token->cmd[0]);
 		free_token(token);
 		return (FAILURE);
 	}
@@ -62,7 +62,7 @@ int	check_cmd(char *cmd)
 			return (FAILURE);
 		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1 || peek_token() == EOL))
 		{
-			print_error_unexpected(token->cmd);
+			print_error_unexpected(token->cmd[0]);
 			return (FAILURE);
 		}
 		if (token->id >= 0 && token->id <= 6)

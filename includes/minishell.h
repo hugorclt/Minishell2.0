@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:14:51 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:32:47 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ t_tree		**_tree(void);
 
 /* ---------------------------------- error --------------------------------- */
 void	error_parsing(char *msg);
+void	print_error_unexpected(char *cmd);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(int flag);
@@ -204,4 +205,8 @@ char	*unquote_line(char *cmd);
 char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
 
+
+
+int	is_redir(int id);
+int	strjoin_redir(t_token **token, char **cmd);
 #endif

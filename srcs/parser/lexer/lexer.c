@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 13:22:11 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:31:10 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,24 @@ char	*scan_token(void)
 	cmd = ft_substring(scanner->cmd, scanner->start_pos, scanner->end_pos);
 	scanner->start_pos = scanner->end_pos;
 	return (cmd);
+}
+
+t_token	*get_token(void)
+{
+	t_token	*token;
+	char	*cmd;
+
+	token	= malloc(sizeof(t_token));
+	if (!token)
+		free_all(QUIT);
+	cmd = scan_token();
+	token->id = find_token_id(cmd);
+	if (strjoin_redir(&token, &cmd) == FAILURE)
+		return (free(cmd), free(token), NULL);
+	token->cmd = split_quoted(cmd);
+	//EXPAND to add here
+	token->cmd = unquote(token->cmd);
+	if (!token->cmd)
+		return (free(cmd), free_token(token), NULL);
+	return (free(cmd), token);
 }

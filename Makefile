@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/23 18:59:42 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/24 11:34:37 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,28 +15,28 @@ NAME 		= 	minishell
 FILES 		=	srcs/main.c\
 				srcs/parser/lexer/lexer.c\
 				srcs/parser/lexer/lexer_utils.c\
-				utils/singleton/singleton.c\
-				utils/print.c\
-				utils/list_functions/ft_lstadd_back.c\
-				utils/list_functions/ft_lstadd_front.c\
-				utils/list_functions/ft_lstclear.c\
-				utils/list_functions/ft_lstdelone.c\
-				utils/list_functions/ft_lstiter.c\
-				utils/list_functions/ft_lstlast.c\
-				utils/list_functions/ft_lstnew.c\
-				utils/list_functions/ft_lstsize.c\
-				utils/list_functions/ft_lst_remove_if.c\
-				utils/free.c\
-				tree_functions/create_node.c\
-				utils/env_utils.c\
-				parser/transformation/expand.c\
-				parser/transformation/split_quoted.c\
-				parser/transformation/unquoting.c\
-				utils/utils/len.c\
-				parser/create_tree/init_tree.c\
-				parser/create_tree/tree_utils.c\
+				srcs/utils/singleton/singleton.c\
+				srcs/utils/print.c\
+				srcs/utils/list_functions/ft_lstadd_back.c\
+				srcs/utils/list_functions/ft_lstadd_front.c\
+				srcs/utils/list_functions/ft_lstclear.c\
+				srcs/utils/list_functions/ft_lstdelone.c\
+				srcs/utils/list_functions/ft_lstiter.c\
+				srcs/utils/list_functions/ft_lstlast.c\
+				srcs/utils/list_functions/ft_lstnew.c\
+				srcs/utils/list_functions/ft_lstsize.c\
+				srcs/utils/list_functions/ft_lst_remove_if.c\
+				srcs/utils/free.c\
+				srcs/tree_functions/create_node.c\
+				srcs/utils/env_utils.c\
+				srcs/parser/transformation/expand.c\
+				srcs/parser/transformation/split_quoted.c\
+				srcs/parser/transformation/unquoting.c\
+				srcs/utils/utils/len.c\
+				srcs/parser/parser/parser.c\
 				srcs/parser/checker/check_cmd.c\
 				srcs/utils/update_last_cmd_status.c\
+				srcs/parser/lexer/join_redir.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -81,7 +81,7 @@ $(OBJS_DIR)/%.o	: 	srcs/parser/transformation/%.c
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
-$(OBJS_DIR)/%.o	: 	srcs/parser/create_tree/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/parser/parser/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 

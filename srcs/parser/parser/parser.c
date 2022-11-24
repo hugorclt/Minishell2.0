@@ -6,25 +6,11 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:19:04 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:36:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_tree 	*create_redirection(void)
-{
-	t_tree	*node;
-
-	node = malloc(sizeof(t_tree));
-	if (!node)
-		free_all(QUIT);
-	ft_bzero(node, sizeof(t_tree));
-	node->token = get_token();
-	if (!node->token)
-		return (NULL);
-	return (node);
-}
 
 t_tree 	*create_simple_cmd(void)
 {
@@ -34,15 +20,9 @@ t_tree 	*create_simple_cmd(void)
 	if (!node)
 		free_all(QUIT);
 	ft_bzero(node, sizeof(t_tree));
-	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
-		node->left = create_redirection();
 	node->token = get_token();
 	if (!node->token)
 		return (NULL);
-	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
-		node->right = create_redirection();
-	if (peek_token() == CMD)
-		node->token = append_two_token(node->token, get_token());
 	return (node);
 }
 
