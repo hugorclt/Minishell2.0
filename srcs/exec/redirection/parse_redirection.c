@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 14:53:21 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:28:12 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	parse_infile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], "<<", 2))
 		{
-			create_temp_file(token, cmd[i + 1], j);
+			(*token)->infile[j].file = ft_strdup(cmd[i + 1]);
 			(*token)->infile[j].type = HEREDOC;
 			j++;
 		}
