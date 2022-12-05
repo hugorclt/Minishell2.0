@@ -6,59 +6,52 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 21:20:46 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/05 17:03:35 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*************************************************************************/
-
-static int	print_last_cmd_status(char **args)
+static char *expand_env_var(char *cmd)
 {
-	int		printed;
-	char	*status;
-	t_data	*data;
-
-	printed = FALSE;
-	data = _data();
-	status = (char *)&data->last_cmd_status;
-	if (ft_strncmp(args[0], "echo", 4) == 0
-		&& ft_strncmp(args[1], "$?", 2) == 0)
+	char	*key;
+	char	*expvalue;
+	char	*dollar_value;
+	char	*before_dollar;
+	
+	expvalue = NULL;
+	while (ft_strchr(cmd, '$'))
 	{
-		printf("conditon passed\n");
-		printf("%d\n", data->last_cmd_status);
-		builtin_echo(&status);
-		printed = TRUE;
+		before_dollar = get_before_dollar(cmd);
+		key = get_key(cmd);
+		dollar_value = get_dollar_value(cmd, key, before_dollar);
+		expvalue = ft_expjoin_free(expvalue, before_dollar, S2);
+		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
+		cmd = ft_strchr(cmd, '$') + ft_strlen(key) + 1;
+		free(key);
 	}
-	return (printed);
+	if (*cmd && (cmd[1] != '\0' || *cmd != '\''))
+		expvalue = ft_expjoin_free(expvalue, cmd, S1);
+	return (expvalue);
 }
 
-void	expand(char **args)
+char	**expand(char **cmd)
 {
 	int		i;
-	int		j;
-	char	**key;
-	char	**value;
-
-	if (ft_strncmp(args[0], "echo", 4) != 0)
-		return ;
-	if (print_last_cmd_status(args))
-		return ;
-	i = 1;
-	while (args[i])
+	char	**expcmd;
+	t_data	*data;
+	
+	i = 0;
+	data = _data();
+	data->singleq = CLOSE;
+	data->doubleq = CLOSE;
+	expcmd = ft_calloc(sizeof(char *), tab_len(cmd) + 1);
+	while (cmd[i])
 	{
-		j = 0;
-		key = ft_split(args[i], '$');
-		value = malloc(sizeof(char *) * tab_len(key));
-		while (key[j])
-		{
-			value[j] = env_get_value(key[j]);
-			j++;
-		}
-		builtin_echo(value);
-		free_matrix(value);
+		expcmd[i] = expand_env_var(cmd[i]);
 		i++;
 	}
-	free_matrix(key);
+	expcmd[i] = NULL;
+	free_matrix(cmd);
+	return (expcmd);
 }
