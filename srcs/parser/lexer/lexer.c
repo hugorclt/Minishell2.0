@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 13:22:11 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:24:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ int 	peek_token(void)
 	return (free(cmd), type);
 }
 
+int 	peek_token_tree(void)
+{
+	t_scanner	*scanner;
+	int			end;
+	char		*cmd;
+	int 		type;
+
+	scanner = _scanner();
+	end = find_end();
+	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
+	type = find_token_id(cmd);
+	if (type >= OUTFILE_APND && type <= INFILE)
+		return (CMD);
+	return (free(cmd), type);
+}
+
 char	*scan_token(void)
 {
 	t_scanner	*scanner;
@@ -60,4 +76,25 @@ char	*scan_token(void)
 	cmd = ft_substring(scanner->cmd, scanner->start_pos, scanner->end_pos);
 	scanner->start_pos = scanner->end_pos;
 	return (cmd);
+}
+
+t_token	*get_token(void)
+{
+	t_token	*token;
+	char	*cmd;
+
+	token	= malloc(sizeof(t_token));
+	if (!token)
+		free_all(QUIT);
+	cmd = scan_token();
+	token->id = find_token_id(cmd);
+	if (strjoin_redir(&token, &cmd) == FAILURE)
+		return (free(cmd), free(token), NULL);
+	token->cmd = split_quoted(cmd);
+		//Expand here
+	parse_redirection(&token, token->cmd);
+	token->cmd = unquote(token->cmd);
+	if (!token->cmd)
+		return (free(cmd), free_token(token), NULL);
+	return (free(cmd), token);
 }

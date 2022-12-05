@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:47:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 14:08:50 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:18:53 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static int	len_wo_quote(char *cmd)
 			while (cmd[i] && cmd[i] != first_quotes)
 				i++;
 			if (!cmd[i])
+			{
 				quote_error(first_quotes);
+				return (-1);
+			}
 			else
 				len++;
 		}
@@ -69,10 +72,14 @@ char	*unquote_line(char *cmd)
 	int		i;
 	char	*ret;
 	int		j;
+	int		len;
 
 	i = 0;
 	j = 0;
-	ret = malloc(sizeof(char) * len_wo_quote(cmd) + 1);
+	len = len_wo_quote(cmd);
+	if (len == -1)
+		return (NULL);
+	ret = malloc(sizeof(char) * len + 1);
 	if (!ret)
 		free_all(QUIT);
 	while (cmd[i])
@@ -105,6 +112,8 @@ char	**unquote(char **cmd)
 	while (cmd[i])
 	{
 		ret[i] = unquote_line(cmd[i]);
+		if (!ret[i])
+			return (NULL);
 		i++;
 	}
 	ret[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 19:18:26 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:57:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
 # include "../Libft/libft.h"
 
@@ -62,6 +66,11 @@
 # define EXIT_TOO_MANY_ARGS		1
 # define EXIT_NUM_ARG_REQUIRED	2
 
+/* -------------------------------- sig_type -------------------------------- */
+# define SIG_PARSE				0
+# define SIG_EXEC				1
+# define SIG_HEREDOC			2
+
 /* -------------------------------------------------------------------------- */
 /*                                    color                                   */
 /* -------------------------------------------------------------------------- */
@@ -82,10 +91,22 @@ typedef unsigned char u_char;
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
 /* -------------------------------------------------------------------------- */
+typedef struct s_file
+{
+	char	*file;
+	int		type;
+}	t_file;
+
 typedef struct s_token
 {
-	int		id;
+	t_file	*infile;
+	t_file	*outfile;
 	char	**cmd;
+	int		id;
+	int		fd_in;
+	int		fd_out;
+	int		nb_file_in;
+	int		nb_file_out;
 }	t_token;
 
 typedef struct s_list
@@ -117,6 +138,7 @@ typedef struct s_data
 	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
+	int			nb_heredoc;
 }	t_data;
 
 /* -------------------------------------------------------------------------- */
@@ -130,12 +152,15 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
-void	create_tree(void);
+
+/* --------------------------------- parser --------------------------------- */
+int		create_tree(void);
 t_token	*append_two_token(t_token *tokone, t_token *toketwo);
 t_tree 	*create_and_or(void);
 
-/* --------------------------------- parser --------------------------------- */
-
+/* ---------------------------- parse_redirection --------------------------- */
+void	create_temp_file(t_token **token, char *delimiter, int index);
+void	parse_redirection(t_token **token, char **cmd);
 
 /* ---------------------------------- lexer --------------------------------- */
 int		is_token(char *str, int i);
@@ -147,6 +172,10 @@ char	*scan_token(void);
 void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
 t_token	*get_token(void);
+int		check_cmd(char *cmd);
+int		is_redir(int id);
+int		strjoin_redir(t_token **token, char **cmd);
+int 	peek_token_tree(void);
 
 /* -------------------------------- builtins -------------------------------- */
 void	builtin_cd(char **arg);
@@ -165,10 +194,12 @@ t_tree		**_tree(void);
 
 /* ---------------------------------- error --------------------------------- */
 void	error_parsing(char *msg);
+void	print_error_unexpected(char *cmd);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(int flag);
 void	free_matrix(char **matrix);
+void	free_token(t_token *token);
 
 /* ----------------------------------- len ---------------------------------- */
 int	tab_len(char **cmd);
@@ -193,6 +224,7 @@ void	print_tree(void);
 /* ---------------------------------- utils --------------------------------- */
 char	*ft_substring(char const *s, unsigned int start, size_t end);
 void	update_last_cmd_status(int status);
+void	sig_choice(int choice);
 
 /* ---------------------------------- tree ---------------------------------- */
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);

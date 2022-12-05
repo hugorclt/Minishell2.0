@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 08:19:03 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/21 14:08:59 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:45:31 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	count_word_len(char *cmd, int index)
 	len = 0;
 	while (cmd[index])
 	{
-		if (cmd[index] == ' ' && !is_quoted(index, cmd))
+		if (ft_iswhitespaces(cmd[index]) && !is_quoted(index, cmd))
 			break ;
 		len++;
 		index++;
@@ -63,7 +63,7 @@ char	**split_quoted(char *cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		while (cmd[i] && cmd[i] == ' ' && !is_quoted(i, cmd))
+		while (cmd[i] && ft_iswhitespaces(cmd[i]) && !is_quoted(i, cmd))
 			i++;
 		if (!cmd[i])
 			break ;

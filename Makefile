@@ -6,43 +6,40 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/23 19:28:21 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/05 15:56:17 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
-FILES 		=	builtins/builtin_cd.c				\
-				builtins/builtin_echo.c				\
-				builtins/builtin_env.c				\
-				builtins/builtin_exit.c				\
-				builtins/builtin_export.c			\
-				builtins/builtin_pwd.c				\
-				builtins/builtin_unset.c			\
-				create_tree/init_tree.c				\
-				create_tree/tree_utils.c			\
-				lexer/lexer_utils.c					\
-				lexer/lexer.c						\
-				list_functions/ft_lst_remove_if.c	\
-				list_functions/ft_lstadd_back.c		\
-				list_functions/ft_lstadd_front.c	\
-				list_functions/ft_lstclear.c		\
-				list_functions/ft_lstdelone.c		\
-				list_functions/ft_lstiter.c			\
-				list_functions/ft_lstlast.c			\
-				list_functions/ft_lstnew.c			\
-				list_functions/ft_lstsize.c			\
-				singleton/singleton.c				\
-				srcs/main.c							\
-				transformation/expand.c				\
-				transformation/split_quoted.c		\
-				transformation/unquoting.c			\
-				tree_functions/create_node.c		\
-				utils/env_utils.c					\
-				utils/free.c						\
-				utils/len.c							\
-				utils/print.c						\
-				utils/update_last_cmd_status.c		\
+FILES 		=	srcs/main.c\
+				srcs/parser/lexer/lexer.c\
+				srcs/parser/lexer/lexer_utils.c\
+				srcs/utils/singleton/singleton.c\
+				srcs/utils/print.c\
+				srcs/utils/list_functions/ft_lstadd_back.c\
+				srcs/utils/list_functions/ft_lstadd_front.c\
+				srcs/utils/list_functions/ft_lstclear.c\
+				srcs/utils/list_functions/ft_lstdelone.c\
+				srcs/utils/list_functions/ft_lstiter.c\
+				srcs/utils/list_functions/ft_lstlast.c\
+				srcs/utils/list_functions/ft_lstnew.c\
+				srcs/utils/list_functions/ft_lstsize.c\
+				srcs/utils/list_functions/ft_lst_remove_if.c\
+				srcs/utils/free.c\
+				srcs/tree_functions/create_node.c\
+				srcs/utils/env_utils.c\
+				srcs/parser/transformation/expand.c\
+				srcs/parser/transformation/split_quoted.c\
+				srcs/parser/transformation/unquoting.c\
+				srcs/utils/utils/len.c\
+				srcs/parser/parser/parser.c\
+				srcs/parser/checker/check_cmd.c\
+				srcs/utils/update_last_cmd_status.c\
+				srcs/parser/lexer/join_redir.c\
+				srcs/exec/redirection/parse_redirection.c\
+				srcs/exec/redirection/create_heredoc.c\
+				srcs/utils/signal.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -63,15 +60,11 @@ $(OBJS_DIR)/%.o	: 	srcs/%.c
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
-$(OBJS_DIR)/%.o	: 	srcs/builtins/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/parser/lexer/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
-$(OBJS_DIR)/%.o	: 	srcs/lexer/%.c 
-					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
-					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
-
-$(OBJS_DIR)/%.o	: 	srcs/singleton/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/utils/singleton/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
@@ -79,21 +72,34 @@ $(OBJS_DIR)/%.o	: 	srcs/utils/%.c
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
-$(OBJS_DIR)/%.o	: 	srcs/list_functions/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/utils/list_functions/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 		
-$(OBJS_DIR)/%.o	: 	srcs/tree_functions/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/utils/tree_functions/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 				
-$(OBJS_DIR)/%.o	: 	srcs/transformation/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/parser/transformation/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
-$(OBJS_DIR)/%.o	: 	srcs/create_tree/%.c 
+$(OBJS_DIR)/%.o	: 	srcs/parser/parser/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/exec/builtins/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/parser/checker/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/exec/redirection/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
 
 # End Multiple Directory
 

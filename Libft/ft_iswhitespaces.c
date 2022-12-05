@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grammar_rules.c                                    :+:      :+:    :+:   */
+/*   ft_iswhitespaces.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 20:55:11 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/18 20:56:39 by lbisson          ###   ########.fr       */
+/*   Created: 2022/11/24 09:36:25 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/11/24 09:38:24 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	complete_cmd()
-{
-	
-}
+#include "libft.h"
 
-void	and_or()
+int	ft_iswhitespaces(char c)
 {
-	
-}
-
-void	pipeline()
-{
-	
-}
-
-void	command()
-{
-	
-}
-
-void	simple_cmd()
-{
-	
-}
-
-void	redirect()
-{
-	
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
 }

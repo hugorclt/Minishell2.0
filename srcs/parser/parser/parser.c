@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_tree.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/23 15:55:45 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:32 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_tree 	*create_redirection(void)
-{
-	t_tree	*node;
-
-	node = malloc(sizeof(t_tree));
-	if (!node)
-		free_all(QUIT);
-	ft_bzero(node, sizeof(t_tree));
-	node->token = get_token();
-	return (node);
-}
 
 t_tree 	*create_simple_cmd(void)
 {
@@ -32,13 +20,9 @@ t_tree 	*create_simple_cmd(void)
 	if (!node)
 		free_all(QUIT);
 	ft_bzero(node, sizeof(t_tree));
-	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
-		node->left = create_redirection();
 	node->token = get_token();
-	if (peek_token() == INFILE || peek_token() == OUTFILE || peek_token() == HEREDOC || peek_token() == OUTFILE_APND)
-		node->right = create_redirection();
-	if (peek_token() == CMD)
-		node->token = append_two_token(node->token, get_token());
+	if (!node->token)
+		return (NULL);
 	return (node);
 }
 
@@ -46,7 +30,7 @@ t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 {
 	t_tree	*node;
 
-	node = calloc(1, sizeof(t_tree));
+	node = ft_calloc(1, sizeof(t_tree));
 	if (!node)
 		free_all(QUIT);
 	node->token = token;
@@ -57,13 +41,14 @@ t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
 
 t_tree	*create_command(void)
 {
-	if (peek_token() == CMD)
+	if (peek_token_tree() == CMD)
 		return (create_simple_cmd());
-	else
+	else if (peek_token_tree() != EOL)
 	{
 		free(get_token());
 		return (create_and_or());
 	}
+	return (NULL);
 }
 
 t_tree	*create_pipeline(void)
@@ -75,14 +60,18 @@ t_tree	*create_pipeline(void)
 	left = create_command();
 	while (42)
 	{
-		if (peek_token() == EOL)
+		if (peek_token_tree() == EOL)
 			return (left);
-		else if (peek_token() == PIPE)
+		else if (peek_token_tree() == PIPE)
 		{
 			token = get_token();
+			if (!token)
+				return (NULL);
 			right = create_command();
 			left = add_node(token, left, right);
 		}
+		else if (peek_token_tree() == RPARENTH)
+			free(get_token());
 		else
 			return (left);
 	}
@@ -98,27 +87,28 @@ t_tree 	*create_and_or(void)
 	left = create_pipeline();
 	while (42)
 	{
-		if (peek_token() == EOL)
+		if (peek_token_tree() == EOL)
 			return (left);
-		else if (peek_token() == AND || peek_token() == OR)
+		else if (peek_token_tree() == AND || peek_token_tree() == OR)
 		{
 			token = get_token();
+			if (!token)
+				return (NULL);
 			right = create_pipeline();
 			left = add_node(token, left, right);
 		}
-		else if (peek_token() == (RPARENTH))
+		else if (peek_token_tree() == RPARENTH)
 			free(get_token());
 	}
 }
 
-void	create_tree(void)
+int	create_tree(void)
 {
 	t_tree 	**tree;
 
 	tree = _tree();
 	(*tree) = create_and_or();
+	if (!*tree)
+		return (FAILURE);
+	return (SUCCESS);
 }
-
-
-
-				

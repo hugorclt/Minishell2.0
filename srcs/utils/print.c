@@ -46,7 +46,7 @@ static void	print_tree_utils(t_tree *root, int space)
 	if (!root)
 		return ;
 	space += STEP_PRINT_TREE;
-	print_tree_utils(root->right, space);
+	print_tree_utils(root->left, space);
 	printf("\n");
 	while (i < space)
 	{
@@ -55,7 +55,7 @@ static void	print_tree_utils(t_tree *root, int space)
 	}
 	if (root->token && root->token->cmd)
 		printf("%s\n", root->token->cmd[0]);
-	print_tree_utils(root->left, space);
+	print_tree_utils(root->right, space);
 }
 
 void	print_tree(void)
