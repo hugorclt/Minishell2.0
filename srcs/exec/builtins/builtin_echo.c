@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 00:05:05 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/23 21:14:28 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/05 17:01:21 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	builtin_echo(char **arg)
 	int	i;
 	int	print_nl;
 
-	i = 0;
+	i = 1;
 	print_nl = TRUE;
 	while (arg[i] && is_nl_flag(arg[i]))
 	{
-		printf("here\n");
 		i++;
 		print_nl = FALSE;
 	}
