@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 11:59:51 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:07:25 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 
 # define QUIT	1
 # define FREE	2
+# define NONE	0
+# define S1		1
+# define S2		2
+# define BOTH	3
 
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
@@ -63,6 +67,7 @@ void	free_all(int flag);
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_dfree(char *s1, char *s2);
 char	*ft_strjoin_char(char *cmd, char c);
+char	*ft_expjoin_free(char *s1, char *s2, int to_free);
 int		ft_iswhitespaces(char c);
 
 #endif
