@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 15:57:05 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:39:34 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 /* -------------------------------------------------------------------------- */
 # define TRUE					1
 # define FALSE					0
+# define OPEN 					1 
+# define CLOSE 					0
 # define STDOUT					1
 # define STDERR					2
 # define SUCCESS				0
@@ -134,6 +136,8 @@ typedef struct s_tree
 
 typedef struct s_data
 {
+	int			singleq;
+	int			doubleq;
 	u_char		last_cmd_status;
 	t_list		*env;
 	t_scanner	scanner;
@@ -222,7 +226,7 @@ void	print_lst(void);
 void	print_tree(void);
 
 /* ---------------------------------- utils --------------------------------- */
-char	*ft_substring(char const *s, unsigned int start, size_t end);
+int		get_last_cmd_status(void);
 void	update_last_cmd_status(int status);
 void	sig_choice(int choice);
 
@@ -230,9 +234,13 @@ void	sig_choice(int choice);
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
+int		get_valid_dollar_index(char *cmd);
+char	*get_key(char *cmd);
+char	*get_before_dollar(char *cmd);
+char	*get_dollar_value(char *cmd, char *key, char *before_dollar);
 char	*unquote_line(char *cmd);
 char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
-void	expand(char **args);
+char	**expand(char **args);
 
 #endif
