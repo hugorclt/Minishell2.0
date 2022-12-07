@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:23:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:22:01 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:34:26 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	builtin_env(char **arg)
 		return ;
 	while (env)
 	{
-		if (*(env->value) == '\0')
+		if (!env->value || *(env->value) == '\0')
 			printf("%s\n", env->key);
 		else
 			printf("%s=%s\n", env->key, env->value);

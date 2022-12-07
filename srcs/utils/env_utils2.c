@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:55:27 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:17:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 22:03:22 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ char	*env_get_key(char *key)
 	t_list	*env;
 
 	env = *_list();
+	if (ft_strncmp(key, "", 1) == 0)
+		return (NULL);
 	while (env && ft_strncmp(env->key, key, ft_strlen(key)) != 0)
 		env = env->next;
 	if (env && ft_strncmp(env->key, key, ft_strlen(key)) == 0)
-		return (ft_strdup(env->key));
+		return (env->key);
 	return (NULL);
 }
 
