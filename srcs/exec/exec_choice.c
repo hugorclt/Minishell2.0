@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 17:16:13 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:39:18 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	exec_choice(t_tree *node)
 {
 	t_fptr	builtin;
 	
+	if (!node)
+		return ;
 	builtin = dispatch(node->token->cmd[0]);
 	if (builtin)
 		(*builtin)(node->token->cmd);
