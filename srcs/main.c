@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 15:56:53 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:00:28 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// void	exec_cmd(t_tree *node)
+// {
+// 	int	pid;
+	
+// 	if (node->token->id == CMD)
+// 	{
+// 		pid = fork();
+// 		if (pid == -1)
+// 			free_all(FREE);
+// 		if (pid == 0)
+// 		{
+// 			execve("/bin/ls", NULL, )
+// 		}
+// 		else
+// 			wait(NULL);
+// 	}
+// }
 
 int	main(int ac, char **av, char **env)
 {
