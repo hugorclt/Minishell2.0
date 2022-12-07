@@ -6,7 +6,7 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/05 16:50:17 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/07 15:00:48 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,10 @@ $(OBJS_DIR)/%.o	: 	srcs/parser/checker/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/exec/redirection/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/exec/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
