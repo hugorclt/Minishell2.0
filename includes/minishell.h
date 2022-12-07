@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:08:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:39:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 /*                                  typedef                                   */
 /* -------------------------------------------------------------------------- */
 typedef unsigned char u_char;
+typedef void (*t_fptr)(char **);
 
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
@@ -98,6 +99,12 @@ typedef struct s_file
 	char	*file;
 	int		type;
 }	t_file;
+
+typedef	struct s_choice
+{
+	t_fptr	*callback;
+	char	*fun_name;
+}	t_choice;
 
 typedef struct s_token
 {
@@ -157,6 +164,7 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
+void	exec_choice(char **cmd);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);

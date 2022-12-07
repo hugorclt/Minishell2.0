@@ -6,13 +6,14 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 16:09:01 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/07 16:39:37 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
 FILES 		=	srcs/main.c									 \
+				srcs/exec/exec_choice.c						 \	
 				srcs/exec/join_cmdpath.c					 \
 				srcs/exec/builtins/builtin_cd.c				 \
 				srcs/exec/builtins/builtin_echo.c			 \
