@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:39:05 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:45:49 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
 void	exec_choice(char **cmd);
+char	*join_cmdpath(char *cmd);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);
