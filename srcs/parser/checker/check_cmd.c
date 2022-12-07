@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:19:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:26:15 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	check_first_token(void)
 {
 	t_token	*token;
 
-	if (peek_token() != CMD && !is_redir(peek_token()))
+	if (peek_token() != CMD && peek_token() != LPARENTH && !is_redir(peek_token()))
 	{
 		token = get_token_check();
 		if (!token)
