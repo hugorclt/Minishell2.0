@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 16:38:42 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:36:05 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,38 @@ void	env_add_node(char *key, char *value)
 	ft_lstadd_back(lst, ft_lstnew(key, value));
 }
 
+static int	find_first_equal(char *env_line)
+{
+	int	i;
+
+	i = 0;
+	while (env_line[i])
+	{
+		if (env_line[i] == '=')
+			return (i);
+		i++;
+	}
+	return (FALSE);
+}
+
 void	env_init_list(char **env)
 {
 	int		i;
-	char	**splited_env;
-
+	int		equal_pos;
+	
 	i = 0;
 	while (env[i])
 	{
-		splited_env = ft_split(env[i], '=');
-		if (!splited_env || !splited_env[0])
-			break ;
-		env_add_node(splited_env[0], splited_env[1]);
+		equal_pos = find_first_equal(env[i]);
+		if (equal_pos == FALSE)
+			env_add_node(env[i], NULL);
+		else
+		{
+			env_add_node(ft_substring(env[i], 0, equal_pos),
+				ft_substring(env[i], equal_pos + 1, ft_strlen(env[i])));
+		}
 		i++;
 	}
-	free_matrix(splited_env);
 }
 
 void	env_change_value(char *key, char *new_value)
