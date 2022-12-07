@@ -6,41 +6,50 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/27 14:39:58 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/07 14:57:28 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
-FILES 		=	srcs/main.c\
-				srcs/parser/lexer/lexer.c\
-				srcs/parser/lexer/lexer_utils.c\
-				srcs/utils/singleton/singleton.c\
-				srcs/utils/print.c\
-				srcs/utils/list_functions/ft_lstadd_back.c\
-				srcs/utils/list_functions/ft_lstadd_front.c\
-				srcs/utils/list_functions/ft_lstclear.c\
-				srcs/utils/list_functions/ft_lstdelone.c\
-				srcs/utils/list_functions/ft_lstiter.c\
-				srcs/utils/list_functions/ft_lstlast.c\
-				srcs/utils/list_functions/ft_lstnew.c\
-				srcs/utils/list_functions/ft_lstsize.c\
-				srcs/utils/list_functions/ft_lst_remove_if.c\
-				srcs/utils/free.c\
-				srcs/tree_functions/create_node.c\
-				srcs/utils/env_utils.c\
-				srcs/parser/transformation/expand.c\
-				srcs/parser/transformation/split_quoted.c\
-				srcs/parser/transformation/unquoting.c\
-				srcs/utils/utils/len.c\
-				srcs/parser/parser/parser.c\
-				srcs/parser/checker/check_cmd.c\
-				srcs/utils/update_last_cmd_status.c\
-				srcs/parser/lexer/join_redir.c\
-				srcs/exec/redirection/parse_redirection.c\
-				srcs/exec/redirection/create_heredoc.c\
-				srcs/utils/signal.c\
-				srcs/exec/join_cmdpath.c\
+FILES 		=	srcs/main.c									 \
+				srcs/exec/join_cmdpath.c					 \
+				srcs/exec/builtins/builtin_cd.c				 \
+				srcs/exec/builtins/builtin_echo.c			 \
+				srcs/exec/builtins/builtin_env.c			 \
+				srcs/exec/builtins/builtin_exit.c			 \
+				srcs/exec/builtins/builtin_export.c			 \
+				srcs/exec/builtins/builtin_pwd.c			 \
+				srcs/exec/builtins/builtin_unset.c			 \
+				srcs/exec/redirection/create_heredoc.c		 \
+				srcs/exec/redirection/parse_redirection.c	 \
+				srcs/parser/checker/check_cmd.c				 \
+				srcs/parser/lexer/join_redir.c				 \
+				srcs/parser/lexer/lexer_utils.c				 \
+				srcs/parser/lexer/lexer.c					 \
+				srcs/parser/parser/parser.c					 \
+				srcs/parser/transformation/expand_utils.c	 \
+				srcs/parser/transformation/expand.c			 \
+				srcs/parser/transformation/split_quoted.c	 \
+				srcs/parser/transformation/unquoting.c		 \
+				srcs/utils/list_functions/ft_lst_remove_if.c \
+				srcs/utils/list_functions/ft_lstadd_back.c	 \
+				srcs/utils/list_functions/ft_lstadd_front.c	 \
+				srcs/utils/list_functions/ft_lstclear.c		 \
+				srcs/utils/list_functions/ft_lstdelone.c	 \
+				srcs/utils/list_functions/ft_lstiter.c		 \
+				srcs/utils/list_functions/ft_lstlast.c		 \
+				srcs/utils/list_functions/ft_lstnew.c		 \
+				srcs/utils/list_functions/ft_lstsize.c		 \
+				srcs/utils/singleton/singleton.c			 \
+				srcs/utils/tree_functions/create_node.c		 \
+				srcs/utils/env_utils.c						 \
+				srcs/utils/error.c							 \
+				srcs/utils/free.c							 \
+				srcs/utils/last_cmd_status.c				 \
+				srcs/utils/utils/len.c						 \
+				srcs/utils/print.c							 \
+				srcs/utils/signal.c							 \
 
 INCL_DIR	=	-I./includes -I./Libft
 

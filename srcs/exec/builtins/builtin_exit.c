@@ -6,19 +6,19 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/19 23:10:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:24:03 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	non_num_arg(char *arg)
+static void	error_non_num_arg(char *arg)
 {
 	dprintf(STDERR, "mimishell: exit: %s: numeric argument required\n", arg);
 	update_last_cmd_status(EXIT_NUM_ARG_REQUIRED);
 }
 
-static void	too_many_args(void)
+static void	error_too_many_args(void)
 {
 	dprintf(STDERR, "mimishell: exit: too many arguments\n");
 	update_last_cmd_status(EXIT_TOO_MANY_ARGS);
@@ -45,9 +45,9 @@ static void	check_error_exit(char **arg)
 	
 	status = ft_atoi(arg[1]);
 	if (arg[1] && is_num_arg(arg[1]) == FALSE)
-		non_num_arg(arg[1]);
+		error_non_num_arg(arg[1]);
 	else if (arg[2])
-		too_many_args();
+		error_too_many_args();
 	else
 		update_last_cmd_status(status);
 		

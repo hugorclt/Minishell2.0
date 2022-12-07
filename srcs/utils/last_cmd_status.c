@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_last_cmd_status.c                           :+:      :+:    :+:   */
+/*   last_cmd_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 20:18:59 by lbisson           #+#    #+#             */
-/*   Updated: 2022/11/26 19:28:33 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/12/05 16:09:50 by lbisson           #+#    #+#             */
+/*   Updated: 2022/12/05 16:39:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	get_last_cmd_status(void)
+{
+	t_data	*data;
+
+	data = _data();
+	return (data->last_cmd_status);
+}
 
 void	update_last_cmd_status(int status)
 {
