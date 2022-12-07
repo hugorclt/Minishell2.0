@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:39:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:08:35 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_data
 /* -------------------------------------------------------------------------- */
 /* ----------------------------------- env ---------------------------------- */
 char	*env_get_value(char	*key);
+char	**env_to_matrix(void);
 void	env_unset_key(char *key);
 void	env_init_list(char **env);
 void	env_add_node(char *key, char *value);
