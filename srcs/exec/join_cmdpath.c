@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   join_cmdpath.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 14:27:55 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 15:31:33 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:47:13 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_path(char *cmd, char *path)
+static char	*find_path(char *cmd, char *path)
 {
 	int		i;
 	char	**splited_path;

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 17:08:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:40:22 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ t_token	*get_token(void)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
 	token->cmd = expand(token->cmd);
-	builtin_echo(token->cmd); /* à retirer */
 	parse_redirection(&token, token->cmd);
 	token->cmd = unquote(token->cmd);
 	if (!token->cmd)

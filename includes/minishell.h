@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:19:48 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:17:49 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 /*                                  typedef                                   */
 /* -------------------------------------------------------------------------- */
 typedef unsigned char u_char;
+typedef void (*t_fptr)(char **);
 
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
@@ -98,6 +99,12 @@ typedef struct s_file
 	char	*file;
 	int		type;
 }	t_file;
+
+typedef	struct s_choice
+{
+	t_fptr	callback;
+	char	*fun_name;
+}	t_choice;
 
 typedef struct s_token
 {
@@ -150,6 +157,7 @@ typedef struct s_data
 /* -------------------------------------------------------------------------- */
 /* ----------------------------------- env ---------------------------------- */
 char	*env_get_value(char	*key);
+char	*env_get_key(char *key);
 char	**env_to_matrix(void);
 void	env_unset_key(char *key);
 void	env_init_list(char **env);
@@ -157,6 +165,9 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
+void	exec_choice(t_tree *node);
+void	exec_cmd(t_tree *node);
+void	launch_exec(t_tree *node);
 char	*join_cmdpath(char *cmd);
 
 /* --------------------------------- parser --------------------------------- */
@@ -217,7 +228,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void 	ft_lst_remove_if(t_list **begin_list, void *key_ref);
+void 	ft_lst_remove_if(t_list **begin_list, char *key_ref);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(char *key, char *value);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));

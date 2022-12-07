@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_remove_if.c                                 :+:      :+:    :+:   */
+/*   launch_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 01:20:43 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:05:54 by lbisson          ###   ########.fr       */
+/*   Created: 2022/12/07 16:50:50 by lbisson           #+#    #+#             */
+/*   Updated: 2022/12/07 17:00:10 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_lst_remove_if(t_list **begin_list, char *key_ref)
+void	launch_exec(t_tree *node)
 {
-	t_list	*cur;
-
-	if (*begin_list == NULL || begin_list == NULL)
-		return;
-	cur = *begin_list;
-	if (ft_strncmp(cur->key, key_ref, ft_strlen(key_ref)) == 0)
-	{
-		*begin_list = cur->next;
-		free(cur);
+	if (!node)
 		return ;
-	}
-	cur = *begin_list;
-	ft_lst_remove_if(&cur->next, key_ref);
+	launch_exec(node->left);
+	exec_choice(node);
+	exec_choice(node->right);
 }
