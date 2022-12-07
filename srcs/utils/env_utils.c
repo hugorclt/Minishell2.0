@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 22:35:02 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 23:25:37 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	env_change_value(char *key, char *new_value)
 	if (ft_strncmp(env->key, key, ft_strlen(key)) == 0)
 	{
 		free(env->value);
-		env->value = ft_strdup(new_value);
+		if (!new_value)
+			env->value = NULL;
+		else
+			env->value = ft_strdup(new_value);
 	}
 }
 

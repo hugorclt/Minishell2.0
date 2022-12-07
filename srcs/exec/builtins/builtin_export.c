@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 23:08:09 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 23:24:31 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static void	check_export_error(char **arg)
 	}
 }
 
-static char	*init_key(char *str, char *val, int equal_index)
+static char	*init_key(char *str, int equal_index)
 {
 	char	*key;
 	
-	if (!equal_index || *val =='\0')
+	if (!equal_index)
 		key = ft_strdup(str);
 	else
 		key = ft_substr(str, 0, equal_index);
@@ -53,10 +53,13 @@ static void	export_key_and_value(char *str)
 	char	*val;
 
 	equal_index = ft_strchr_index(str, '=');
+	key = init_key(str, equal_index);
 	val = init_value(str, equal_index);
-	key = init_key(str, val, equal_index);
 	if (env_get_key(key))
+	{
 		env_change_value(key, val);
+		return (free(key), free(val));
+	}	
 	else
 		env_add_node(key, val);
 }
