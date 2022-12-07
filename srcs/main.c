@@ -6,29 +6,29 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:00:28 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:19:26 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	exec_cmd(t_tree *node)
-// {
-// 	int	pid;
+void	exec_cmd(t_tree *node)
+{
+	int	pid;
 	
-// 	if (node->token->id == CMD)
-// 	{
-// 		pid = fork();
-// 		if (pid == -1)
-// 			free_all(FREE);
-// 		if (pid == 0)
-// 		{
-// 			execve("/bin/ls", NULL, )
-// 		}
-// 		else
-// 			wait(NULL);
-// 	}
-// }
+	if (node->token->id == CMD)
+	{
+		pid = fork();
+		if (pid == -1)
+			free_all(FREE);
+		if (pid == 0)
+		{
+			execve(join_cmdpath(node->token->cmd[0]), node->token->cmd, env_to_matrix());
+		}
+		else
+			wait(NULL);
+	}
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -55,6 +55,7 @@ int	main(int ac, char **av, char **env)
 			{
 				sig_choice(SIG_EXEC);
 				print_tree();
+				exec_cmd(NULL);
 			}
 		}
 		free_all(FREE);
