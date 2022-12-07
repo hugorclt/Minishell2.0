@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 17:47:33 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 18:27:46 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 
 void	free_all(int flag)
 {
-	// t_data	*data;
+	t_data	*data;
 	
-	// data = _data();
+	data = _data();
+	free(data->info_cmd.pid);
+	data->info_cmd.pid = NULL;
+	data->info_cmd.nb_cmd = 0;
 	//free_tree(&(data->tree));
 	if (flag == QUIT)
 	{

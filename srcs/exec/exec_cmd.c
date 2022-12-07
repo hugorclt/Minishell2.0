@@ -3,33 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 17:49:27 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 19:31:46 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	dup2_io(int in, int out)
+{
+	dup2(in, STDIN);
+	dup2(out, STDOUT);
+}
+
 void	exec_cmd(t_tree *node)
 {
-	int	pid;
+	t_info_cmd	*info_cmd;
 	
+	info_cmd = _info_cmd();
 	if (node->token->id == CMD)
 	{
-		pid = fork();
-		if (pid == -1)
+		info_cmd->pid[info_cmd->index_cmd] = fork();
+		if (info_cmd->pid[info_cmd->index_cmd] == -1)
 			free_all(FREE);
-		if (pid == 0)
+		if (info_cmd->pid[info_cmd->index_cmd] == 0)
 		{
+			dup2_io(node->token->fd_in, node->token->fd_out);
 			if (execve(join_cmdpath(node->token->cmd[0]), node->token->cmd, env_to_matrix()) == -1)
 			{
+				info_cmd->index_cmd++;
 				dprintf(2, "bash: %s: command not found\n", node->token->cmd[0]);
 				free_all(QUIT);
 			}
 		}
-		else
-			wait(NULL);
+		info_cmd->index_cmd++;
 	}
 }
+

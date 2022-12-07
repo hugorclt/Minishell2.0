@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 18:17:49 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 19:12:41 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define OPEN 					1 
 # define CLOSE 					0
 # define STDOUT					1
+# define STDIN					0
 # define STDERR					2
 # define SUCCESS				0
 # define FAILURE				1
@@ -112,6 +113,7 @@ typedef struct s_token
 	t_file	*outfile;
 	char	**cmd;
 	int		id;
+	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
 	int		nb_file_in;
@@ -141,15 +143,24 @@ typedef struct s_tree
 	struct s_tree 	*right;
 }	t_tree;
 
+typedef struct s_info_cmd
+{
+	u_char		last_cmd_status;
+	int			index_cmd;
+	int			index_cmd_start;
+	int			nb_cmd;
+	int			*pid;
+}	t_info_cmd;
+
 typedef struct s_data
 {
 	int			singleq;
 	int			doubleq;
-	u_char		last_cmd_status;
+	int			nb_heredoc;
+	t_info_cmd	info_cmd;
 	t_list		*env;
 	t_scanner	scanner;
 	t_tree		*tree;
-	int			nb_heredoc;
 }	t_data;
 
 /* -------------------------------------------------------------------------- */
@@ -165,10 +176,12 @@ void	env_add_node(char *key, char *value);
 void	env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
+char	*join_cmdpath(char *cmd);
 void	exec_choice(t_tree *node);
 void	exec_cmd(t_tree *node);
 void	launch_exec(t_tree *node);
-char	*join_cmdpath(char *cmd);
+void	wait_cmd(void);
+void	link_fd(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);
@@ -206,12 +219,14 @@ void	builtin_unset(char **arg);
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
 t_scanner	*_scanner(void);
+t_info_cmd	*_info_cmd(void);
 t_list		**_list(void);
 t_tree		**_tree(void);
 
 /* ---------------------------------- error --------------------------------- */
 void	error_parsing(char *msg);
 void	print_error_unexpected(char *cmd);
+void	error_opening(char *str);
 
 /* ---------------------------------- free ---------------------------------- */
 void	free_all(int flag);
@@ -242,6 +257,7 @@ void	print_tree(void);
 int		get_last_cmd_status(void);
 void	update_last_cmd_status(int status);
 void	sig_choice(int choice);
+void	init_nb_cmd(t_tree *tree);
 
 /* ---------------------------------- tree ---------------------------------- */
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);

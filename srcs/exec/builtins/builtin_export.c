@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:24:02 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 18:22:11 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	builtin_export(char **arg)
 	i = 1;
 	data = _data();
 	check_export_error(arg);
-	if (data->last_cmd_status == FAILURE)
+	if (data->info_cmd.last_cmd_status == FAILURE)
 		return;
 	while (arg[i])
 	{

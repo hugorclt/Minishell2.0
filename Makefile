@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
+#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 17:19:43 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/07 17:45:53 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/utils/env_utils2.c						 \
 				srcs/utils/error.c							 \
 				srcs/utils/free.c							 \
+				srcs/utils/utils_cmd.c						 \
 				srcs/utils/last_cmd_status.c				 \
 				srcs/utils/utils/len.c						 \
 				srcs/utils/print.c							 \

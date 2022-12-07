@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 08:19:03 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:45:31 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:15:22 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	**split_quoted(char *cmd)
 	int		word_len;
 	int		j;
 
+	if (!cmd)
+		return (NULL);
 	ret = malloc(sizeof(char *) * (count_word(cmd) + 1));
 	if (!ret)
 		free_all(QUIT);
