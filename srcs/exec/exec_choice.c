@@ -6,16 +6,18 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 16:43:53 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:16:13 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_choice	*init_tchoice(void)
+static t_fptr	dispatch(char *str)
 {
+	int			index;
 	t_choice	funchoice[7];
 
+	index = 0;
 	funchoice[0].callback = builtin_cd;
 	funchoice[0].fun_name = "cd"; 
 	funchoice[1].callback = builtin_echo;
@@ -30,15 +32,6 @@ static t_choice	*init_tchoice(void)
 	funchoice[5].fun_name = "pwd"; 
 	funchoice[6].callback = builtin_unset;
 	funchoice[6].fun_name = "unset"; 
-	return (funchoice);
-}
-
-static t_fptr	dispatch(char *str)
-{
-	int			index;
-	t_choice	*funchoice = init_tchoice();
-
-	index = 0;
 	while (index < 7)
 	{
 		if (ft_strncmp(funchoice[index].fun_name, str, ft_strlen(str)) == 0)
@@ -48,11 +41,13 @@ static t_fptr	dispatch(char *str)
 	return (NULL);
 }
 
-void	exec_choice(char **cmd)
+void	exec_choice(t_tree *node)
 {
 	t_fptr	builtin;
 	
-	builtin = dispatch(cmd[0]);
+	builtin = dispatch(node->token->cmd[0]);
 	if (builtin)
-		(*builtin)(cmd);
+		(*builtin)(node->token->cmd);
+	else
+		exec_cmd(node);
 }
