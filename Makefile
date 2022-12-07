@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 14:57:28 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/07 16:09:01 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/utils/singleton/singleton.c			 \
 				srcs/utils/tree_functions/create_node.c		 \
 				srcs/utils/env_utils.c						 \
+				srcs/utils/env_utils2.c						 \
 				srcs/utils/error.c							 \
 				srcs/utils/free.c							 \
 				srcs/utils/last_cmd_status.c				 \
