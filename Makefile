@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/11/24 14:35:12 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/11/27 14:39:58 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES 		=	srcs/main.c\
 				srcs/exec/redirection/parse_redirection.c\
 				srcs/exec/redirection/create_heredoc.c\
 				srcs/utils/signal.c\
+				srcs/exec/join_cmdpath.c\
 
 INCL_DIR	=	-I./includes -I./Libft
 
@@ -97,6 +98,10 @@ $(OBJS_DIR)/%.o	: 	srcs/parser/checker/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/exec/redirection/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/exec/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
