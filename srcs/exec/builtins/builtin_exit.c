@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 23:30:05 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 18:23:36 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,9 @@ static void	check_error_exit(char **arg)
 
 void	builtin_exit(char **arg)
 {
-	t_data	*data;
-	
-	data = _data();
 	printf("exit\n");
 	check_error_exit(arg);
-	if (data->info_cmd.last_cmd_status == EXIT_TOO_MANY_ARGS)
+	if (get_last_cmd_status() == EXIT_TOO_MANY_ARGS)
 		return;
 	free_all(QUIT);
 }
