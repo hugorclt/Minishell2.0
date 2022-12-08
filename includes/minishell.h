@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 14:40:13 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:43:12 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void	exec_cmd(t_tree *node);
 void	launch_exec(t_tree *node);
 void	wait_cmd(void);
 void	link_fd(t_tree *node);
+void	pipe_node(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);

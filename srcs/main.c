@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 19:12:56 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:23:19 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(int ac, char **av, char **env)
 			{
 				init_pid();
 				sig_choice(SIG_EXEC);
-				link_fd(*_tree());
+				print_tree();
+				pipe_node(*_tree());
 				launch_exec(*_tree());
 				wait_cmd();
 			}
