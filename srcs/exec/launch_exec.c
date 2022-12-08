@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:50:50 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 19:35:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:23:10 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,14 @@ void	launch_exec(t_tree *node)
 	exec_choice(node->right);
 }
 
-void	link_fd(t_tree *node)
+void	pipe_node(t_tree *node)
 {
 	if (!node)
 		return ;
+	pipe_node(node->left);
 	if (node->token->id == PIPE)
-	{
 		pipe(node->token->pipe);
-		if (node->left->token->id == PIPE)
-			node->left->right->token->fd_out = node->token->pipe[1];
-		else
-			node->left->token->fd_out = node->token->pipe[1];
-		node->right->token->fd_in = node->token->pipe[0];
-	}
-	link_fd(node->left);
+	pipe_node(node->right);
 }
 
 
