@@ -6,7 +6,7 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/08 14:41:19 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/08 23:08:35 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME 		= 	minishell
 
 FILES 		=	srcs/main.c									 \
 				srcs/exec/exec_choice.c						 \
+				srcs/exec/pipe.c							 \
 				srcs/exec/exec_cmd.c 						 \
 				srcs/exec/join_cmdpath.c					 \
 				srcs/exec/launch_exec.c 					 \
@@ -127,7 +128,7 @@ all 			: 	$(NAME)
 
 leaks			:	all
 					valgrind --suppressions=ignore_readline	\
-					--leak-check=full --show-leak-kinds=all --track-origins=yes	\
+					--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes	\
 					./minishell
 
 $(NAME)			: 	$(OBJS_DIR) $(OBJS)

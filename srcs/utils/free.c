@@ -6,22 +6,59 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 18:27:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:41:05 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static void	free_tree(t_tree **root)
-// {
-// 	if (!root)
-// 		return ;
-// 	free((*root)->token->cmd);
-// 	free((*root)->token);
-// 	free_tree(&((*root)->right));
-// 	free_tree(&((*root)->left));
-// 	free((*root));
-// }
+static void	free_file(t_token *token)
+{
+	int	i;
+
+	i = 0;
+	while (i < token->nb_file_in)
+	{
+		free(token->infile[i].file);
+		i++;
+	}
+	free(token->infile);
+	i = 0;
+	while (i < token->nb_file_out)
+	{
+		free(token->outfile[i].file);
+		i++;
+	}
+	free(token->outfile);
+}
+
+static void	free_tree(t_tree *root)
+{
+ 	if (!root)
+ 		return ;
+ 	free_tree(root->left);
+	free_file(root->token);
+	free_matrix(root->token->cmd);
+	free(root->token);
+	free_tree(root->right);
+	free(root);
+}
+
+static void	free_env(void)
+{
+	t_list	*lst;
+	t_list	*tmp;
+
+	lst = *(_list());
+	while (lst)
+	{
+		tmp = lst->next;
+		free(lst->key);
+		free(lst->value);
+		free(lst);
+		lst = tmp;
+	}
+}
 
 void	free_all(int flag)
 {
@@ -29,12 +66,11 @@ void	free_all(int flag)
 	
 	data = _data();
 	free(data->info_cmd.pid);
-	data->info_cmd.pid = NULL;
-	data->info_cmd.nb_cmd = 0;
-	//free_tree(&(data->tree));
+	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
+	free_tree(data->tree);
 	if (flag == QUIT)
 	{
-		//free env
+		free_env();
 		exit(get_last_cmd_status());
 	}
 }

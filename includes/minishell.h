@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 14:43:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 23:07:44 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,11 @@ typedef struct s_tree
 	t_token			*token;
 	struct s_tree 	*left;
 	struct s_tree 	*right;
+	struct s_tree	*parent;
 }	t_tree;
 
 typedef struct s_info_cmd
 {
-	u_char		last_cmd_status;
 	int			index_cmd;
 	int			index_cmd_start;
 	int			nb_cmd;
@@ -154,6 +154,7 @@ typedef struct s_info_cmd
 
 typedef struct s_data
 {
+	u_char		last_cmd_status;
 	int			singleq;
 	int			doubleq;
 	int			nb_heredoc;
@@ -180,9 +181,11 @@ char	*join_cmdpath(char *cmd);
 void	exec_choice(t_tree *node);
 void	exec_cmd(t_tree *node);
 void	launch_exec(t_tree *node);
-void	wait_cmd(void);
+void	wait_cmd(t_tree *node);
 void	link_fd(t_tree *node);
 void	pipe_node(t_tree *node);
+void	close_pipe_used(t_tree *node);
+void	close_pipe_fd(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);
