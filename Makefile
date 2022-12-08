@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/08 16:59:01 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/08 17:17:17 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME 		= 	minishell
 
 FILES 		=	srcs/main.c									 \
 				srcs/exec/exec_choice.c						 \
+				srcs/exec/pipe.c							 \
 				srcs/exec/exec_cmd.c 						 \
 				srcs/exec/join_cmdpath.c					 \
 				srcs/exec/launch_exec.c 					 \

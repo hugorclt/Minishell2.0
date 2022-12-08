@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 16:50:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:17:37 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void	wait_cmd(t_tree *node);
 void	link_fd(t_tree *node);
 void	pipe_node(t_tree *node);
 void	close_pipe_used(t_tree *node);
+void	close_pipe_fd(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int		create_tree(void);
