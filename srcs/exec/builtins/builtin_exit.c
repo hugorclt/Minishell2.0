@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:22:06 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:41:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	builtin_exit(char **arg)
 	data = _data();
 	printf("exit\n");
 	check_error_exit(arg);
-	if (data->info_cmd.last_cmd_status == EXIT_TOO_MANY_ARGS)
+	if (data->last_cmd_status == EXIT_TOO_MANY_ARGS)
 		return;
 	free_all(QUIT);// voir avec hugo psk faut tout free
 }

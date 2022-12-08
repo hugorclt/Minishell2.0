@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 17:45:53 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/08 16:59:01 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ all 			: 	$(NAME)
 
 leaks			:	all
 					valgrind --suppressions=ignore_readline	\
-					--leak-check=full --show-leak-kinds=all --track-origins=yes	\
+					--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes	\
 					./minishell
 
 $(NAME)			: 	$(OBJS_DIR) $(OBJS)

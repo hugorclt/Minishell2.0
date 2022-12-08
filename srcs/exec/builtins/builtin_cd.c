@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:21:55 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:40:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	builtin_cd(char **arg)
 	
 	data = _data();
 	check_cd_error(arg);
-	if (data->info_cmd.last_cmd_status == FAILURE)
+	if (data->last_cmd_status == FAILURE)
 		return ;
 	if (!arg[1])
 		chdir((const char*)getenv("HOME"));
