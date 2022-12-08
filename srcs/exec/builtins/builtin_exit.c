@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:22:06 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:30:05 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	builtin_exit(char **arg)
 	check_error_exit(arg);
 	if (data->info_cmd.last_cmd_status == EXIT_TOO_MANY_ARGS)
 		return;
-	free_all(QUIT);// voir avec hugo psk faut tout free
+	free_all(QUIT);
 }

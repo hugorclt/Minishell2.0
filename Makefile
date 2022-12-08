@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 17:45:53 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/08 14:41:19 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtin_unset.c			 \
 				srcs/exec/redirection/create_heredoc.c		 \
 				srcs/exec/redirection/parse_redirection.c	 \
+				srcs/exec/redirection/open_redirection.c 	 \
 				srcs/parser/checker/check_cmd.c				 \
 				srcs/parser/lexer/join_redir.c				 \
 				srcs/parser/lexer/lexer_utils.c				 \
