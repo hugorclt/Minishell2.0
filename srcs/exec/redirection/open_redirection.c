@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 14:39:45 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:47:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@ static void	open_file_in(t_tree *node)
 	fd = 0;
 	while (i < node->token->nb_file_in)
 	{
-		if (node->token->infile->type == INFILE)
-		{
-			fd = open(node->token->infile->file, O_RDONLY);
-			if (fd == -1)
-				error_opening(node->token->infile);
-			else if (i != node->token->nb_file_in - 1)
-				close(fd);
-		}
+		fd = open(node->token->infile->file, O_RDONLY);
+		if (fd == -1)
+			error_opening(node->token->infile);
+		else if (i != node->token->nb_file_in - 1)
+			close(fd);
 		i++;
 	}
 	node->token->fd_in = fd;
