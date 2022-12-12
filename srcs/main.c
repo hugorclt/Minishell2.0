@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 23:14:28 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:30:13 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	while (42)
 	{
 		sig_choice(SIG_PARSE);
-		cmd = readline(PINK "mimishell $>" RESET);
+		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)
 			free_all(QUIT);
 		add_history(cmd);
