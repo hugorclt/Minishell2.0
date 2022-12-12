@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:14:32 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:43:41 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	exec_cmd(t_tree *node)
 					env_to_matrix()) == -1)
 			{
 				info_cmd->index_cmd++;
-				dprintf(2, "bash: %s: command not found\n", node->token->cmd[0]);
+				ft_putstr_fd("bash: ", 2);
+				ft_putstr_fd(node->token->cmd[0], 2);
+				ft_putstr_fd(": command not found\n", 2);
 				update_last_cmd_status(1);
 				free_all(QUIT);
 			}

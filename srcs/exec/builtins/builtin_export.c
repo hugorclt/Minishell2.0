@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:02:48 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:42:53 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ static void	check_export_error(char **arg)
 		update_last_cmd_status(FAILURE);
 	else if (ft_isalpha(arg[1][0]) == FALSE && arg[1][0] != '_')
 	{
-		dprintf(STDERR, "mimishell: export: '%c': not a valiid identifier \n",
-			arg[1][0]);
+		ft_putstr_fd("mimishell: export: '", 2);
+		ft_putchar_fd(arg[1][0], 2);
+		ft_putstr_fd("': not a valiid identifier\n", 2);
 		update_last_cmd_status(FAILURE);
 	}
 }

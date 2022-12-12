@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:02:18 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:41:50 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void	error_non_num_arg(char *arg)
 {
-	dprintf(STDERR, "mimishell: exit: %s: numeric argument required\n", arg);
+	ft_putstr_fd("mimishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	update_last_cmd_status(EXIT_NUM_ARG_REQUIRED);
 }
 
 static void	error_too_many_args(void)
 {
-	dprintf(STDERR, "mimishell: exit: too many arguments\n");
+	ft_putstr_fd("mimishell: exit: too many arguments\n", 2);
 	update_last_cmd_status(EXIT_TOO_MANY_ARGS);
 }
 

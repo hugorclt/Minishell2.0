@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:23:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:05:19 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:40:40 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static void	check_env_error(char **arg)
 {
 	if (arg[1])
 	{
-		dprintf(STDERR, "mimishell: env: '%s': No such file or directory\n",
-			arg[1]);
+		ft_putstr_fd("mimishell: env: '", 2);
+		ft_putstr_fd(arg[1], 2);
+		ft_putstr_fd("': No such file or directory\n", 2);
 		update_last_cmd_status(NOT_FOUND);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:05:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:39:38 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 static void	too_many_arg(void)
 {
-	dprintf(STDERR, "mimishell: cd: too many arguments\n");
+	ft_putstr_fd("mimishell: cd: too many arguments\n", 2);
 	update_last_cmd_status(FAILURE);
 }
 
 static void	erno_error(char *arg)
 {
 	if (errno == ENOENT)
-		dprintf(STDERR, "mimishell: cd: %s: No such file or directory\n", arg);
+	{
+		ft_putstr_fd("mimishell: cd: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 	else if (errno == EACCES)
-		dprintf(STDERR, "mimishell: cd: %s: Permission denied\n", arg);
+	{
+		ft_putstr_fd("mimishell: cd: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
 	update_last_cmd_status(FAILURE);
 }
 
