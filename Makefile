@@ -6,7 +6,7 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/08 23:08:35 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/12 21:26:28 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
 				srcs/parser/transformation/unquoting.c		 \
+				srcs/parser/transformation/wildcards.c		 \
+				srcs/parser/transformation/wildcards_utils.c \
 				srcs/utils/list_functions/ft_lst_remove_if.c \
 				srcs/utils/list_functions/ft_lstadd_back.c	 \
 				srcs/utils/list_functions/ft_lstadd_front.c	 \

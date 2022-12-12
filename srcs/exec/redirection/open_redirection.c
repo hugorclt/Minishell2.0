@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 14:47:07 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 19:44:48 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	open_file_in(t_tree *node)
 	{
 		fd = open(node->token->infile->file, O_RDONLY);
 		if (fd == -1)
-			error_opening(node->token->infile);
+			error_opening(node->token->infile->file);
 		else if (i != node->token->nb_file_in - 1)
 			close(fd);
 		i++;
@@ -44,7 +44,7 @@ static void	open_file_out(t_tree *node)
 		{
 			fd = open(node->token->outfile->file, O_RDWR | O_TRUNC | O_CREAT);
 			if (fd == -1)
-				error_opening(node->token->outfile);
+				error_opening(node->token->outfile->file);
 			else if (i != node->token->nb_file_out - 1)
 				close(fd);
 		}
@@ -52,7 +52,7 @@ static void	open_file_out(t_tree *node)
 		{
 			fd = open(node->token->outfile->file, O_APPEND | O_CREAT);
 			if (fd == -1)
-				error_opening(node->token->outfile);
+				error_opening(node->token->outfile->file);
 			else if (i != node->token->nb_file_out - 1)
 				close(fd);
 		}

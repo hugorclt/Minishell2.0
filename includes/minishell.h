@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 23:07:44 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 21:25:56 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 # include <stdio.h>
 # include <errno.h>
 # include <unistd.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <limits.h>
+# include <dirent.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -89,8 +92,8 @@
 /* -------------------------------------------------------------------------- */
 /*                                  typedef                                   */
 /* -------------------------------------------------------------------------- */
-typedef unsigned char u_char;
 typedef void (*t_fptr)(char **);
+typedef struct dirent t_dirent;
 
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
@@ -198,6 +201,10 @@ void	parse_redirection(t_token **token, char **cmd);
 void	open_file(t_tree *node);
 
 /* ---------------------------------- lexer --------------------------------- */
+int		check_cmd(char *cmd);
+int		is_redir(int id);
+int		strjoin_redir(t_token **token, char **cmd);
+int 	peek_token_tree(void);
 int		is_token(char *str, int i);
 int		find_token_id(char *token);
 int		is_quoted(int index, char *cmd);
@@ -207,10 +214,7 @@ char	*scan_token(void);
 void	init_scanner(char *cmd);
 void	skip_whitespaces(char *cmd, int *i);
 t_token	*get_token(void);
-int		check_cmd(char *cmd);
-int		is_redir(int id);
-int		strjoin_redir(t_token **token, char **cmd);
-int 	peek_token_tree(void);
+
 
 /* -------------------------------- builtins -------------------------------- */
 void	builtin_cd(char **arg);
@@ -268,6 +272,10 @@ void	init_nb_cmd(t_tree *tree);
 t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
+bool	is_valid_wildcard(char *str);
+bool	is_valid_filename(char *request, char *filename, int i, int j);
+int		nb_valid_filename(char *str);
+int		get_new_matrix_len(char **old_matrix);
 int		get_valid_dollar_index(char *cmd);
 char	*get_key(char *cmd);
 char	*get_before_dollar(char *cmd);
@@ -276,5 +284,6 @@ char	*unquote_line(char *cmd);
 char	**split_quoted(char *cmd);
 char	**unquote(char **cmd);
 char	**expand(char **args);
+char	**wildcards(char **old_matrix);
 
 #endif

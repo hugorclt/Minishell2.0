@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 17:03:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 21:32:58 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char *expand_env_var(char *cmd)
 		before_dollar = get_before_dollar(cmd);
 		key = get_key(cmd);
 		dollar_value = get_dollar_value(cmd, key, before_dollar);
-		expvalue = ft_expjoin_free(expvalue, before_dollar, S2);
+		expvalue = ft_expjoin_free(expvalue, before_dollar, BOTH);
 		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
 		cmd = ft_strchr(cmd, '$') + ft_strlen(key) + 1;
 		free(key);
