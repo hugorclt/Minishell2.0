@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 23:08:22 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:02:18 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	is_num_arg(char *str)
 static void	check_error_exit(char **arg)
 {
 	int	status;
-	
+
 	if (!arg[1])
 		return ;
 	status = ft_atoi(arg[1]);
@@ -52,7 +52,6 @@ static void	check_error_exit(char **arg)
 		error_too_many_args();
 	else
 		update_last_cmd_status(status);
-		
 }
 
 void	builtin_exit(char **arg)
@@ -60,6 +59,6 @@ void	builtin_exit(char **arg)
 	printf("exit\n");
 	check_error_exit(arg);
 	if (get_last_cmd_status() == EXIT_TOO_MANY_ARGS)
-		return;
+		return ;
 	free_all(QUIT);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_all_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 19:33:51 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:15:51 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_file(t_token *token)
+void	free_file(t_token *token)
 {
 	int	i;
 
@@ -32,11 +32,11 @@ static void	free_file(t_token *token)
 	free(token->outfile);
 }
 
-static void	free_tree(t_tree *root)
+void	free_tree(t_tree *root)
 {
- 	if (!root)
- 		return ;
- 	free_tree(root->left);
+	if (!root)
+		return ;
+	free_tree(root->left);
 	free_file(root->token);
 	free_matrix(root->token->cmd);
 	free(root->token);
@@ -44,7 +44,7 @@ static void	free_tree(t_tree *root)
 	free(root);
 }
 
-static void	free_env(void)
+void	free_env(void)
 {
 	t_list	*lst;
 	t_list	*tmp;
@@ -57,21 +57,6 @@ static void	free_env(void)
 		free(lst->value);
 		free(lst);
 		lst = tmp;
-	}
-}
-
-void	free_all(int flag)
-{
-	t_data	*data;
-	
-	data = _data();
-	free(data->info_cmd.pid);
-	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
-	free_tree(data->tree);
-	if (flag == QUIT)
-	{
-		free_env();
-		exit(get_last_cmd_status());
 	}
 }
 

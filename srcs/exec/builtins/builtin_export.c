@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 23:08:29 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:02:48 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	check_export_error(char **arg)
 	else if (ft_isalpha(arg[1][0]) == FALSE && arg[1][0] != '_')
 	{
 		dprintf(STDERR, "mimishell: export: '%c': not a valiid identifier \n",
-						arg[1][0]);
+			arg[1][0]);
 		update_last_cmd_status(FAILURE);
 	}
 }
@@ -27,18 +27,18 @@ static void	check_export_error(char **arg)
 static char	*init_key(char *str, int equal_index)
 {
 	char	*key;
-	
+
 	if (!equal_index)
 		key = ft_strdup(str);
 	else
 		key = ft_substr(str, 0, equal_index);
-	return (key);	
+	return (key);
 }
 
 static char	*init_value(char *str, int equal_index)
 {
 	char	*value;
-	
+
 	if (!equal_index)
 		value = NULL;
 	else
@@ -67,11 +67,11 @@ static void	export_key_and_value(char *str)
 void	builtin_export(char **arg)
 {
 	int		i;
-	
+
 	i = 1;
 	check_export_error(arg);
 	if (get_last_cmd_status() == FAILURE)
-		return;
+		return ;
 	while (arg[i])
 	{
 		export_key_and_value(arg[i]);

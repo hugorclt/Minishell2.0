@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:36:07 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:37:05 by lbisson          ###   ########.fr       */
+/*   Created: 2022/12/12 23:13:02 by lbisson           #+#    #+#             */
+/*   Updated: 2022/12/12 23:13:30 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(char *key, char *value)
+void	free_all(int flag)
 {
-	t_list	*lst;
+	t_data	*data;
 
-	lst = malloc(sizeof(t_list));
-	if (lst == NULL)
-		free_all(QUIT);
-	lst->key = key;
-	lst->value = value;
-	lst->next = NULL;
-	return (lst);
+	data = _data();
+	free(data->info_cmd.pid);
+	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
+	free_tree(data->tree);
+	if (flag == QUIT)
+	{
+		free_env();
+		exit(get_last_cmd_status());
+	}
 }

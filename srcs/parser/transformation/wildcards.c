@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:58:52 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 21:28:24 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 23:05:20 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,13 @@ static char	**expand_wildcard(char *str)
 		{
 			result[i] = ft_strdup(current->d_name);
 			if (!result[i])
-			{
-				free_matrix(result);
-				free_all(QUIT);
-			}
+				return (free_matrix(result), free_all(QUIT), NULL);
 			i++;
 		}
 		current = readdir(directory);
 	}
 	closedir(directory);
-	result[i] = NULL;
 	return (result);
-	
 }
 
 static void	insert_matrix(char **to_insert, char **dest, int *j)
@@ -65,7 +60,7 @@ static void	insert_matrix(char **to_insert, char **dest, int *j)
 	free_matrix(to_insert);
 }
 
-char	**wildcards(char **old_matrix)
+char	**wildcards(char **old)
 {
 	int		i;
 	int		j;
@@ -74,27 +69,22 @@ char	**wildcards(char **old_matrix)
 
 	i = 0;
 	j = 0;
-	new_len = get_new_matrix_len(old_matrix);
+	new_len = get_new_matrix_len(old);
 	new_matrix = ft_calloc(sizeof(char *), new_len + 1);
 	if (!new_matrix)
 		free_all(QUIT);
-	while (old_matrix[i])
+	while (old[i])
 	{
-		if (is_valid_wildcard(old_matrix[i])
-			&& nb_valid_filename(old_matrix[i]) > 0)
-			insert_matrix(expand_wildcard(old_matrix[i]), new_matrix, &j);
+		if (is_valid_wildcard(old[i]) && nb_valid_filename(old[i]) > 0)
+			insert_matrix(expand_wildcard(old[i]), new_matrix, &j);
 		else
 		{
-			new_matrix[j] = ft_strdup(old_matrix[i]);
+			new_matrix[j] = ft_strdup(old[i]);
 			if (!new_matrix[j])
-			{
-				free_matrix(new_matrix);
-				free_all(QUIT);
-			}
+				return (free_matrix(new_matrix), free_all(QUIT), NULL);
 			j++;
 		}
 		i++;
 	}
-	free_matrix(old_matrix);
-	return (new_matrix);
+	return (free_matrix(old), new_matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:22:50 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 21:24:03 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:18:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	is_valid_filename(char *request, char *filename, int i, int j)
 		{
 			if (request[i + 1] == '\0')
 				return (TRUE);
-			while (filename[j] && filename[j] !=request[i + 1])
+			while (filename[j] && filename[j] != request[i + 1])
 				j++;
 			if (filename[j] == '\0')
 				return (FALSE);
@@ -48,7 +48,7 @@ bool	is_valid_filename(char *request, char *filename, int i, int j)
 	return (FALSE);
 }
 
-int nb_valid_filename(char *str)
+int	nb_valid_filename(char *str)
 {
 	int			nb;
 	DIR			*directory;

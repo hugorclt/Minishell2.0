@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   singleton.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 22:27:20 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 18:14:17 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:50:45 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_data	*_data(void)
 	if (init == 0)
 	{
 		ft_bzero(&data, sizeof(t_data));
+		data.nb_heredoc = -1;
 		init++;
 	}
 	return (&data);

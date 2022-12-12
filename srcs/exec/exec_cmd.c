@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 17:16:30 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:14:32 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	dup2_io(int in, int out)
 void	exec_cmd(t_tree *node)
 {
 	t_info_cmd	*info_cmd;
-	
+
 	info_cmd = _info_cmd();
 	if (node->token->id == CMD)
 	{
@@ -32,7 +32,8 @@ void	exec_cmd(t_tree *node)
 		{
 			dup2_io(node->token->fd_in, node->token->fd_out);
 			close_pipe_fd(node);
-			if (execve(join_cmdpath(node->token->cmd[0]), node->token->cmd, env_to_matrix()) == -1)
+			if (execve(join_cmdpath(node->token->cmd[0]), node->token->cmd,
+					env_to_matrix()) == -1)
 			{
 				info_cmd->index_cmd++;
 				dprintf(2, "bash: %s: command not found\n", node->token->cmd[0]);
@@ -43,4 +44,3 @@ void	exec_cmd(t_tree *node)
 		info_cmd->index_cmd++;
 	}
 }
-

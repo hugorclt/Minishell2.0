@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/26 19:28:12 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:35:53 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	count_infile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], "<<", 2))
 		{
-			i+= 1;
+			i += 1;
 			len++;
 		}
 		else if (!ft_strncmp(cmd[i], "<", 1))
@@ -45,7 +45,7 @@ static int	count_outfile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], ">>", 2))
 		{
-			i+= 1;
+			i += 1;
 			len++;
 		}
 		else if (!ft_strncmp(cmd[i], ">", 1))

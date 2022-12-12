@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 16:50:21 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:14:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_pid(void)
 {
 	t_info_cmd	*info_cmd;
 	t_tree		*tree;
-	
+
 	tree = *_tree();
 	info_cmd = _info_cmd();
 	init_nb_cmd(tree);
@@ -25,38 +25,37 @@ void	init_pid(void)
 		free_all(QUIT);
 }
 
+void	shell_process(char *cmd)
+{
+	init_scanner(cmd);
+	if (create_tree() == SUCCESS)
+	{
+		init_pid();
+		sig_choice(SIG_EXEC);
+		pipe_node(*_tree());
+		link_fd(*_tree());
+		launch_exec(*_tree());
+		wait_cmd(*_tree());
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
+	char	*cmd;
+
 	(void)ac;
 	(void)av;
-	char	*cmd;
-	t_data	*data;
-	
 	using_history();
 	env_init_list(env);
-	data = _data();
 	while (42)
 	{
-		data->nb_heredoc = -1;
 		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell $>" RESET);
 		if (!cmd)
 			free_all(QUIT);
 		add_history(cmd);
 		if (check_cmd(cmd) == SUCCESS)
-		{
-			init_scanner(cmd);
-			if (create_tree() == SUCCESS)
-			{
-				init_pid();
-				sig_choice(SIG_EXEC);
-				//print_tree();
-				pipe_node(*_tree());
-				link_fd(*_tree());
-				launch_exec(*_tree());
-				wait_cmd(*_tree());
-			}
-		}
+			shell_process(cmd);
 		free_all(FREE);
 	}
 }

@@ -6,19 +6,19 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 21:32:58 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 21:51:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *expand_env_var(char *cmd)
+static char	*expand_env_var(char *cmd)
 {
 	char	*key;
 	char	*expvalue;
 	char	*dollar_value;
 	char	*before_dollar;
-	
+
 	expvalue = NULL;
 	while (ft_strchr(cmd, '$'))
 	{
@@ -40,7 +40,7 @@ char	**expand(char **cmd)
 	int		i;
 	char	**expcmd;
 	t_data	*data;
-	
+
 	i = 0;
 	data = _data();
 	data->singleq = CLOSE;

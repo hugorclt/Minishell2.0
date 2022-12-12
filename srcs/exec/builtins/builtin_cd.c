@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 23:08:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:05:06 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	too_many_arg(void)
 {
 	dprintf(STDERR, "mimishell: cd: too many arguments\n");
-	update_last_cmd_status(FAILURE);	
+	update_last_cmd_status(FAILURE);
 }
 
 static void	erno_error(char *arg)
@@ -38,7 +38,7 @@ static void	check_cd_error(char **arg)
 static void	update_pwds(char *arg)
 {
 	char	cwd[PATH_MAX];
-	
+
 	chdir(arg);
 	env_change_value("OLDPWD", env_get_value("PWD"));
 	env_change_value("PWD", getcwd(cwd, PATH_MAX));
@@ -50,7 +50,7 @@ void	builtin_cd(char **arg)
 	if (get_last_cmd_status() == FAILURE)
 		return ;
 	if (!arg[1])
-		chdir((const char*)getenv("HOME"));
+		chdir((const char *)getenv("HOME"));
 	else
 		update_pwds(*arg);
 	update_last_cmd_status(SUCCESS);

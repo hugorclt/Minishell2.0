@@ -6,7 +6,7 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/12 21:26:28 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/12 23:13:55 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/lexer/lexer_utils.c				 \
 				srcs/parser/lexer/lexer.c					 \
 				srcs/parser/parser/parser.c					 \
+				srcs/parser/parser/parser_utils.c			 \
 				srcs/parser/transformation/expand_utils.c	 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
@@ -53,7 +54,8 @@ FILES 		=	srcs/main.c									 \
 				srcs/utils/env_utils.c						 \
 				srcs/utils/env_utils2.c						 \
 				srcs/utils/error.c							 \
-				srcs/utils/free.c							 \
+				srcs/utils/free_all.c						 \
+				srcs/utils/free_all_utils.c					 \
 				srcs/utils/utils_cmd.c						 \
 				srcs/utils/last_cmd_status.c				 \
 				srcs/utils/utils/len.c						 \
