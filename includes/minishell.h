@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:19:48 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:07:05 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_data
 {
 	int			singleq;
 	int			doubleq;
+	int			nb_heredoc;
 	u_char		last_cmd_status;
 	t_list		*env;
 	t_scanner	scanner;
