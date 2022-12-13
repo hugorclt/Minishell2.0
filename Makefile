@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/08 17:17:17 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/13 16:50:29 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtin_export.c			 \
 				srcs/exec/builtins/builtin_pwd.c			 \
 				srcs/exec/builtins/builtin_unset.c			 \
-				srcs/exec/redirection/create_heredoc.c		 \
 				srcs/exec/redirection/parse_redirection.c	 \
 				srcs/parser/checker/check_cmd.c				 \
 				srcs/parser/lexer/join_redir.c				 \
@@ -36,6 +35,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
 				srcs/parser/transformation/unquoting.c		 \
+				srcs/parser/heredoc/heredoc.c 				 \
 				srcs/utils/list_functions/ft_lst_remove_if.c \
 				srcs/utils/list_functions/ft_lstadd_back.c	 \
 				srcs/utils/list_functions/ft_lstadd_front.c	 \
@@ -117,6 +117,10 @@ $(OBJS_DIR)/%.o	: 	srcs/exec/redirection/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 
 $(OBJS_DIR)/%.o	: 	srcs/exec/%.c 
+					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
+					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
+
+$(OBJS_DIR)/%.o	: 	srcs/parser/heredoc/%.c 
 					@printf "\033[0;33mGenerating minsihell object... %-38.38s \r" $@
 					@$(CC) $(CFLAGS) -c $< -o $@ -MMD $(INCL_DIR)
 

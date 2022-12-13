@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 17:41:05 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:09:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	free_all(int flag)
 	free(data->info_cmd.pid);
 	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
 	free_tree(data->tree);
+	data->nb_heredoc = 0;
 	if (flag == QUIT)
 	{
 		free_env();

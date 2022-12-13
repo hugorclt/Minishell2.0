@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:28:04 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:19:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:43:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void	sig_handle(int sig)
 void	sig_heredoc(int sig)
 {
 	(void)sig;
+	t_data	*data;
+
+	data = _data();
+	data->nb_heredoc = -1;
 	close(STDIN_FILENO);
 	open("/dev/stdin", O_RDWR);
 }
