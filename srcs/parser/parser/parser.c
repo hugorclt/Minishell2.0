@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 13:00:32 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:34:03 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,15 @@ t_tree 	*create_and_or(void)
 	}
 }
 
+void	init_parent(t_tree *node, t_tree *parent)
+{
+	if (!node)
+		return ;
+	init_parent(node->left, node);
+	node->parent = parent;
+	init_parent(node->right, node);
+}
+
 int	create_tree(void)
 {
 	t_tree 	**tree;
@@ -110,5 +119,6 @@ int	create_tree(void)
 	(*tree) = create_and_or();
 	if (!*tree)
 		return (FAILURE);
+	init_parent(*tree, NULL);
 	return (SUCCESS);
 }

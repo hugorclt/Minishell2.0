@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 17:08:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 12:17:19 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ t_token	*get_token(void)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
 	token->cmd = expand(token->cmd);
-	builtin_echo(token->cmd); /* à retirer */
 	parse_redirection(&token, token->cmd);
 	token->cmd = unquote(token->cmd);
+	token->fd_in = 0;
+	token->fd_out = 1;
 	if (!token->cmd)
 		return (free(cmd), free_token(token), NULL);
 	return (free(cmd), token);

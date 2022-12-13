@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:19:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:56:45 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,11 @@ static t_token	*get_token_check(void)
 	return (free(cmd), token);
 }
 
-void	print_error_unexpected(char *cmd)
-{
-	char	*error_type;
-
-	if (peek_token() == EOL)
-		error_type = ft_strdup("newline");
-	else
-		error_type = ft_strdup(cmd);
-	ft_putstr_fd(PINK "mimishell" RESET, 2);
-	ft_putstr_fd(": syntax error near unexpected token `", 2);
-	ft_putstr_fd(RED, 2);
-	ft_putstr_fd(error_type, 2);
-	ft_putstr_fd(RESET, 2);
-	ft_putstr_fd("'\n", 2);
-	free(error_type);
-	update_last_cmd_status(2);
-}
-
 static int	check_first_token(void)
 {
 	t_token	*token;
 
-	if (peek_token() != CMD && !is_redir(peek_token()))
+	if (peek_token() != CMD && peek_token() != LPARENTH && !is_redir(peek_token()))
 	{
 		token = get_token_check();
 		if (!token)

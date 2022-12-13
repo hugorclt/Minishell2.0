@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 16:24:03 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:41:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	check_error_exit(char **arg)
 {
 	int	status;
 	
+	if (!arg[1])
+		return ;
 	status = ft_atoi(arg[1]);
 	if (arg[1] && is_num_arg(arg[1]) == FALSE)
 		error_non_num_arg(arg[1]);
@@ -62,6 +64,5 @@ void	builtin_exit(char **arg)
 	check_error_exit(arg);
 	if (data->last_cmd_status == EXIT_TOO_MANY_ARGS)
 		return;
-	free_all(FREE);// voir avec hugo psk faut tout free
-	exit(data->last_cmd_status);
+	free_all(QUIT);// voir avec hugo psk faut tout free
 }

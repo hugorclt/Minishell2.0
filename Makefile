@@ -3,17 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
+#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/07 16:09:01 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/08 17:17:17 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	minishell
 
 FILES 		=	srcs/main.c									 \
+				srcs/exec/exec_choice.c						 \
+				srcs/exec/pipe.c							 \
+				srcs/exec/exec_cmd.c 						 \
 				srcs/exec/join_cmdpath.c					 \
+				srcs/exec/launch_exec.c 					 \
 				srcs/exec/builtins/builtin_cd.c				 \
 				srcs/exec/builtins/builtin_echo.c			 \
 				srcs/exec/builtins/builtin_env.c			 \
@@ -47,6 +51,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/utils/env_utils2.c						 \
 				srcs/utils/error.c							 \
 				srcs/utils/free.c							 \
+				srcs/utils/utils_cmd.c						 \
 				srcs/utils/last_cmd_status.c				 \
 				srcs/utils/utils/len.c						 \
 				srcs/utils/print.c							 \
@@ -119,6 +124,11 @@ $(OBJS_DIR)/%.o	: 	srcs/exec/%.c
 # End Multiple Directory
 
 all 			: 	$(NAME)
+
+leaks			:	all
+					valgrind --suppressions=ignore_readline	\
+					--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes	\
+					./minishell
 
 $(NAME)			: 	$(OBJS_DIR) $(OBJS)
 					@$(MAKE) --no-print-directory -C Libft

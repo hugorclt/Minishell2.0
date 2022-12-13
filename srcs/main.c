@@ -6,28 +6,23 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 16:19:26 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:50:21 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cmd(t_tree *node)
+void	init_pid(void)
 {
-	int	pid;
+	t_info_cmd	*info_cmd;
+	t_tree		*tree;
 	
-	if (node->token->id == CMD)
-	{
-		pid = fork();
-		if (pid == -1)
-			free_all(FREE);
-		if (pid == 0)
-		{
-			execve(join_cmdpath(node->token->cmd[0]), node->token->cmd, env_to_matrix());
-		}
-		else
-			wait(NULL);
-	}
+	tree = *_tree();
+	info_cmd = _info_cmd();
+	init_nb_cmd(tree);
+	info_cmd->pid = malloc(sizeof(int) * info_cmd->nb_cmd);
+	if (!info_cmd->pid)
+		free_all(QUIT);
 }
 
 int	main(int ac, char **av, char **env)
@@ -53,9 +48,13 @@ int	main(int ac, char **av, char **env)
 			init_scanner(cmd);
 			if (create_tree() == SUCCESS)
 			{
+				init_pid();
 				sig_choice(SIG_EXEC);
-				print_tree();
-				exec_cmd(NULL);
+				//print_tree();
+				pipe_node(*_tree());
+				link_fd(*_tree());
+				launch_exec(*_tree());
+				wait_cmd(*_tree());
 			}
 		}
 		free_all(FREE);

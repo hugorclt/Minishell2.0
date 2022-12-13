@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 16:20:40 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:40:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	check_cd_error(char **arg)
 {
 	if (arg[1] && arg[2])
 		too_many_arg();
-	else if (chdir(arg[1]) == FAILURE)
+	else if (chdir(arg[1]) == -1)
 		erno_error(arg[1]);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:23:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 16:20:40 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:41:01 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	builtin_env(char **arg)
 		return ;
 	while (env)
 	{
-		printf("%s=%s\n", env->key, env->value);
+		if (*(env->value) == '\0')
+			printf("%s\n", env->key);
+		else
+			printf("%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 	update_last_cmd_status(SUCCESS);
