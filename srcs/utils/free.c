@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/13 16:09:13 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:21:11 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ static void	free_file(t_token *token)
 	i = 0;
 	while (i < token->nb_file_in)
 	{
+		if (token->infile[i].type == HEREDOC)
+		{
+			free(token->infile[i].delim);
+			unlink(token->infile[i].file);
+		}
 		free(token->infile[i].file);
 		i++;
 	}
@@ -65,9 +70,10 @@ void	free_all(int flag)
 	t_data	*data;
 	
 	data = _data();
+	if (data->info_cmd.nb_cmd)
+		free_tree(data->tree);
 	free(data->info_cmd.pid);
 	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
-	free_tree(data->tree);
 	data->nb_heredoc = 0;
 	if (flag == QUIT)
 	{

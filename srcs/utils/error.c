@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 17:56:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:29:23 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ void	print_error_unexpected(char *cmd)
 	ft_putstr_fd("'\n", 2);
 	free(error_type);
 	update_last_cmd_status(2);
+}
+
+void	heredoc_error(char *delim)
+{
+	ft_putstr(PINK "mimishell:" RESET);
+	ft_putstr(" warning: here-document at line 1 delimited by end-of-file (wanted `");
+	ft_putstr(delim);
+	ft_putstr("'\n");
 }

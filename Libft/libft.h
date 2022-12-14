@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:07:25 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/14 13:09:51 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define S2		2
 # define BOTH	3
 
+void	ft_putstr(char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
 void	*ft_memset(void *b, int c, size_t len);

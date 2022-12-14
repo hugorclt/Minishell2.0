@@ -6,47 +6,11 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:03:15 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/13 17:00:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:29:16 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	create_file(t_tree *node)
-{
-	t_data	*data;
-	char	*nb;
-	int		i;
-
-	i = 0;
-	data = _data();
-	while (i < node->token->nb_file_in)
-	{
-		if (node->token->infile[i].type == HEREDOC)
-		{
-			nb = ft_itoa(data->nb_heredoc);
-			node->token->infile[i].file = ft_strjoin(".heredoc_file", nb);
-			free(nb); 
-		}
-		i++;
-	}
-}
-
-void	create_heredoc(t_tree *node)
-{
-	if (!node)
-		return ;
-	create_heredoc(node->left);
-	if (node->token->id == CMD)
-		create_file(node);
-	create_heredoc(node->right);
-}
-
-void	heredoc_error(char *delim)
-{
-	(void)delim;
-	free_all(QUIT);
-}
 
 void	write_one_file(char *file, char *delimiter)
 {
@@ -62,9 +26,9 @@ void	write_one_file(char *file, char *delimiter)
 		if (!line)
 		{
 			close(fd);
-			printf("%d\n", data->nb_heredoc);
 			if (data->nb_heredoc == -1)
-				return (heredoc_error(delimiter));
+				free_all(QUIT);
+			heredoc_error(delimiter);
 			return ;
 		}
 		if (ft_strcmp(line, delimiter) == 0)

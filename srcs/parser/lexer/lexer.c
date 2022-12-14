@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 12:17:19 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:26:40 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int 	peek_token_tree(void)
 	cmd = ft_substring(scanner->cmd, scanner->start_pos, end);
 	type = find_token_id(cmd);
 	if (type >= OUTFILE_APND && type <= INFILE)
-		return (CMD);
+		return (free(cmd), CMD);
 	return (free(cmd), type);
 }
 
