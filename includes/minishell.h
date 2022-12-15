@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:26:11 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:40:47 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,9 +202,9 @@ t_tree		*create_and_or(void);
 t_tree		*add_node(t_token *token, t_tree *left, t_tree *right);
 void		init_parent(t_tree *node, t_tree *parent);
 
-/* ---------------------------- parse_redirection --------------------------- */
-void		create_temp_file(t_token **token, char *delimiter, int index);
+/* ---------------------------- redirection --------------------------- */
 void		parse_redirection(t_token **token, char **cmd);
+char		**clean_redirection(char **str, int nb_in, int nb_out);
 void		open_file(t_tree *node);
 
 /* ---------------------------------- lexer --------------------------------- */

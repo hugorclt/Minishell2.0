@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:27:18 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:30:15 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec_cmd(t_tree *node)
 			free_all(FREE);
 		if (info_cmd->pid[info_cmd->index_cmd] == 0)
 		{
+			open_file(node);
 			dup2_io(node->token->fd_in, node->token->fd_out);
 			close_pipe_fd(node);
 			env = env_to_matrix();
