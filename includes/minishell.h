@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:40:47 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:10:23 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ typedef struct s_data
 	int			singleq;
 	int			doubleq;
 	int			nb_heredoc;
+	int			save_in;
+	int			save_out;
 	t_info_cmd	info_cmd;
 	t_list		*env;
 	t_scanner	scanner;
@@ -189,6 +191,8 @@ void		link_fd(t_tree *node);
 void		pipe_node(t_tree *node);
 void		close_pipe_used(t_tree *node);
 void		close_pipe_fd(t_tree *node);
+t_fptr		dispatch(char *str);
+void		exec_one_builtin(t_tree *node);
 
 /* --------------------------------- heredoc -------------------------------- */
 void	create_heredoc(t_tree *node);
@@ -242,6 +246,8 @@ t_tree		**_tree(void);
 void		error_parsing(char *msg);
 void		error_opening(char *str);
 void		print_error_unexpected(char *cmd);
+void		exec_error(char *str, char **env);
+
 
 /* ---------------------------------- free ---------------------------------- */
 void		free_env(void);

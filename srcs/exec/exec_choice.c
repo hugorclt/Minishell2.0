@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_choice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:10:23 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 08:08:12 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_fptr	dispatch(char *str)
+t_fptr	dispatch(char *str)
 {
 	int			index;
 	t_choice	funchoice[7];
@@ -49,7 +49,7 @@ void	exec_choice(t_tree *node)
 		return ;
 	builtin = dispatch(node->token->cmd[0]);
 	if (builtin)
-		(*builtin)(node->token->cmd);
+		exec_one_builtin(node);
 	else
 		exec_cmd(node);
 }

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:26:39 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:11:29 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int ac, char **av, char **env)
 	while (42)
 	{
 		data->nb_heredoc = 0;
+		data->save_in = dup(STDIN);
+		data->save_out = dup(STDOUT);
 		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 07:26:00 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:01:23 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ void	heredoc_error(char *delim)
 	ft_putstr(" warning: here-document at line 1 delimited by end-of-file (wanted `");
 	ft_putstr(delim);
 	ft_putstr("'\n");
+}
+
+void	exec_error(char *str, char **env)
+{
+	t_info_cmd	*info_cmd;
+	
+	info_cmd = _info_cmd();
+	free_matrix(env);
+	info_cmd->index_cmd++;
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": command not found\n", 2);
+	update_last_cmd_status(1);
+	free_all(QUIT);
 }
