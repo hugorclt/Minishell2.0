@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/15 07:40:55 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/15 17:35:49 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/transformation/clean_redirection.c\
 				srcs/parser/heredoc/heredoc.c 				 \
 				srcs/parser/heredoc/create_file.c			 \
+				srcs/parser/heredoc/heredoc_utils.c			 \
 				srcs/parser/transformation/wildcards.c		 \
 				srcs/parser/transformation/wildcards_utils.c \
 				srcs/utils/list_functions/ft_lst_remove_if.c \

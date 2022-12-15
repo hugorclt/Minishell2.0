@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 08:10:23 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:34:51 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define FAILURE				1
 # define NB_TOKEN				10
 # define STEP_PRINT_TREE		10
+# define NO						0
+# define YES					1
 
 /* ------------------------------- token_type ------------------------------- */
 # define AND					0
@@ -157,7 +159,7 @@ typedef struct s_info_cmd
 
 typedef struct s_data
 {
-	u_char		last_cmd_status;
+	size_t		last_cmd_status;
 	int			singleq;
 	int			doubleq;
 	int			nb_heredoc;
@@ -198,6 +200,7 @@ void		exec_one_builtin(t_tree *node);
 void	create_heredoc(t_tree *node);
 void	heredoc_error(char *delim);
 void	start_heredoc(void);
+void	unlink_heredoc(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int			create_tree(void);

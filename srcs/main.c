@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 08:11:29 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:35:18 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	shell_process(char *cmd)
 	if (create_tree() == SUCCESS)
 	{
 		init_pid();
+		start_heredoc();
 		sig_choice(SIG_EXEC);
 		pipe_node(*_tree());
 		link_fd(*_tree());
@@ -63,6 +64,7 @@ int	main(int ac, char **av, char **env)
 		add_history(cmd);
 		if (check_cmd(cmd) == SUCCESS)
 			shell_process(cmd);
+		unlink_heredoc(*(_tree()));
 		free_all(FREE);
 	}
 }

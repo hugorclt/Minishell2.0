@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 08:01:23 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:21:36 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	error_opening(char *str)
 	{
 		ft_putstr_fd(PINK "mimishell: " RESET, 2);
 		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": Permission denied", 2);
+		ft_putstr_fd(": Permission denied\n", 2);
 	}
 	else
 	{
 		ft_putstr_fd(PINK "mimishell: cannot access " RESET, 2);
 		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": No such file or directory", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 	}
 	free_all(FREE);
 }

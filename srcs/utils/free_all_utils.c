@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:25:54 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:30:43 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	free_file(t_token *token)
 	while (i < token->nb_file_in)
 	{
 		if (token->infile[i].type == HEREDOC)
-		{
 			free(token->infile[i].delim);
-			unlink(token->infile[i].file);
-		}
 		free(token->infile[i].file);
 		i++;
 	}

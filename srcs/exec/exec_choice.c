@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 08:08:12 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:14:39 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ t_fptr	dispatch(char *str)
 
 void	exec_choice(t_tree *node)
 {
-	t_fptr	builtin;
+	t_fptr		builtin;
+	t_info_cmd	*info_cmd;
 
-	if (!node)
+	info_cmd = _info_cmd();
+	if (!node || !node->token->cmd[0])
 		return ;
 	builtin = dispatch(node->token->cmd[0]);
-	if (builtin)
+	if (builtin && info_cmd->nb_cmd == 1)
 		exec_one_builtin(node);
 	else
 		exec_cmd(node);

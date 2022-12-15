@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 07:51:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:23:56 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ static void	open_file_out(t_tree *node)
 
 void	open_file(t_tree *node)
 {
+	t_data	*data;
+
+	data = _data();
+	data->nb_heredoc = 0;
 	if (node->token->nb_file_in > 0)
 		open_file_in(node);
 	if (node->token->nb_file_out > 0)
