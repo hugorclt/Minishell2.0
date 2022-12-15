@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:16:27 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:32:23 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:21:39 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 	char	*new_str;
 
 	if (!s1)
-		return (ft_strdup(s2));
+	{
+		s1 = ft_strdup(s2);
+		return (free(s2), s1);
+	}
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	new_str = ft_calloc(sizeof(char), s1_len + s2_len + 1);

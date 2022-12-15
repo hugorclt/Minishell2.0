@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quoted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 08:19:03 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:36:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:28:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**split_quoted(char *cmd)
 
 	if (!cmd)
 		return (NULL);
-	ret = malloc(sizeof(char *) * (count_word(cmd) + 1));
+	ret = ft_calloc(sizeof(char *), (count_word(cmd) + 1));
 	if (!ret)
 		free_all(QUIT);
 	j = 0;
