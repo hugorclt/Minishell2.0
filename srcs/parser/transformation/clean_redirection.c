@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 07:22:19 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:41:19 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:45:40 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**clean_redirection(char **str, int nb_in, int nb_out)
 		return (NULL);
 	while (str[i])
 	{
-		if (!ft_strcmp(str[i], ">") || !ft_strcmp(str[i], "<") 
+		while (!ft_strcmp(str[i], ">") || !ft_strcmp(str[i], "<") 
 			|| !ft_strcmp(str[i], "<<") || !ft_strcmp(str[i], ">>"))
 			i += 2;
 		if (!str[i])

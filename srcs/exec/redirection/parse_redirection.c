@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:27:22 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:50:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	parse_outfile(t_token **token, char **cmd)
 		if (!ft_strncmp(cmd[i], ">>", 2))
 		{
 			(*token)->outfile[j].file = ft_strdup(cmd[i + 1]);
+			
 			(*token)->outfile[j].type = OUTFILE_APND;
 			j++;
 		}

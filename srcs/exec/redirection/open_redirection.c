@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 23:10:42 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 07:51:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	open_file_in(t_tree *node)
 	fd = 0;
 	while (i < node->token->nb_file_in)
 	{
-		fd = open(node->token->infile->file, O_RDONLY);
+		fd = open(node->token->infile[i].file, O_RDONLY);
 		check_error_and_close_fd(node->token->infile->file, fd, i,
 			node->token->nb_file_in);
 		i++;
@@ -48,13 +48,13 @@ static void	open_file_out(t_tree *node)
 	{
 		if (node->token->outfile->type == OUTFILE)
 		{
-			fd = open(node->token->outfile->file, O_RDWR | O_TRUNC | O_CREAT);
+			fd = open(node->token->outfile[i].file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			check_error_and_close_fd(node->token->outfile->file, fd, i,
 				node->token->nb_file_out);
 		}
 		else if (node->token->outfile->type == OUTFILE_APND)
 		{
-			fd = open(node->token->outfile->file, O_APPEND | O_CREAT);
+			fd = open(node->token->outfile[i].file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			check_error_and_close_fd(node->token->outfile->file, fd, i,
 				node->token->nb_file_out);
 		}
