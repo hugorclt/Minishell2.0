@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_all_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/14 13:21:11 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:25:54 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_file(t_token *token)
+void	free_file(t_token *token)
 {
 	int	i;
 
@@ -37,11 +37,11 @@ static void	free_file(t_token *token)
 	free(token->outfile);
 }
 
-static void	free_tree(t_tree *root)
+void	free_tree(t_tree *root)
 {
- 	if (!root)
- 		return ;
- 	free_tree(root->left);
+	if (!root)
+		return ;
+	free_tree(root->left);
 	free_file(root->token);
 	free_matrix(root->token->cmd);
 	free(root->token);
@@ -49,7 +49,7 @@ static void	free_tree(t_tree *root)
 	free(root);
 }
 
-static void	free_env(void)
+void	free_env(void)
 {
 	t_list	*lst;
 	t_list	*tmp;
@@ -62,23 +62,6 @@ static void	free_env(void)
 		free(lst->value);
 		free(lst);
 		lst = tmp;
-	}
-}
-
-void	free_all(int flag)
-{
-	t_data	*data;
-	
-	data = _data();
-	if (data->info_cmd.nb_cmd)
-		free_tree(data->tree);
-	free(data->info_cmd.pid);
-	ft_bzero(&data->info_cmd, sizeof(t_info_cmd));
-	data->nb_heredoc = 0;
-	if (flag == QUIT)
-	{
-		free_env();
-		exit(get_last_cmd_status());
 	}
 }
 
@@ -95,6 +78,7 @@ void	free_matrix(char **matrix)
 		i++;
 	}
 	free(matrix);
+	matrix = NULL;
 }
 
 void	free_token(t_token *token)

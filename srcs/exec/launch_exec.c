@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:50:50 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 17:16:20 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:09:52 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	link_fd(t_tree *node)
 			node->left->token->fd_in = STDIN;
 			node->left->token->fd_out = node->token->pipe[1];
 		}
-		if (node->right->token->id == CMD && node->parent && node->parent->token->id == PIPE)
+		if (node->right->token->id == CMD && node->parent
+			&& node->parent->token->id == PIPE)
 		{
 			node->right->token->fd_in = node->token->pipe[0];
 			node->right->token->fd_out = node->parent->token->pipe[1];

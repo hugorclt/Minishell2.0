@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:53:28 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 16:40:55 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:39:38 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 static void	too_many_arg(void)
 {
-	dprintf(STDERR, "mimishell: cd: too many arguments\n");
-	update_last_cmd_status(FAILURE);	
+	ft_putstr_fd("mimishell: cd: too many arguments\n", 2);
+	update_last_cmd_status(FAILURE);
 }
 
 static void	erno_error(char *arg)
 {
 	if (errno == ENOENT)
-		dprintf(STDERR, "mimishell: cd: %s: No such file or directory\n", arg);
+	{
+		ft_putstr_fd("mimishell: cd: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 	else if (errno == EACCES)
-		dprintf(STDERR, "mimishell: cd: %s: Permission denied\n", arg);
+	{
+		ft_putstr_fd("mimishell: cd: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
 	update_last_cmd_status(FAILURE);
 }
 
@@ -38,7 +46,7 @@ static void	check_cd_error(char **arg)
 static void	update_pwds(char *arg)
 {
 	char	cwd[PATH_MAX];
-	
+
 	chdir(arg);
 	env_change_value("OLDPWD", env_get_value("PWD"));
 	env_change_value("PWD", getcwd(cwd, PATH_MAX));
@@ -46,14 +54,11 @@ static void	update_pwds(char *arg)
 
 void	builtin_cd(char **arg)
 {
-	t_data	*data;
-	
-	data = _data();
 	check_cd_error(arg);
-	if (data->last_cmd_status == FAILURE)
+	if (get_last_cmd_status() == FAILURE)
 		return ;
 	if (!arg[1])
-		chdir((const char*)getenv("HOME"));
+		chdir((const char *)getenv("HOME"));
 	else
 		update_pwds(*arg);
 	update_last_cmd_status(SUCCESS);

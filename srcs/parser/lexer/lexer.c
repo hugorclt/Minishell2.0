@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/14 13:26:40 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:27:28 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	find_token_id(char *token)
 {
-	t_scanner	*scanner;
 	int			i;
 	int			j;
+	t_scanner	*scanner;
 
 	i = 0;
 	j = 0;
@@ -34,12 +34,12 @@ int	find_token_id(char *token)
 	return (i);
 }
 
-int 	peek_token(void)
+int	peek_token(void)
 {
-	t_scanner	*scanner;
 	int			end;
+	int			type;
 	char		*cmd;
-	int 		type;
+	t_scanner	*scanner;
 
 	scanner = _scanner();
 	end = find_end();
@@ -48,12 +48,12 @@ int 	peek_token(void)
 	return (free(cmd), type);
 }
 
-int 	peek_token_tree(void)
+int	peek_token_tree(void)
 {
-	t_scanner	*scanner;
 	int			end;
+	int			type;
 	char		*cmd;
-	int 		type;
+	t_scanner	*scanner;
 
 	scanner = _scanner();
 	end = find_end();
@@ -66,8 +66,8 @@ int 	peek_token_tree(void)
 
 char	*scan_token(void)
 {
-	t_scanner	*scanner;
 	char		*cmd;
+	t_scanner	*scanner;
 
 	scanner = _scanner();
 	if (scanner->start_pos == ft_strlen(scanner->cmd))
@@ -80,10 +80,10 @@ char	*scan_token(void)
 
 t_token	*get_token(void)
 {
-	t_token	*token;
 	char	*cmd;
+	t_token	*token;
 
-	token	= malloc(sizeof(t_token));
+	token = malloc(sizeof(t_token));
 	if (!token)
 		free_all(QUIT);
 	cmd = scan_token();
@@ -92,6 +92,7 @@ t_token	*get_token(void)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
 	token->cmd = expand(token->cmd);
+	token->cmd = wildcards(token->cmd);
 	parse_redirection(&token, token->cmd);
 	token->cmd = unquote(token->cmd);
 	token->fd_in = 0;

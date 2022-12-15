@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 16:41:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:42:53 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,35 @@ static void	check_export_error(char **arg)
 {
 	if (!arg[1])
 		update_last_cmd_status(FAILURE);
-	if (ft_isalpha(arg[1][0]) == FALSE && arg[1][0] != '_')
+	else if (ft_isalpha(arg[1][0]) == FALSE && arg[1][0] != '_')
 	{
-		dprintf(STDERR, "mimishell: export: '%c': not a valiid identifier \n",
-						arg[1][0]);
+		ft_putstr_fd("mimishell: export: '", 2);
+		ft_putchar_fd(arg[1][0], 2);
+		ft_putstr_fd("': not a valiid identifier\n", 2);
 		update_last_cmd_status(FAILURE);
 	}
+}
+
+static char	*init_key(char *str, int equal_index)
+{
+	char	*key;
+
+	if (!equal_index)
+		key = ft_strdup(str);
+	else
+		key = ft_substr(str, 0, equal_index);
+	return (key);
+}
+
+static char	*init_value(char *str, int equal_index)
+{
+	char	*value;
+
+	if (!equal_index)
+		value = NULL;
+	else
+		value = ft_substr(str, equal_index + 1, -1);
+	return (value);
 }
 
 static void	export_key_and_value(char *str)
@@ -31,32 +54,25 @@ static void	export_key_and_value(char *str)
 	char	*val;
 
 	equal_index = ft_strchr_index(str, '=');
-	if (env_get_key(str))
-		env_change_value(str, env_get_value(str));
-	else if (!equal_index)
+	key = init_key(str, equal_index);
+	val = init_value(str, equal_index);
+	if (env_get_key(key))
 	{
-		key = ft_substr(str, 0, ft_strlen(str));
-		val = NULL;
-		env_add_node(key, val);
-	}
+		env_change_value(key, val);
+		return (free(key), free(val));
+	}	
 	else
-	{
-		key = ft_substr(str, 0, equal_index);
-		val = ft_substr(str, equal_index + 1, ft_strlen(str + equal_index + 1));
 		env_add_node(key, val);
-	}
 }
 
 void	builtin_export(char **arg)
 {
 	int		i;
-	t_data	*data;
-	
+
 	i = 1;
-	data = _data();
 	check_export_error(arg);
-	if (data->last_cmd_status == FAILURE)
-		return;
+	if (get_last_cmd_status() == FAILURE)
+		return ;
 	while (arg[i])
 	{
 		export_key_and_value(arg[i]);

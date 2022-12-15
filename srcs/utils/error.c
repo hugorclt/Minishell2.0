@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/14 13:29:23 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:26:00 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	error_parsing(char *msg)
 		RED "'%s' \n" RESET, msg);
 	free_all(FREE);
 }
-
 
 void	error_opening(char *str)
 {

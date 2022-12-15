@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/07 17:56:45 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:36:08 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_token	*get_token_check(void)
 	t_token	*token;
 	char	*cmd;
 
-	token	= malloc(sizeof(t_token));
+	token = malloc(sizeof(t_token));
 	if (!token)
 		free_all(QUIT);
 	cmd = scan_token();
@@ -34,7 +34,8 @@ static int	check_first_token(void)
 {
 	t_token	*token;
 
-	if (peek_token() != CMD && peek_token() != LPARENTH && !is_redir(peek_token()))
+	if (peek_token() != CMD && peek_token() != LPARENTH
+		&& !is_redir(peek_token()))
 	{
 		token = get_token_check();
 		if (!token)
@@ -50,7 +51,7 @@ int	check_cmd(char *cmd)
 {
 	int		is_last_token;
 	t_token	*token;
-	
+
 	init_scanner(cmd);
 	is_last_token = -1;
 	if (check_first_token())
@@ -60,7 +61,8 @@ int	check_cmd(char *cmd)
 		token = get_token_check();
 		if (!token)
 			return (FAILURE);
-		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1 || peek_token() == EOL))
+		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1
+				|| peek_token() == EOL))
 		{
 			print_error_unexpected(token->cmd[0]);
 			return (FAILURE);
