@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 08:10:57 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:25:08 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	exec_one_builtin(t_tree *node)
 	data = _data();
 	exec_fd(node);
 	exec_builtin(node);
+	close(node->token->fd_in);
+	close(node->token->fd_out);
 	dup2_io(data->save_in, data->save_out);
 }
 
