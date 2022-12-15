@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 17:35:18 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 21:17:33 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,15 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	char	*cmd;
 	t_data	*data;
-	t_tree	*tree;
 	
 	using_history();
 	env_init_list(env);
 	data = _data();
-	tree = *_tree();
 	while (42)
 	{
 		data->nb_heredoc = 0;
-		data->save_in = dup(STDIN);
-		data->save_out = dup(STDOUT);
+		data->save_in = dup(0);
+		data->save_out = dup(1);
 		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)

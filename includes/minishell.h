@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 17:34:51 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 21:23:30 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 # define STEP_PRINT_TREE		10
 # define NO						0
 # define YES					1
+# define FORK					1
+# define MAIN					0
 
 /* ------------------------------- token_type ------------------------------- */
 # define AND					0
