@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/16 17:32:00 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/16 21:51:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	main(int ac, char **av, char **env)
 	while (42)
 	{
 		data->nb_heredoc = 0;
-		data->save_in = dup(STDIN);
-		data->save_out = dup(STDOUT);
+		data->save_in = dup(0);
+		data->save_out = dup(1);
 		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)

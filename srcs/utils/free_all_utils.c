@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:43:48 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 18:32:22 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:41:53 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	free_matrix(char **matrix)
 	while (matrix[i])
 	{
 		free(matrix[i]);
-		matrix[i] = NULL;
 		i++;
 	}
 	free(matrix);
