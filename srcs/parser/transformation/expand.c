@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/16 17:57:07 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:17:40 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ char	**expand(char **cmd)
 		expcmd[i] = expand_env_var(cmd[i]);
 		i++;
 	}
-	print_tab(expcmd);
-	exit(0);
 	expcmd[i] = NULL;
 	free_matrix(cmd);
 	return (expcmd);
