@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:03:15 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 16:58:44 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:32:09 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	write_one_file(char *file, char *delimiter)
 
 void	write_node_heredoc(t_tree *node)
 {
-	t_data	*data;
 	int		i;
 
 	i = 0;
-	data = _data();
 	while (i < node->token->nb_file_in)
 	{
 		if (node->token->infile[i].type == HEREDOC)

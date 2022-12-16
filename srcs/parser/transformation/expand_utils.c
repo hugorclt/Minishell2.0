@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:47 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 18:24:07 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:32:29 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// static int	change_quote_status(int status)
+// {
+// 	if (status == OPEN)
+// 		status = CLOSE;
+// 	else
+// 		status = OPEN;
+// 	return (status);
+// }
 
 int	get_valid_dollar_index(char *cmd)
 {
@@ -59,11 +68,11 @@ char	*get_key(char *cmd)
 	return (key);
 }
 
-char	*get_before_dollar(char *cmd)
+char	*get_before_dollar(char *cmd, int index_dollar)
 {
 	char	*before;
 
-	before = ft_substr(cmd, 0, get_valid_dollar_index(cmd));
+	before = ft_substr(cmd, 0, index_dollar);
 	if (!before)
 		return (NULL);
 	return (before);

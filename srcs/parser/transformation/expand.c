@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/15 18:32:03 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:33:09 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 static char	*expand_env_var(char *cmd)
 {
+	int		index_dollar;
 	char	*key;
 	char	*expvalue;
 	char	*dollar_value;
 	char	*before_dollar;
 
 	expvalue = NULL;
+	index_dollar = get_valid_dollar_index(cmd);
 	while (ft_strchr(cmd, '$'))
 	{
-		before_dollar = get_before_dollar(cmd);
+		before_dollar = get_before_dollar(cmd, index_dollar);
 		key = get_key(cmd);
 		dollar_value = get_dollar_value(cmd, key, before_dollar);
 		expvalue = ft_expjoin_free(expvalue, before_dollar, BOTH);
 		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
-		cmd = ft_strchr(cmd, '$') + ft_strlen(key) + 1;
+		cmd += index_dollar + ft_strlen(key) + ft_strlen("$");
+		index_dollar = get_valid_dollar_index(cmd);
 		free(key);
 	}
-	if (*cmd && (cmd[1] != '\0' || *cmd != '\''))
+	if (*cmd)
 		expvalue = ft_expjoin_free(expvalue, cmd, S1);
 	return (expvalue);
 }
@@ -51,6 +54,8 @@ char	**expand(char **cmd)
 		expcmd[i] = expand_env_var(cmd[i]);
 		i++;
 	}
+	print_tab(expcmd);
+	exit(0);
 	expcmd[i] = NULL;
 	free_matrix(cmd);
 	return (expcmd);
