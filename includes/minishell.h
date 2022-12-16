@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/16 17:30:54 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:50:34 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,7 +295,7 @@ bool		is_valid_filename(char *request, char *filename, int i, int j);
 int			nb_valid_filename(char *str);
 int			get_new_matrix_len(char **old_matrix);
 int			get_valid_dollar_index(char *cmd);
-char		*get_key(char *cmd);
+char		*get_key(char *cmd, int index_dollar);
 char		*get_before_dollar(char *cmd, int index_dollar);
 char		*get_dollar_value(char *cmd, char *key, char *before_dollar);
 char		*unquote_line(char *cmd);

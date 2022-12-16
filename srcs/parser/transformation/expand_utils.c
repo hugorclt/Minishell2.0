@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:47 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/16 17:32:29 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:56:12 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,24 @@ int	get_valid_dollar_index(char *cmd)
 			return (index);
 		index++;
 	}
-	return (index);
+	return (-1);
 }
 
-char	*get_key(char *cmd)
+char	*get_key(char *cmd, int index_dollar)
 {
 	int		len_key;
 	int		index;
 	char	*key;
 
 	len_key = 0;
-	index = ft_strchr_index(cmd, '$') + 1;
+	index = index_dollar + 1;
 	while (cmd[index] && cmd[index] != '$'
 		&& cmd[index] != '\'' && cmd[index] != '"')
 	{
 		index++;
 		len_key++;
 	}
-	index = ft_strchr_index(cmd, '$') + 1;
+	index = index_dollar + 1;
 	key = ft_substr(cmd, index, len_key);
 	return (key);
 }

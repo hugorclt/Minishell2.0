@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/16 17:33:09 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:57:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static char	*expand_env_var(char *cmd)
 
 	expvalue = NULL;
 	index_dollar = get_valid_dollar_index(cmd);
-	while (ft_strchr(cmd, '$'))
+	while (index_dollar >= 0)
 	{
 		before_dollar = get_before_dollar(cmd, index_dollar);
-		key = get_key(cmd);
+		key = get_key(cmd, index_dollar);
 		dollar_value = get_dollar_value(cmd, key, before_dollar);
 		expvalue = ft_expjoin_free(expvalue, before_dollar, BOTH);
 		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
