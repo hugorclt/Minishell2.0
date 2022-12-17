@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/16 21:51:13 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:05:38 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av, char **env)
 	data = _data();
 	while (42)
 	{
+		*(_tree()) = NULL;
 		data->nb_heredoc = 0;
 		data->save_in = dup(0);
 		data->save_out = dup(1);
