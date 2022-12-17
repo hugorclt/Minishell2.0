@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unquoting.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:47:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 08:18:53 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:00:23 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	quote_error(char c)
 
 static int	len_wo_quote(char *cmd)
 {
-	int		len;
 	int		i;
+	int		len;
 	char	first_quotes;
 
 	i = 0;
@@ -38,10 +38,7 @@ static int	len_wo_quote(char *cmd)
 			while (cmd[i] && cmd[i] != first_quotes)
 				i++;
 			if (!cmd[i])
-			{
-				quote_error(first_quotes);
-				return (-1);
-			}
+				return (quote_error(first_quotes), -1);
 			else
 				len++;
 		}
@@ -70,16 +67,16 @@ static void	copy_interior(char *cmd, int *i, int *j, char **ret)
 char	*unquote_line(char *cmd)
 {
 	int		i;
-	char	*ret;
 	int		j;
 	int		len;
+	char	*ret;
 
 	i = 0;
 	j = 0;
 	len = len_wo_quote(cmd);
 	if (len == -1)
 		return (NULL);
-	ret = malloc(sizeof(char) * len + 1);
+	ret = ft_calloc(sizeof(char), len + 1);
 	if (!ret)
 		free_all(QUIT);
 	while (cmd[i])
@@ -96,7 +93,6 @@ char	*unquote_line(char *cmd)
 		i++;
 		j++;
 	}
-	ret[j] = '\0';
 	return (free(cmd), ret);
 }
 

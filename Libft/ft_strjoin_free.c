@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:16:27 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/05 16:05:47 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:21:39 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,8 @@ char	*ft_strjoin_char(char *cmd, char c)
 	return (free(cmd), ret);
 }
 
-char	*ft_expjoin_free(char *s1, char *s2, int to_free)
+static void	ft_free_choice(char *s1, char *s2, int to_free)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*new_str;
-
-	if (!s1)
-		return (ft_strdup(s2));
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	new_str = ft_calloc(sizeof(char), s1_len + s2_len + 1);
-	if (new_str == NULL)
-		return (NULL);
-	ft_strlcpy(new_str, s1, s1_len + 1);
-	ft_strlcpy(new_str + s1_len, s2, s2_len + 1);
 	if (to_free == S1)
 		free(s1);
 	else if (to_free == S2)
@@ -109,5 +96,26 @@ char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 		free(s1);
 		free(s2);
 	}
+}
+
+char	*ft_expjoin_free(char *s1, char *s2, int to_free)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_str;
+
+	if (!s1)
+	{
+		s1 = ft_strdup(s2);
+		return (free(s2), s1);
+	}
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_str = ft_calloc(sizeof(char), s1_len + s2_len + 1);
+	if (new_str == NULL)
+		return (NULL);
+	ft_strlcpy(new_str, s1, s1_len + 1);
+	ft_strlcpy(new_str + s1_len, s2, s2_len + 1);
+	ft_free_choice(s1, s2, to_free);
 	return (new_str);
 }

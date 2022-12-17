@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:36:07 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:37:05 by lbisson          ###   ########.fr       */
+/*   Created: 2022/12/12 22:56:19 by lbisson           #+#    #+#             */
+/*   Updated: 2022/12/12 22:56:50 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(char *key, char *value)
+void	init_parent(t_tree *node, t_tree *parent)
 {
-	t_list	*lst;
+	if (!node)
+		return ;
+	init_parent(node->left, node);
+	node->parent = parent;
+	init_parent(node->right, node);
+}
 
-	lst = malloc(sizeof(t_list));
-	if (lst == NULL)
+t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
+{
+	t_tree	*node;
+
+	node = ft_calloc(1, sizeof(t_tree));
+	if (!node)
 		free_all(QUIT);
-	lst->key = key;
-	lst->value = value;
-	lst->next = NULL;
-	return (lst);
+	node->token = token;
+	node->left = left;
+	node->right = right;
+	return (node);
 }

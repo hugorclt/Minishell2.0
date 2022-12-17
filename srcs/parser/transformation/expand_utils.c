@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:47 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 16:31:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:24:07 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_valid_dollar_index(char *cmd)
 {
-	int	index;
+	int		index;
 	t_data	*data;
 
 	index = 0;
@@ -22,16 +22,16 @@ int	get_valid_dollar_index(char *cmd)
 	while (cmd[index])
 	{
 		if (cmd[index] == '\"' && data->doubleq == CLOSE
-				&& data->singleq == CLOSE)
+			&& data->singleq == CLOSE)
 			data->doubleq = OPEN;
 		else if (cmd[index] == '\"' && data->doubleq == OPEN
-				&& data->singleq == CLOSE)
+			&& data->singleq == CLOSE)
 			data->doubleq = CLOSE;
 		if (cmd[index] == '\'' && data->singleq == CLOSE
-				&& data->doubleq == CLOSE)
+			&& data->doubleq == CLOSE)
 			data->singleq = OPEN;
 		else if (cmd[index] == '\'' && data->singleq == OPEN
-				&& data->doubleq == CLOSE)
+			&& data->doubleq == CLOSE)
 			data->singleq = CLOSE;
 		if (cmd[index] == '$' && data->singleq == CLOSE)
 			return (index);
@@ -48,7 +48,7 @@ char	*get_key(char *cmd)
 
 	len_key = 0;
 	index = ft_strchr_index(cmd, '$') + 1;
-	while (cmd[index] && cmd[index] != '$' 
+	while (cmd[index] && cmd[index] != '$'
 		&& cmd[index] != '\'' && cmd[index] != '"')
 	{
 		index++;

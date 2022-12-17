@@ -6,13 +6,13 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/08 14:34:03 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:26:05 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tree 	*create_simple_cmd(void)
+t_tree	*create_simple_cmd(void)
 {
 	t_tree	*node;
 
@@ -23,19 +23,6 @@ t_tree 	*create_simple_cmd(void)
 	node->token = get_token();
 	if (!node->token)
 		return (NULL);
-	return (node);
-}
-
-t_tree	*add_node(t_token *token, t_tree *left, t_tree *right)
-{
-	t_tree	*node;
-
-	node = ft_calloc(1, sizeof(t_tree));
-	if (!node)
-		free_all(QUIT);
-	node->token = token;
-	node->left = left;
-	node->right = right;
 	return (node);
 }
 
@@ -78,12 +65,12 @@ t_tree	*create_pipeline(void)
 	return (NULL);
 }
 
-t_tree 	*create_and_or(void)
+t_tree	*create_and_or(void)
 {
 	t_token	*token;
 	t_tree	*left;
 	t_tree	*right;
-	
+
 	left = create_pipeline();
 	while (42)
 	{
@@ -102,18 +89,9 @@ t_tree 	*create_and_or(void)
 	}
 }
 
-void	init_parent(t_tree *node, t_tree *parent)
-{
-	if (!node)
-		return ;
-	init_parent(node->left, node);
-	node->parent = parent;
-	init_parent(node->right, node);
-}
-
 int	create_tree(void)
 {
-	t_tree 	**tree;
+	t_tree	**tree;
 
 	tree = _tree();
 	(*tree) = create_and_or();

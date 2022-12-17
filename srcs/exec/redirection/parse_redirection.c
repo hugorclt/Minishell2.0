@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/13 16:14:15 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:50:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	count_infile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], "<<", 2))
 		{
-			i+= 1;
+			i += 1;
 			len++;
 		}
 		else if (!ft_strncmp(cmd[i], "<", 1))
@@ -45,7 +45,7 @@ static int	count_outfile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], ">>", 2))
 		{
-			i+= 1;
+			i += 1;
 			len++;
 		}
 		else if (!ft_strncmp(cmd[i], ">", 1))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/22 01:39:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:54:12 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,16 @@ int	is_quoted(int index, char *cmd)
 	return (FALSE);
 }
 
+
+
 int	find_end(void)
 {
 	t_scanner	*scanner;
 	int			i;
-	int			is_tok;
 	int			j;
+	int			is_tok;
 
-	scanner = _scanner();
-	i = scanner->start_pos;
-	skip_whitespaces(scanner->cmd, &i);
-	is_tok = is_token(scanner->cmd, i);
+	init_var(&scanner, &i, &is_tok);
 	while (scanner->cmd[i])
 	{
 		j = 0;

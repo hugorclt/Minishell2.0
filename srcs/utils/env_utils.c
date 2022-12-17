@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:24:54 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/07 18:16:52 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:16:33 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	env_add_node(char *key, char *value)
 {
 	t_list	**lst;
-	
+
 	lst = _list();
 	ft_lstadd_back(lst, ft_lstnew(key, value));
 }
@@ -38,7 +38,7 @@ void	env_init_list(char **env)
 {
 	int		i;
 	int		equal_pos;
-	
+
 	i = 0;
 	while (env[i])
 	{
@@ -58,13 +58,16 @@ void	env_change_value(char *key, char *new_value)
 {
 	t_list	*env;
 
-	env	= *_list();
+	env = *_list();
 	while (env && ft_strncmp(env->key, key, ft_strlen(key)) != 0)
 		env = env->next;
 	if (ft_strncmp(env->key, key, ft_strlen(key)) == 0)
 	{
 		free(env->value);
-		env->value = ft_strdup(new_value);
+		if (!new_value)
+			env->value = NULL;
+		else
+			env->value = ft_strdup(new_value);
 	}
 }
 

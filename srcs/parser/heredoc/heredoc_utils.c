@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:39:26 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 17:12:18 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/12/15 17:34:31 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/12/15 17:34:44 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+static void	unlink_file(t_token *token)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while ((s1[i] == s2[i]) && (s1[i] && s2[i]) && i < n - 1)
+	while (i < token->nb_file_in)
+	{
+		if (token->infile[i].type == HEREDOC)
+			unlink(token->infile[i].file);
 		i++;
-	if (n > 0)
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	else
-		return (0);
+	}
+}
+
+void	unlink_heredoc(t_tree *node)
+{
+	if (!node)
+		return ;
+	unlink_heredoc(node->left);
+	if (node->token->nb_file_in)
+		unlink_file(node->token);
+	unlink_heredoc(node->right);
 }

@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/13 16:50:29 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/15 17:35:49 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,23 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtin_pwd.c			 \
 				srcs/exec/builtins/builtin_unset.c			 \
 				srcs/exec/redirection/parse_redirection.c	 \
+				srcs/exec/redirection/open_redirection.c 	 \
 				srcs/parser/checker/check_cmd.c				 \
 				srcs/parser/lexer/join_redir.c				 \
 				srcs/parser/lexer/lexer_utils.c				 \
 				srcs/parser/lexer/lexer.c					 \
 				srcs/parser/parser/parser.c					 \
+				srcs/parser/parser/parser_utils.c			 \
 				srcs/parser/transformation/expand_utils.c	 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
 				srcs/parser/transformation/unquoting.c		 \
+				srcs/parser/transformation/clean_redirection.c\
 				srcs/parser/heredoc/heredoc.c 				 \
+				srcs/parser/heredoc/create_file.c			 \
+				srcs/parser/heredoc/heredoc_utils.c			 \
+				srcs/parser/transformation/wildcards.c		 \
+				srcs/parser/transformation/wildcards_utils.c \
 				srcs/utils/list_functions/ft_lst_remove_if.c \
 				srcs/utils/list_functions/ft_lstadd_back.c	 \
 				srcs/utils/list_functions/ft_lstadd_front.c	 \
@@ -50,7 +57,8 @@ FILES 		=	srcs/main.c									 \
 				srcs/utils/env_utils.c						 \
 				srcs/utils/env_utils2.c						 \
 				srcs/utils/error.c							 \
-				srcs/utils/free.c							 \
+				srcs/utils/free_all.c						 \
+				srcs/utils/free_all_utils.c					 \
 				srcs/utils/utils_cmd.c						 \
 				srcs/utils/last_cmd_status.c				 \
 				srcs/utils/utils/len.c						 \

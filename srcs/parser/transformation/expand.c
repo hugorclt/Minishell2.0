@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 17:03:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:32:03 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *expand_env_var(char *cmd)
+static char	*expand_env_var(char *cmd)
 {
 	char	*key;
 	char	*expvalue;
 	char	*dollar_value;
 	char	*before_dollar;
-	
+
 	expvalue = NULL;
 	while (ft_strchr(cmd, '$'))
 	{
 		before_dollar = get_before_dollar(cmd);
 		key = get_key(cmd);
 		dollar_value = get_dollar_value(cmd, key, before_dollar);
-		expvalue = ft_expjoin_free(expvalue, before_dollar, S2);
+		expvalue = ft_expjoin_free(expvalue, before_dollar, BOTH);
 		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
 		cmd = ft_strchr(cmd, '$') + ft_strlen(key) + 1;
 		free(key);
@@ -40,7 +40,7 @@ char	**expand(char **cmd)
 	int		i;
 	char	**expcmd;
 	t_data	*data;
-	
+
 	i = 0;
 	data = _data();
 	data->singleq = CLOSE;

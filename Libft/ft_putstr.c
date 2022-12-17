@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:36:07 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:37:05 by lbisson          ###   ########.fr       */
+/*   Created: 2022/12/14 13:08:47 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/12/14 13:10:17 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_list	*ft_lstnew(char *key, char *value)
+void	ft_putstr(char *str)
 {
-	t_list	*lst;
+	int	i;
 
-	lst = malloc(sizeof(t_list));
-	if (lst == NULL)
-		free_all(QUIT);
-	lst->key = key;
-	lst->value = value;
-	lst->next = NULL;
-	return (lst);
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }

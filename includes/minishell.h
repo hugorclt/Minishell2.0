@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/13 16:50:08 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/17 11:27:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 # include <stdio.h>
 # include <errno.h>
 # include <unistd.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <limits.h>
+# include <dirent.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -45,6 +48,10 @@
 # define FAILURE				1
 # define NB_TOKEN				10
 # define STEP_PRINT_TREE		10
+# define NO						0
+# define YES					1
+# define FORK					1
+# define MAIN					0
 
 /* ------------------------------- token_type ------------------------------- */
 # define AND					0
@@ -64,10 +71,10 @@
 # define FREE					2
 # define CD_ERROR				1
 # define MALLOC_ERROR			1
-# define SYNTAX_ERROR			2
-# define NOT_FOUND				127
 # define EXIT_TOO_MANY_ARGS		1
 # define EXIT_NUM_ARG_REQUIRED	2
+# define SYNTAX_ERROR			2
+# define NOT_FOUND				127
 
 /* -------------------------------- sig_type -------------------------------- */
 # define SIG_PARSE				0
@@ -89,7 +96,8 @@
 /* -------------------------------------------------------------------------- */
 /*                                  typedef                                   */
 /* -------------------------------------------------------------------------- */
-typedef void	(*t_fptr)(char **);
+typedef void			(*t_fptr)(char **);
+typedef struct dirent	t_dirent;
 
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
@@ -153,10 +161,12 @@ typedef struct s_info_cmd
 
 typedef struct s_data
 {
-	u_char		last_cmd_status;
+	size_t		last_cmd_status;
 	int			singleq;
 	int			doubleq;
 	int			nb_heredoc;
+	int			save_in;
+	int			save_out;
 	t_info_cmd	info_cmd;
 	t_list		*env;
 	t_scanner	scanner;
@@ -185,18 +195,32 @@ void		link_fd(t_tree *node);
 void		pipe_node(t_tree *node);
 void		close_pipe_used(t_tree *node);
 void		close_pipe_fd(t_tree *node);
+t_fptr		dispatch(char *str);
+void		exec_one_builtin(t_tree *node);
+
+/* --------------------------------- heredoc -------------------------------- */
+void		create_heredoc(t_tree *node);
+void		heredoc_error(char *delim);
 void		start_heredoc(void);
+void		unlink_heredoc(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int			create_tree(void);
 t_token		*append_two_token(t_token *tokone, t_token *toketwo);
 t_tree		*create_and_or(void);
+t_tree		*add_node(t_token *token, t_tree *left, t_tree *right);
+void		init_parent(t_tree *node, t_tree *parent);
 
-/* ---------------------------- parse_redirection --------------------------- */
-void		create_temp_file(t_token **token, char *delimiter, int index);
+/* ---------------------------- redirection --------------------------- */
 void		parse_redirection(t_token **token, char **cmd);
+char		**clean_redirection(char **str, int nb_in, int nb_out);
+void		open_file(t_tree *node);
 
 /* ---------------------------------- lexer --------------------------------- */
+int			check_cmd(char *cmd);
+int			is_redir(int id);
+int			strjoin_redir(t_token **token, char **cmd);
+int			peek_token_tree(void);
 int			is_token(char *str, int i);
 int			find_token_id(char *token);
 int			is_quoted(int index, char *cmd);
@@ -206,10 +230,7 @@ char		*scan_token(void);
 void		init_scanner(char *cmd);
 void		skip_whitespaces(char *cmd, int *i);
 t_token		*get_token(void);
-int			check_cmd(char *cmd);
-int			is_redir(int id);
-int			strjoin_redir(t_token **token, char **cmd);
-int			peek_token_tree(void);
+void		init_var(t_scanner **scanner, int *i, int *is_tok);
 
 /* -------------------------------- builtins -------------------------------- */
 void		builtin_cd(char **arg);
@@ -229,11 +250,15 @@ t_tree		**_tree(void);
 
 /* ---------------------------------- error --------------------------------- */
 void		error_parsing(char *msg);
-void		print_error_unexpected(char *cmd);
 void		error_opening(char *str);
+void		print_error_unexpected(char *cmd);
+void		exec_error(char *str, char **env);
 
 /* ---------------------------------- free ---------------------------------- */
+void		free_env(void);
 void		free_all(int flag);
+void		free_tree(t_tree *root);
+void		free_file(t_token *token);
 void		free_matrix(char **matrix);
 void		free_token(t_token *token);
 
@@ -267,6 +292,10 @@ void		init_nb_cmd(t_tree *tree);
 t_tree		*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
+bool		is_valid_wildcard(char *str);
+bool		is_valid_filename(char *request, char *filename, int i, int j);
+int			nb_valid_filename(char *str);
+int			get_new_matrix_len(char **old_matrix);
 int			get_valid_dollar_index(char *cmd);
 char		*get_key(char *cmd);
 char		*get_before_dollar(char *cmd);
@@ -275,5 +304,6 @@ char		*unquote_line(char *cmd);
 char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);
 char		**expand(char **args);
+char		**wildcards(char **old_matrix);
 
 #endif

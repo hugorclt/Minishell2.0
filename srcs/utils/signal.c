@@ -28,9 +28,9 @@ void	sig_handle(int sig)
 
 void	sig_heredoc(int sig)
 {
-	(void)sig;
 	t_data	*data;
 
+	(void)sig;
 	data = _data();
 	data->nb_heredoc = -1;
 	close(STDIN_FILENO);

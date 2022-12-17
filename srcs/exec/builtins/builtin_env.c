@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:23:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 16:41:01 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:40:40 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static void	check_env_error(char **arg)
 {
 	if (arg[1])
 	{
-		dprintf(STDERR, "mimishell: env: '%s': No such file or directory\n",
-					arg[1]);
+		ft_putstr_fd("mimishell: env: '", 2);
+		ft_putstr_fd(arg[1], 2);
+		ft_putstr_fd("': No such file or directory\n", 2);
 		update_last_cmd_status(NOT_FOUND);
 	}
 }
@@ -25,16 +26,14 @@ static void	check_env_error(char **arg)
 void	builtin_env(char **arg)
 {
 	t_list	*env;
-	t_data	*data;
 
 	env = *_list();
-	data = _data();
 	check_env_error(arg);
-	if (data->last_cmd_status == NOT_FOUND)
+	if (get_last_cmd_status() == NOT_FOUND)
 		return ;
 	while (env)
 	{
-		if (*(env->value) == '\0')
+		if (!env->value)
 			printf("%s\n", env->key);
 		else
 			printf("%s=%s\n", env->key, env->value);

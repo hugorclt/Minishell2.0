@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:33:13 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/11/24 12:53:40 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:42:25 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	strjoin_redir_redir(t_token **token, char **cmd)
 
 int	strjoin_redir_cmd(t_token **token, char **cmd)
 {
-	char *tok;
-	
+	char	*tok;
+
 	if ((*token)->id == CMD)
 	{
 		while (is_redir(peek_token()))
@@ -67,6 +67,7 @@ int	strjoin_redir_cmd(t_token **token, char **cmd)
 	}
 	return (SUCCESS);
 }
+
 int	strjoin_redir(t_token **token, char **cmd)
 {
 	if (strjoin_redir_cmd(token, cmd) == FAILURE)

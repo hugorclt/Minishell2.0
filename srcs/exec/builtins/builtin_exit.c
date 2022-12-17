@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:33:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/08 16:41:07 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/12 23:41:50 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void	error_non_num_arg(char *arg)
 {
-	dprintf(STDERR, "mimishell: exit: %s: numeric argument required\n", arg);
+	ft_putstr_fd("mimishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	update_last_cmd_status(EXIT_NUM_ARG_REQUIRED);
 }
 
 static void	error_too_many_args(void)
 {
-	dprintf(STDERR, "mimishell: exit: too many arguments\n");
+	ft_putstr_fd("mimishell: exit: too many arguments\n", 2);
 	update_last_cmd_status(EXIT_TOO_MANY_ARGS);
 }
 
@@ -42,7 +44,7 @@ static int	is_num_arg(char *str)
 static void	check_error_exit(char **arg)
 {
 	int	status;
-	
+
 	if (!arg[1])
 		return ;
 	status = ft_atoi(arg[1]);
@@ -52,17 +54,13 @@ static void	check_error_exit(char **arg)
 		error_too_many_args();
 	else
 		update_last_cmd_status(status);
-		
 }
 
 void	builtin_exit(char **arg)
 {
-	t_data	*data;
-	
-	data = _data();
 	printf("exit\n");
 	check_error_exit(arg);
-	if (data->last_cmd_status == EXIT_TOO_MANY_ARGS)
-		return;
-	free_all(QUIT);// voir avec hugo psk faut tout free
+	if (get_last_cmd_status() == EXIT_TOO_MANY_ARGS)
+		return ;
+	free_all(QUIT);
 }
