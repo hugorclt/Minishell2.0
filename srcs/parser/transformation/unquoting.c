@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:47:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/17 10:41:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:09:53 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*unquote_line(char *cmd)
 		return (NULL);
 	while (cmd[i])
 	{
-		if ((cmd[i] == '\'' || cmd[i] == '"'))
+		while ((cmd[i] == '\'' || cmd[i] == '"'))
 		{
 			copy_interior(cmd, &i, &j, &ret);
 			if (!cmd[i])
