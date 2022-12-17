@@ -89,8 +89,7 @@
 /* -------------------------------------------------------------------------- */
 /*                                  typedef                                   */
 /* -------------------------------------------------------------------------- */
-typedef unsigned char u_char;
-typedef void (*t_fptr)(char **);
+typedef void	(*t_fptr)(char **);
 
 /* -------------------------------------------------------------------------- */
 /*                                  structure                                 */
@@ -102,7 +101,7 @@ typedef struct s_file
 	int		type;
 }	t_file;
 
-typedef	struct s_choice
+typedef struct s_choice
 {
 	t_fptr	callback;
 	char	*fun_name;
@@ -128,7 +127,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct	s_scanner
+typedef struct s_scanner
 {
 	int		start_pos;
 	int		end_pos;
@@ -136,12 +135,11 @@ typedef struct	s_scanner
 	char	*cmd;
 }	t_scanner;
 
-
 typedef struct s_tree
 {
 	t_token			*token;
-	struct s_tree 	*left;
-	struct s_tree 	*right;
+	struct s_tree	*left;
+	struct s_tree	*right;
 	struct s_tree	*parent;
 }	t_tree;
 
@@ -169,58 +167,58 @@ typedef struct s_data
 /*                                  prototypes                                */
 /* -------------------------------------------------------------------------- */
 /* ----------------------------------- env ---------------------------------- */
-char	*env_get_value(char	*key);
-char	*env_get_key(char *key);
-char	**env_to_matrix(void);
-void	env_unset_key(char *key);
-void	env_init_list(char **env);
-void	env_add_node(char *key, char *value);
-void	env_change_value(char *key, char *new_value);
+char		*env_get_value(char	*key);
+char		*env_get_key(char *key);
+char		**env_to_matrix(void);
+void		env_unset_key(char *key);
+void		env_init_list(char **env);
+void		env_add_node(char *key, char *value);
+void		env_change_value(char *key, char *new_value);
 
 /* -------------------------------- execution ------------------------------- */
-char	*join_cmdpath(char *cmd);
-void	exec_choice(t_tree *node);
-void	exec_cmd(t_tree *node);
-void	launch_exec(t_tree *node);
-void	wait_cmd(t_tree *node);
-void	link_fd(t_tree *node);
-void	pipe_node(t_tree *node);
-void	close_pipe_used(t_tree *node);
-void	close_pipe_fd(t_tree *node);
-void	start_heredoc(void);
+char		*join_cmdpath(char *cmd);
+void		exec_choice(t_tree *node);
+void		exec_cmd(t_tree *node);
+void		launch_exec(t_tree *node);
+void		wait_cmd(t_tree *node);
+void		link_fd(t_tree *node);
+void		pipe_node(t_tree *node);
+void		close_pipe_used(t_tree *node);
+void		close_pipe_fd(t_tree *node);
+void		start_heredoc(void);
 
 /* --------------------------------- parser --------------------------------- */
-int		create_tree(void);
-t_token	*append_two_token(t_token *tokone, t_token *toketwo);
-t_tree 	*create_and_or(void);
+int			create_tree(void);
+t_token		*append_two_token(t_token *tokone, t_token *toketwo);
+t_tree		*create_and_or(void);
 
 /* ---------------------------- parse_redirection --------------------------- */
-void	create_temp_file(t_token **token, char *delimiter, int index);
-void	parse_redirection(t_token **token, char **cmd);
+void		create_temp_file(t_token **token, char *delimiter, int index);
+void		parse_redirection(t_token **token, char **cmd);
 
 /* ---------------------------------- lexer --------------------------------- */
-int		is_token(char *str, int i);
-int		find_token_id(char *token);
-int		is_quoted(int index, char *cmd);
-int		find_end(void);
-int		peek_token(void);
-char	*scan_token(void);
-void	init_scanner(char *cmd);
-void	skip_whitespaces(char *cmd, int *i);
-t_token	*get_token(void);
-int		check_cmd(char *cmd);
-int		is_redir(int id);
-int		strjoin_redir(t_token **token, char **cmd);
-int 	peek_token_tree(void);
+int			is_token(char *str, int i);
+int			find_token_id(char *token);
+int			is_quoted(int index, char *cmd);
+int			find_end(void);
+int			peek_token(void);
+char		*scan_token(void);
+void		init_scanner(char *cmd);
+void		skip_whitespaces(char *cmd, int *i);
+t_token		*get_token(void);
+int			check_cmd(char *cmd);
+int			is_redir(int id);
+int			strjoin_redir(t_token **token, char **cmd);
+int			peek_token_tree(void);
 
 /* -------------------------------- builtins -------------------------------- */
-void	builtin_cd(char **arg);
-void	builtin_echo(char **arg);
-void	builtin_env(char **arg);
-void	builtin_exit(char **arg);
-void	builtin_export(char **arg);
-void	builtin_pwd(char **arg);
-void	builtin_unset(char **arg);
+void		builtin_cd(char **arg);
+void		builtin_echo(char **arg);
+void		builtin_env(char **arg);
+void		builtin_exit(char **arg);
+void		builtin_export(char **arg);
+void		builtin_pwd(char **arg);
+void		builtin_unset(char **arg);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -230,52 +228,52 @@ t_list		**_list(void);
 t_tree		**_tree(void);
 
 /* ---------------------------------- error --------------------------------- */
-void	error_parsing(char *msg);
-void	print_error_unexpected(char *cmd);
-void	error_opening(char *str);
+void		error_parsing(char *msg);
+void		print_error_unexpected(char *cmd);
+void		error_opening(char *str);
 
 /* ---------------------------------- free ---------------------------------- */
-void	free_all(int flag);
-void	free_matrix(char **matrix);
-void	free_token(t_token *token);
+void		free_all(int flag);
+void		free_matrix(char **matrix);
+void		free_token(t_token *token);
 
 /* ----------------------------------- len ---------------------------------- */
-int	tab_len(char **cmd);
+int			tab_len(char **cmd);
 
 /* ------------------------------ list_function ----------------------------- */
-int		ft_lstsize(t_list *lst);
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstadd_front(t_list **alst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void 	ft_lst_remove_if(t_list **begin_list, char *key_ref);
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstnew(char *key, char *value);
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int			ft_lstsize(t_list *lst);
+void		ft_lstiter(t_list *lst, void (*f)(void *));
+void		ft_lstadd_back(t_list **alst, t_list *new);
+void		ft_lstadd_front(t_list **alst, t_list *new);
+void		ft_lstclear(t_list **lst, void (*del)(void*));
+void		ft_lstdelone(t_list *lst, void (*del)(void*));
+void		ft_lst_remove_if(t_list **begin_list, char *key_ref);
+t_list		*ft_lstlast(t_list *lst);
+t_list		*ft_lstnew(char *key, char *value);
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* ---------------------------------- print --------------------------------- */
-void	print_tab(char **tab);
-void	print_lst(void);
-void	print_tree(void);
+void		print_tab(char **tab);
+void		print_lst(void);
+void		print_tree(void);
 
 /* ---------------------------------- utils --------------------------------- */
-int		get_last_cmd_status(void);
-void	update_last_cmd_status(int status);
-void	sig_choice(int choice);
-void	init_nb_cmd(t_tree *tree);
+int			get_last_cmd_status(void);
+void		update_last_cmd_status(int status);
+void		sig_choice(int choice);
+void		init_nb_cmd(t_tree *tree);
 
 /* ---------------------------------- tree ---------------------------------- */
-t_tree	*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
+t_tree		*create_node(t_token *token, t_tree *l_child, t_tree *r_child);
 
 /* ----------------------------- transformation ----------------------------- */
-int		get_valid_dollar_index(char *cmd);
-char	*get_key(char *cmd);
-char	*get_before_dollar(char *cmd);
-char	*get_dollar_value(char *cmd, char *key, char *before_dollar);
-char	*unquote_line(char *cmd);
-char	**split_quoted(char *cmd);
-char	**unquote(char **cmd);
-char	**expand(char **args);
+int			get_valid_dollar_index(char *cmd);
+char		*get_key(char *cmd);
+char		*get_before_dollar(char *cmd);
+char		*get_dollar_value(char *cmd, char *key, char *before_dollar);
+char		*unquote_line(char *cmd);
+char		**split_quoted(char *cmd);
+char		**unquote(char **cmd);
+char		**expand(char **args);
 
 #endif

@@ -16,7 +16,7 @@ void	init_pid(void)
 {
 	t_info_cmd	*info_cmd;
 	t_tree		*tree;
-	
+
 	tree = *_tree();
 	info_cmd = _info_cmd();
 	init_nb_cmd(tree);
@@ -27,11 +27,11 @@ void	init_pid(void)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
 	char	*cmd;
 	t_data	*data;
-	
+	(void)ac;
+	(void)av;
+
 	using_history();
 	env_init_list(env);
 	data = _data();
@@ -51,7 +51,6 @@ int	main(int ac, char **av, char **env)
 				init_pid();
 				start_heredoc();
 				sig_choice(SIG_EXEC);
-				//print_tree();
 				pipe_node(*_tree());
 				link_fd(*_tree());
 				launch_exec(*_tree());
