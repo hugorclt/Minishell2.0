@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/17 11:30:01 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/17 10:40:29 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
 				srcs/parser/transformation/unquoting.c		 \
+				srcs/parser/transformation/unquoting_utils.c \
 				srcs/parser/transformation/clean_redirection.c\
 				srcs/parser/heredoc/heredoc.c 				 \
 				srcs/parser/heredoc/create_file.c			 \

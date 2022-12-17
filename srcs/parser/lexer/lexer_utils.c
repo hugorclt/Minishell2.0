@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:54:12 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/17 10:34:53 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	is_quoted(int index, char *cmd)
 		return (TRUE);
 	return (FALSE);
 }
-
-
 
 int	find_end(void)
 {

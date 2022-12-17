@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unquoting.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:47:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 23:00:23 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/17 10:41:24 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	quote_error(char c)
 	free_all(FREE);
 }
 
-static int	len_wo_quote(char *cmd)
+int	len_wo_quote(char *cmd)
 {
 	int		i;
 	int		len;
@@ -72,13 +72,8 @@ char	*unquote_line(char *cmd)
 	char	*ret;
 
 	i = 0;
-	j = 0;
-	len = len_wo_quote(cmd);
-	if (len == -1)
+	if (unquote_line_init(cmd, &j, &len, &ret) == -1)
 		return (NULL);
-	ret = ft_calloc(sizeof(char), len + 1);
-	if (!ret)
-		free_all(QUIT);
 	while (cmd[i])
 	{
 		if ((cmd[i] == '\'' || cmd[i] == '"'))

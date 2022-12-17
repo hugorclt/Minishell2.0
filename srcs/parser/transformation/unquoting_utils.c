@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_init.c                                       :+:      :+:    :+:   */
+/*   unquoting_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 11:26:49 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/17 10:34:57 by hrecolet         ###   ########.fr       */
+/*   Created: 2022/12/17 10:39:04 by hrecolet          #+#    #+#             */
+/*   Updated: 2022/12/17 10:41:12 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_var(t_scanner **scanner, int *i, int *is_tok)
+int	unquote_line_init(char *cmd, int *j, int *len, char **ret)
 {
-	(*scanner) = _scanner();
-	(*i) = (*scanner)->start_pos;
-	skip_whitespaces((*scanner)->cmd, i);
-	(*is_tok) = is_token((*scanner)->cmd, *i);
+	*j = 0;
+	(*len) = len_wo_quote(cmd);
+	if ((*len) == -1)
+		return (-1);
+	(*ret) = ft_calloc(sizeof(char), (*len) + 1);
+	if (!(*ret))
+		free_all(QUIT);
+	return (1);
 }
