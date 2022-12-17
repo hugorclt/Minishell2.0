@@ -6,7 +6,7 @@
 #    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/15 17:35:49 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/17 11:30:01 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/lexer/join_redir.c				 \
 				srcs/parser/lexer/lexer_utils.c				 \
 				srcs/parser/lexer/lexer.c					 \
+				srcs/parser/lexer/lexer_init.c				 \
 				srcs/parser/parser/parser.c					 \
 				srcs/parser/parser/parser_utils.c			 \
 				srcs/parser/transformation/expand_utils.c	 \
