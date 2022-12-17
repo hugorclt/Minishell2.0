@@ -58,7 +58,8 @@ void	print_error_unexpected(char *cmd)
 void	heredoc_error(char *delim)
 {
 	ft_putstr(PINK "mimishell:" RESET);
-	ft_putstr(" warning: here-document at line 1 delimited by end-of-file (wanted `");
+	ft_putstr(" warning: here-document at line 1 delimited \
+	by end-of-file (wanted `");
 	ft_putstr(delim);
 	ft_putstr("'\n");
 }
@@ -66,7 +67,7 @@ void	heredoc_error(char *delim)
 void	exec_error(char *str, char **env)
 {
 	t_info_cmd	*info_cmd;
-	
+
 	info_cmd = _info_cmd();
 	free_matrix(env);
 	info_cmd->index_cmd++;

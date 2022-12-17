@@ -91,11 +91,11 @@ t_token	*get_token(void)
 	if (strjoin_redir(&token, &cmd) == FAILURE)
 		return (free(cmd), free(token), NULL);
 	token->cmd = split_quoted(cmd);
-	//token->cmd = expand(token->cmd);
+	token->cmd = expand(token->cmd);
 	token->cmd = wildcards(token->cmd);
 	parse_redirection(&token, token->cmd);
-	token->cmd = clean_redirection(token->cmd, 
-		token->nb_file_in, token->nb_file_out);
+	token->cmd = clean_redirection(token->cmd,
+			token->nb_file_in, token->nb_file_out);
 	token->cmd = unquote(token->cmd);
 	token->fd_in = 0;
 	token->fd_out = 1;

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/16 17:37:09 by lbisson          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/15 21:27:41 by hrecolet         ###   ########.fr       */
->>>>>>> hugo
+/*   Updated: 2022/12/17 10:42:51 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +28,20 @@ void	exec_fd(t_tree *node)
 void	exec_builtin(t_tree	*node, int flag)
 {
 	t_fptr		builtin;
-	
+
 	builtin = dispatch(node->token->cmd[0]);
 	if (builtin)
 	{
 		(*builtin)(node->token->cmd);
-<<<<<<< HEAD
-		// free_all(QUIT);
-=======
 		if (flag == FORK)
 			free_all(QUIT);
->>>>>>> hugo
 	}
 }
 
 void	exec_one_builtin(t_tree *node)
 {
 	t_data	*data;
-	
+
 	data = _data();
 	exec_fd(node);
 	exec_builtin(node, MAIN);
@@ -60,8 +52,7 @@ void	exec_cmd(t_tree *node)
 {
 	t_info_cmd	*info_cmd;
 	char		**env;
-	
-	
+
 	info_cmd = _info_cmd();
 	if (node->token->id == CMD)
 	{
@@ -73,8 +64,8 @@ void	exec_cmd(t_tree *node)
 			exec_fd(node);
 			exec_builtin(node, FORK);
 			env = env_to_matrix();
-			if (execve(join_cmdpath(node->token->cmd[0]), node->token->cmd, env) 
-				== -1)
+			if (execve(join_cmdpath(node->token->cmd[0]),
+					node->token->cmd, env) == -1)
 				exec_error(node->token->cmd[0], env);
 		}
 		info_cmd->index_cmd++;

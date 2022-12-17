@@ -71,7 +71,6 @@ void	parse_outfile(t_token **token, char **cmd)
 		if (!ft_strncmp(cmd[i], ">>", 2))
 		{
 			(*token)->outfile[j].file = ft_strdup(cmd[i + 1]);
-			
 			(*token)->outfile[j].type = OUTFILE_APND;
 			j++;
 		}

@@ -47,4 +47,3 @@ void	free_all_fork(int flag)
 		exit(get_last_cmd_status());
 	}
 }
-

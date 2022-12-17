@@ -20,12 +20,13 @@ char	**clean_redirection(char **str, int nb_in, int nb_out)
 
 	i = 0;
 	j = 0;
-	ret = malloc(sizeof(char *) * ((tab_len(str) - (nb_in * 2 + nb_out * 2)) + 1));
+	ret = calloc(sizeof(char *),
+			((tab_len(str) - (nb_in * 2 + nb_out * 2)) + 1));
 	if (!ret)
 		return (NULL);
 	while (str[i])
 	{
-		while (!ft_strcmp(str[i], ">") || !ft_strcmp(str[i], "<") 
+		while (!ft_strcmp(str[i], ">") || !ft_strcmp(str[i], "<")
 			|| !ft_strcmp(str[i], "<<") || !ft_strcmp(str[i], ">>"))
 			i += 2;
 		if (!str[i])

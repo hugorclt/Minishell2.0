@@ -19,7 +19,7 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		printf("index: %d|%s|\n",i, tab[i]);
+		printf("index: %d|%s|\n", i, tab[i]);
 		i++;
 	}
 }

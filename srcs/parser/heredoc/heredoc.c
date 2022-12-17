@@ -45,7 +45,8 @@ void	write_node_heredoc(t_tree *node)
 	while (i < node->token->nb_file_in)
 	{
 		if (node->token->infile[i].type == HEREDOC)
-			write_one_file(node->token->infile[i].file, node->token->infile[i].delim);
+			write_one_file(node->token->infile[i].file,
+				node->token->infile[i].delim);
 		i++;
 	}
 }

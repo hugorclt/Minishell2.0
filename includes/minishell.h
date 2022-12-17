@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/16 21:51:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/17 10:42:27 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,10 @@ t_fptr		dispatch(char *str);
 void		exec_one_builtin(t_tree *node);
 
 /* --------------------------------- heredoc -------------------------------- */
-void	create_heredoc(t_tree *node);
-void	heredoc_error(char *delim);
-void	start_heredoc(void);
-void	unlink_heredoc(t_tree *node);
+void		create_heredoc(t_tree *node);
+void		heredoc_error(char *delim);
+void		start_heredoc(void);
+void		unlink_heredoc(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int			create_tree(void);
@@ -230,6 +230,7 @@ char		*scan_token(void);
 void		init_scanner(char *cmd);
 void		skip_whitespaces(char *cmd, int *i);
 t_token		*get_token(void);
+void		init_var(t_scanner **scanner, int *i, int *is_tok);
 
 /* -------------------------------- builtins -------------------------------- */
 void		builtin_cd(char **arg);
@@ -252,7 +253,6 @@ void		error_parsing(char *msg);
 void		error_opening(char *str);
 void		print_error_unexpected(char *cmd);
 void		exec_error(char *str, char **env);
-
 
 /* ---------------------------------- free ---------------------------------- */
 void		free_env(void);
@@ -305,5 +305,7 @@ char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);
 char		**expand(char **args);
 char		**wildcards(char **old_matrix);
+int			unquote_line_init(char *cmd, int *j, int *len, char **ret);
+int			len_wo_quote(char *cmd);
 
 #endif

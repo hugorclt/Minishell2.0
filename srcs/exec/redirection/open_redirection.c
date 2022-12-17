@@ -48,13 +48,15 @@ static void	open_file_out(t_tree *node)
 	{
 		if (node->token->outfile->type == OUTFILE)
 		{
-			fd = open(node->token->outfile[i].file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			fd = open(node->token->outfile[i].file,
+					O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			check_error_and_close_fd(node->token->outfile->file, fd, i,
 				node->token->nb_file_out);
 		}
 		else if (node->token->outfile->type == OUTFILE_APND)
 		{
-			fd = open(node->token->outfile[i].file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = open(node->token->outfile[i].file,
+					O_CREAT | O_WRONLY | O_APPEND, 0644);
 			check_error_and_close_fd(node->token->outfile->file, fd, i,
 				node->token->nb_file_out);
 		}

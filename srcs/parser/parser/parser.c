@@ -28,7 +28,6 @@ t_tree	*create_simple_cmd(void)
 
 t_tree	*create_command(void)
 {
-	
 	if (peek_token_tree() == CMD)
 		return (create_simple_cmd());
 	else if (peek_token_tree() != EOL)

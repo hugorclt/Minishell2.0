@@ -42,11 +42,11 @@ void	shell_process(char *cmd)
 
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
 	char	*cmd;
 	t_data	*data;
-	
+
+	(void)ac;
+	(void)av;
 	using_history();
 	env_init_list(env);
 	data = _data();

@@ -85,6 +85,19 @@ char	*ft_strjoin_char(char *cmd, char c)
 	return (free(cmd), ret);
 }
 
+static void	ft_free_choice(char *s1, char *s2, int to_free)
+{
+	if (to_free == S1)
+		free(s1);
+	else if (to_free == S2)
+		free(s2);
+	else if (to_free == BOTH)
+	{
+		free(s1);
+		free(s2);
+	}
+}
+
 char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 {
 	size_t	s1_len;
@@ -103,14 +116,6 @@ char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 		return (NULL);
 	ft_strlcpy(new_str, s1, s1_len + 1);
 	ft_strlcpy(new_str + s1_len, s2, s2_len + 1);
-	if (to_free == S1)
-		free(s1);
-	else if (to_free == S2)
-		free(s2);
-	else if (to_free == BOTH)
-	{
-		free(s1);
-		free(s2);
-	}
+	ft_free_choice(s1, s2, to_free);
 	return (new_str);
 }
