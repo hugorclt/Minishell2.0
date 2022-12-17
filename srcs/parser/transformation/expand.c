@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/17 10:42:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/17 10:48:08 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ char	**expand(char **cmd)
 		i++;
 	}
 	expcmd[i] = NULL;
-	free_matrix(cmd);
+	free(cmd);
 	return (expcmd);
 }
