@@ -6,13 +6,13 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/17 10:48:08 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:06:17 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*expand_env_var(char *cmd)
+char	*expand_env_var(char *cmd)
 {
 	int		index_dollar;
 	char	*key;

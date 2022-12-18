@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:03:15 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/16 21:51:19 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:11:30 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	write_one_file(char *file, char *delimiter)
 	while (42)
 	{
 		line = readline(">");
+		line = expand_env_var(line);
 		if (!line)
 		{
 			close(fd);
@@ -32,8 +33,10 @@ void	write_one_file(char *file, char *delimiter)
 			return ;
 		}
 		if (ft_strcmp(line, delimiter) == 0)
-			return ((void)close(fd));
+			return (free(line), (void)close(fd));
+		line = ft_strjoin_char(line, '\n');
 		ft_putstr_fd(line, fd);
+		free(line);
 	}
 }
 
