@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 00:05:05 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/05 17:01:21 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/18 15:10:08 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	builtin_echo(char **arg)
 			printf(" ");
 		i++;
 	}
-	if (print_nl == TRUE)
+	if (!arg[1][0] || print_nl == TRUE)
 		printf("\n");
 	update_last_cmd_status(SUCCESS);
 }
