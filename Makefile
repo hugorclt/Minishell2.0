@@ -6,7 +6,7 @@
 #    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/18 14:13:49 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/18 17:37:51 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtin_pwd.c			 \
 				srcs/exec/builtins/builtin_unset.c			 \
 				srcs/exec/builtins/builtins_error.c 		 \
+				srcs/exec/builtins/builtins_utils.c 		 \
 				srcs/exec/redirection/parse_redirection.c	 \
 				srcs/exec/redirection/open_redirection.c 	 \
 				srcs/parser/checker/check_cmd.c				 \
