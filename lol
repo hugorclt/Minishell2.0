@@ -1,9 +1,0 @@
-Libft
-Makefile
-cc
-ignore_readline
-in
-includes
-lol
-minishell
-srcs
