@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 07:26:05 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:52:13 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_tree	*create_command(void)
 		return (create_simple_cmd());
 	else if (peek_token_tree() != EOL)
 	{
-		free(get_token());
+		free_token(get_token());
 		return (create_and_or());
 	}
 	return (NULL);
@@ -58,9 +58,9 @@ t_tree	*create_pipeline(void)
 			left = add_node(token, left, right);
 		}
 		else if (peek_token_tree() == RPARENTH)
-			free(get_token());
-		else
-			return (left);
+			free_token(get_token());
+		else if (peek_token_tree() == CMD)
+			left->token = concat_token(left->token);
 	}
 	return (NULL);
 }
@@ -85,7 +85,7 @@ t_tree	*create_and_or(void)
 			left = add_node(token, left, right);
 		}
 		else if (peek_token_tree() == RPARENTH)
-			free(get_token());
+			free_token(get_token());
 	}
 }
 

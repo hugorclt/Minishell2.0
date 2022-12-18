@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 17:36:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/18 18:50:42 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ t_token		*append_two_token(t_token *tokone, t_token *toketwo);
 t_tree		*create_and_or(void);
 t_tree		*add_node(t_token *token, t_tree *left, t_tree *right);
 void		init_parent(t_tree *node, t_tree *parent);
+t_token		*concat_token(t_token *token1);
 
 /* ---------------------------- redirection --------------------------- */
 void		parse_redirection(t_token **token, char **cmd);
@@ -310,6 +311,7 @@ char		*unquote_line(char *cmd);
 char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);
 char		**expand(char **args);
+char	*expand_env_var(char *cmd);
 char		**wildcards(char **old_matrix);
 int			unquote_line_init(char *cmd, int *j, int *len, char **ret);
 int			len_wo_quote(char *cmd);
