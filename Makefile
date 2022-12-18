@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/17 10:40:29 by hrecolet         ###   ########.fr        #
+#    Updated: 2022/12/18 14:13:49 by lbisson          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtin_export.c			 \
 				srcs/exec/builtins/builtin_pwd.c			 \
 				srcs/exec/builtins/builtin_unset.c			 \
+				srcs/exec/builtins/builtins_error.c 		 \
 				srcs/exec/redirection/parse_redirection.c	 \
 				srcs/exec/redirection/open_redirection.c 	 \
 				srcs/parser/checker/check_cmd.c				 \
