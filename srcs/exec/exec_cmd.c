@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 19:23:55 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 20:47:16 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	dup2_io(int in, int out)
 void	exec_fd(t_tree *node)
 {
 	open_file(node);
-	close_pipe_fd(node);
 	dup2_io(node->token->fd_in, node->token->fd_out);
+	close_pipe_fd(node);
 }
 
 void	exec_builtin(t_tree	*node, int flag)
