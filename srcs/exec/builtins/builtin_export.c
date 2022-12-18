@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/18 14:49:46 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/18 17:29:15 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,19 @@ static void	export_key_and_value(char *str)
 
 static void	check_export_args(char *arg)
 {
-	int	j;
+	int		j;
+	t_data	*data;
 
 	j = 0;
+	data = _data();
+	get_valid_dollar_index(arg);
 	if (ft_isalpha(arg[0]) == FALSE && arg[0] != '_')
 		return (export_invalid_identifier(arg));
 	while (arg[j])
 	{
-		if (arg[j] == '_' || arg[j] == '=' || ft_isalnum(arg[j]))
+		if ((arg[j] == '_' || arg[j] == '=' || arg[j] == ' '
+			|| ft_isalnum(arg[j]))
+			|| (data->doubleq == CLOSE && data->singleq == CLOSE))
 			j++;
 		else
 			return (export_invalid_identifier(arg));
