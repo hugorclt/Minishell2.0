@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 18:06:36 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:14:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ char		**env_to_matrix(void);
 void		env_unset_key(char *key);
 void		env_init_list(char **env);
 void		env_add_node(char *key, char *value);
-void		env_change_value(char *key, char *new_value);
+void		env_change_value(char *key, char *new_value, int flag);
 
 /* -------------------------------- execution ------------------------------- */
 char		*join_cmdpath(char *cmd);
@@ -233,6 +233,7 @@ t_token		*get_token(void);
 void		init_var(t_scanner **scanner, int *i, int *is_tok);
 
 /* -------------------------------- builtins -------------------------------- */
+bool		export_is_valid_char(char *arg, int index);
 void		builtin_cd(char **arg);
 void		builtin_echo(char **arg);
 void		builtin_env(char **arg);
@@ -240,6 +241,11 @@ void		builtin_exit(char **arg);
 void		builtin_export(char **arg);
 void		builtin_pwd(char **arg);
 void		builtin_unset(char **arg);
+void		cd_too_many_arg(void);
+void		cd_erno_error(char *arg);
+void		exit_non_num_arg(char *arg);
+void		exit_too_many_args(void);
+void		export_invalid_identifier(char *arg);
 
 /* -------------------------------- singleton ------------------------------- */
 t_data		*_data(void);
@@ -299,7 +305,7 @@ int			get_new_matrix_len(char **old_matrix);
 int			get_valid_dollar_index(char *cmd);
 char		*get_key(char *cmd, int index_dollar);
 char		*get_before_dollar(char *cmd, int index_dollar);
-char		*get_dollar_value(char *cmd, char *key, char *before_dollar);
+char		*get_dollar_value(char *cmd, char *key, int after_dollar);
 char		*unquote_line(char *cmd);
 char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);

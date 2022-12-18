@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:05:55 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/18 18:06:17 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:14:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ char	*expand_env_var(char *cmd)
 	{
 		before_dollar = get_before_dollar(cmd, index_dollar);
 		key = get_key(cmd, index_dollar);
-		dollar_value = get_dollar_value(cmd, key, before_dollar);
+		dollar_value = get_dollar_value(cmd, key, index_dollar + 1);
 		expvalue = ft_expjoin_free(expvalue, before_dollar, BOTH);
 		expvalue = ft_expjoin_free(expvalue, dollar_value, BOTH);
 		cmd += index_dollar + ft_strlen(key) + ft_strlen("$");
 		index_dollar = get_valid_dollar_index(cmd);
 		free(key);
 	}
-	if (*cmd)
+	if (*cmd && *cmd != '?')
 		expvalue = ft_expjoin_free(expvalue, cmd, S1);
 	return (expvalue);
 }

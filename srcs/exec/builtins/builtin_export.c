@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/17 10:43:56 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/18 17:35:22 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	check_export_error(char **arg)
-{
-	int	i;
-	int	j;
-
-	if (!arg[1])
-		update_last_cmd_status(FAILURE);
-	i = 1;
-	while (arg[i])
-	{
-		j = 0;
-		while (arg[i][j])
-		{
-			if ((ft_isalpha(arg[i][0]) == FALSE && arg[i][0] != '_')
-				|| ft_isalnum(arg[i][j]))
-			{
-				ft_putstr_fd("mimishell: export: '", 2);
-				ft_putchar_fd(arg[1][0], 2);
-				ft_putstr_fd("': not a valiid identifier\n", 2);
-				update_last_cmd_status(FAILURE);
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 static char	*init_key(char *str, int equal_index)
 {
@@ -72,26 +45,42 @@ static void	export_key_and_value(char *str)
 	val = init_value(str, equal_index);
 	if (env_get_key(key))
 	{
-		env_change_value(key, val);
+		env_change_value(key, val, 0);
 		return (free(key), free(val));
 	}	
 	else
 		env_add_node(key, val);
 }
 
-void	builtin_export(char **arg)
+static void	check_export_args(char *arg)
 {
-	int		i;
+	int		j;
+
+	j = 0;
+	if (ft_isalpha(arg[0]) == FALSE && arg[0] != '_')
+		return (export_invalid_identifier(arg));
+	while (arg[j])
+	{
+		if (export_is_valid_char(arg, j) == TRUE)
+			j++;
+		else
+			return (export_invalid_identifier(arg));
+	}
+	if (arg[j] == '\0')
+		export_key_and_value(arg);
+}
+
+void	builtin_export(char **args)
+{
+	int	i;
 
 	i = 1;
-	check_export_error(arg);
-	if (get_last_cmd_status() == FAILURE)
-		return ;
-	while (arg[i])
+	update_last_cmd_status(SUCCESS);
+	if (!args[1])
+		export_invalid_identifier(args[i]);
+	while (args[i])
 	{
-		export_key_and_value(arg[i]);
+		check_export_args(args[i]);
 		i++;
 	}
-	update_last_cmd_status(SUCCESS);
-	exit(0);
 }
