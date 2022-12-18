@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
+#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/18 17:37:51 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/18 18:51:02 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/parser/lexer/lexer_init.c				 \
 				srcs/parser/parser/parser.c					 \
 				srcs/parser/parser/parser_utils.c			 \
+				srcs/parser/parser/concat_token.c			 \
 				srcs/parser/transformation/expand_utils.c	 \
 				srcs/parser/transformation/expand.c			 \
 				srcs/parser/transformation/split_quoted.c	 \
