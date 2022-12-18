@@ -1,11 +1,9 @@
 Libft
 Makefile
 cc
-coc
 ignore_readline
 in
 includes
 lol
 minishell
 srcs
-ssah
