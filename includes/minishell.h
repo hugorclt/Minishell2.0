@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 18:50:42 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:37:51 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,12 +306,12 @@ int			get_new_matrix_len(char **old_matrix);
 int			get_valid_dollar_index(char *cmd);
 char		*get_key(char *cmd, int index_dollar);
 char		*get_before_dollar(char *cmd, int index_dollar);
-char		*get_dollar_value(char *cmd, char *key, int after_dollar);
+char		*get_dollar_value(char *cmd, char *key, int *index_dollar);
 char		*unquote_line(char *cmd);
 char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);
 char		**expand(char **args);
-char	*expand_env_var(char *cmd);
+char		*expand_env_var(char *cmd);
 char		**wildcards(char **old_matrix);
 int			unquote_line_init(char *cmd, int *j, int *len, char **ret);
 int			len_wo_quote(char *cmd);
