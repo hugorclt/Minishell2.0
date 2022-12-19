@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 18:29:09 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:43:39 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int	main(int ac, char **av, char **env)
 		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)
+		{
+			ft_putstr_fd("\n", STDOUT);
 			free_all(QUIT);
+		}
 		add_history(cmd);
 		if (check_cmd(cmd) == SUCCESS)
 			shell_process(cmd);

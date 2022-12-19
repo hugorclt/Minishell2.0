@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 18:25:14 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:01:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ t_token		*concat_token(t_token *token1);
 /* ---------------------------- redirection --------------------------- */
 void		parse_redirection(t_token **token, char **cmd);
 char		**clean_redirection(char **str, int nb_in, int nb_out);
-void		open_file(t_tree *node);
+int			open_file(t_tree *node);
 
 /* ---------------------------------- lexer --------------------------------- */
 int			check_cmd(char *cmd);

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 18:09:46 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:09:36 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	dup2_io(int in, int out)
 	dup2(out, STDOUT);
 }
 
-void	exec_fd(t_tree *node)
+int	exec_fd(t_tree *node)
 {
-	open_file(node);
+	int	ret;
+	
+	ret = open_file(node);
 	dup2_io(node->token->fd_in, node->token->fd_out);
 	close_pipe_fd(node);
+	return (ret);
 }
 
 void	exec_builtin(t_tree	*node, int flag)
@@ -49,13 +52,20 @@ void	exec_one_builtin(t_tree *node)
 	t_data	*data;
 
 	data = _data();
-	exec_fd(node);
-	exec_builtin(node, MAIN);
-	dup2_io(data->save_in, data->save_out);
-	if (node->token->fd_in != 0)
-		close(node->token->fd_in);
-	if (node->token->fd_out != 1)
-		close(node->token->fd_out);
+	if (exec_fd(node) == FAILURE)
+	{
+		dup2_io(data->save_in, data->save_out);
+		return ;
+	}
+	else
+	{	
+		exec_builtin(node, MAIN);
+		dup2_io(data->save_in, data->save_out);
+		if (node->token->fd_in != 0)
+			close(node->token->fd_in);
+		if (node->token->fd_out != 1)
+			close(node->token->fd_out);
+	}
 }
 
 void	exec_cmd(t_tree *node)
@@ -72,7 +82,8 @@ void	exec_cmd(t_tree *node)
 		if (info_cmd->pid[info_cmd->index_cmd] == 0)
 		{
 			sig_choice(SIG_EXEC_FORK);
-			exec_fd(node);
+			if (exec_fd(node) == FAILURE)
+				free_all(QUIT);
 			exec_builtin(node, FORK);
 			env = env_to_matrix();
 			if (execve(join_cmdpath(node->token->cmd[0]),
