@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 14:22:41 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:33:57 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_tree	*create_simple_cmd(void)
 	ft_bzero(node, sizeof(t_tree));
 	node->token = get_token();
 	if (!node->token)
-		return (NULL);
+		return (free(node), NULL);
 	return (node);
 }
 
