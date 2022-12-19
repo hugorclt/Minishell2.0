@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:50:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/17 10:34:53 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:49:23 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ void	init_scanner(char *cmd)
 	t_scanner	*scanner;
 
 	scanner = _scanner();
-	scanner->token_tab[0] = "&&";
-	scanner->token_tab[1] = "||";
-	scanner->token_tab[2] = ">>";
-	scanner->token_tab[3] = "<<";
-	scanner->token_tab[4] = ">";
-	scanner->token_tab[5] = "<";
-	scanner->token_tab[6] = "|";
-	scanner->token_tab[7] = "(";
-	scanner->token_tab[8] = ")";
-	scanner->token_tab[9] = NULL;
+	scanner->token_tab[0] = ">>";
+	scanner->token_tab[1] = "<<";
+	scanner->token_tab[2] = ">";
+	scanner->token_tab[3] = "<";
+	scanner->token_tab[4] = "|";
+	scanner->token_tab[5] = NULL;
 	scanner->start_pos = 0;
 	scanner->end_pos = 0;
 	scanner->cmd = cmd;

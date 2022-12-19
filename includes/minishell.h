@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 15:42:37 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:53:29 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,19 @@
 # define MAIN					0
 
 /* ------------------------------- token_type ------------------------------- */
-# define AND					0
-# define OR						1
-# define OUTFILE_APND			2
-# define HEREDOC				3
-# define OUTFILE				4
-# define INFILE					5
-# define PIPE					6
-# define LPARENTH				7
-# define RPARENTH				8
-# define CMD					9
+# define OUTFILE_APND			0
+# define HEREDOC				1
+# define OUTFILE				2
+# define INFILE					3
+# define PIPE					4
+# define CMD					5
 # define EOL					10
+
+/* -------------------------------- useless --------------------------------- */
+# define AND					999
+# define OR						999
+# define LPARENTH				999
+# define RPARENTH				999
 
 /* ------------------------------- error_type ------------------------------- */
 # define QUIT					1

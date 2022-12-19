@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:21:01 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/12 22:36:08 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:52:03 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	check_cmd(char *cmd)
 		token = get_token_check();
 		if (!token)
 			return (FAILURE);
-		if (token->id >= 0 && token->id <= 6 && (is_last_token == 1
+		if (token->id >= 0 && token->id <= 4 && (is_last_token == 1
 				|| peek_token() == EOL))
 		{
 			print_error_unexpected(token->cmd[0]);
 			return (FAILURE);
 		}
-		if (token->id >= 0 && token->id <= 6)
+		if (token->id >= 0 && token->id <= 4)
 			is_last_token = 1;
 		else
 			is_last_token = 0;
