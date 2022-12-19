@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:28:04 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 15:44:44 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:04:02 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	sig_choice(int choice)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (choice == SIG_EXEC_FORK)
+	{
+		signal(SIGINT, sig_handle);
+		signal(SIGQUIT, sig_handle);
 	}
 	else if (choice == SIG_HEREDOC)
 	{

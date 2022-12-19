@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 17:05:58 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:00:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	exec_cmd(t_tree *node)
 			free_all(FREE);
 		if (info_cmd->pid[info_cmd->index_cmd] == 0)
 		{
+			sig_choice(SIG_EXEC_FORK);
 			exec_fd(node);
 			exec_builtin(node, FORK);
 			env = env_to_matrix();
