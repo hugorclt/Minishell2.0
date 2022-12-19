@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 15:46:10 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:06:48 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	shell_process(char *cmd)
 	if (create_tree() == SUCCESS)
 	{
 		init_pid();
-		// print_tree();
 		start_heredoc();
 		sig_choice(SIG_EXEC);
 		pipe_node(*_tree());

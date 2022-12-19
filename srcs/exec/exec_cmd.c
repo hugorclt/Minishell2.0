@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 16:07:26 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:05:58 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,19 @@ void	exec_builtin(t_tree	*node, int flag)
 {
 	t_fptr		builtin;
 
-	builtin = dispatch(node->token->cmd[0]);
-	if (builtin)
+	if (node->token->cmd[0])
 	{
-		(*builtin)(node->token->cmd);
+		builtin = dispatch(node->token->cmd[0]);
+		if (builtin)
+		{
+			(*builtin)(node->token->cmd);
+			if (flag == FORK)
+				free_all(QUIT);
+		}
+	}
+	else
 		if (flag == FORK)
 			free_all(QUIT);
-	}
 }
 
 void	exec_one_builtin(t_tree *node)

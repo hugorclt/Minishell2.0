@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:34:31 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 15:41:24 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:06:43 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_all_heredoc(t_tree *node)
 {
 	int	i;
-	
+
 	if (!node)
 		return ;
 	close_all_heredoc(node->left);

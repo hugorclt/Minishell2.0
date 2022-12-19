@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 16:36:22 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:07:01 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void		exec_one_builtin(t_tree *node);
 /* --------------------------------- heredoc -------------------------------- */
 void		create_heredoc(t_tree *node);
 void		heredoc_error(char *delim);
-void			start_heredoc(void);
+void		start_heredoc(void);
 void		unlink_heredoc(t_tree *node);
 void		close_all_heredoc(t_tree *node);
 
