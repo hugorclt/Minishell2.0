@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 15:37:51 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:50:09 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_file
 {
 	char	*file;
 	char	*delim;
+	int		fd;
 	int		type;
 }	t_file;
 
@@ -201,8 +202,9 @@ void		exec_one_builtin(t_tree *node);
 /* --------------------------------- heredoc -------------------------------- */
 void		create_heredoc(t_tree *node);
 void		heredoc_error(char *delim);
-void		start_heredoc(void);
+void			start_heredoc(void);
 void		unlink_heredoc(t_tree *node);
+void		close_all_heredoc(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int			create_tree(void);

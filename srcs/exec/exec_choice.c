@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/18 18:02:50 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:44:15 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	exec_choice(t_tree *node)
 		return ;
 	if (node->token->cmd[0])
 	{
-		
 		builtin = dispatch(node->token->cmd[0]);
 		if (builtin && info_cmd->nb_cmd == 1)
 			exec_one_builtin(node);

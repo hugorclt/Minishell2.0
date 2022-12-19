@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 18:50:05 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 19:07:22 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:45:28 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,15 @@ static void	concat_infile(t_token **ret, t_token *token1, t_token *token2)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < token1->nb_file_in)
+	while (++i < token1->nb_file_in)
 	{
 		(*ret)->infile[j].type = token1->infile[i].type;
 		if (token1->infile[i].type == HEREDOC)
 			(*ret)->infile[j].delim = ft_strdup(token1->infile[i].delim);
 		else
 			(*ret)->infile[j].file = ft_strdup(token1->infile[i].file);
-		i++;
 		j++;
 	}
 	i = 0;
