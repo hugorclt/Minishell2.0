@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:16:27 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/15 18:21:39 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:29:19 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 	if (!s1)
 	{
 		s1 = ft_strdup(s2);
-		return (free(s2), s1);
+		return (s1);
 	}
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
