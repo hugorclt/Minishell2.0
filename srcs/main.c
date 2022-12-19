@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 17:06:48 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:29:09 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,32 @@ void	init_pid(void)
 		free_all(QUIT);
 }
 
+void	calc_nb_heredoc(t_tree *node)
+{
+	int	i;
+
+	i = 0;
+	if (!node)
+		return ;
+	calc_nb_heredoc(node->left);
+	while (i < node->token->nb_file_in)
+	{
+		if (node->token->infile[i].type == HEREDOC)
+			_data()->nb_hd += 1;
+		i++;
+	}
+	calc_nb_heredoc(node->right);
+}
+
 void	shell_process(char *cmd)
 {
 	init_scanner(cmd);
 	if (create_tree() == SUCCESS)
 	{
 		init_pid();
-		start_heredoc();
+		calc_nb_heredoc((*_tree()));
+		if (_data()->nb_hd > 0)
+			start_heredoc();
 		sig_choice(SIG_EXEC);
 		pipe_node(*_tree());
 		link_fd(*_tree());

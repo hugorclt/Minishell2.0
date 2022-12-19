@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 17:59:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:25:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_data
 	int			nb_heredoc;
 	int			save_in;
 	int			save_out;
+	int			nb_hd;
 	t_info_cmd	info_cmd;
 	t_list		*env;
 	t_scanner	scanner;
