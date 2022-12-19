@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:47 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/19 15:36:52 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:46:56 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*get_dollar_value(char *cmd, char *key, int *index_dollar)
 	int	after_dollar;
 
 	after_dollar = *index_dollar + 1;
-	if (!cmd[*index_dollar])
+	if (!*key)
 		return (ft_strdup("$"));
 	else if (cmd[after_dollar] == '?')
 	{
