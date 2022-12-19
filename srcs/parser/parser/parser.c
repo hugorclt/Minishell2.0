@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 20:18:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 18:52:13 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:22:41 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_tree	*create_pipeline(void)
 			free_token(get_token());
 		else if (peek_token_tree() == CMD)
 			left->token = concat_token(left->token);
+		else
+			return (left);
 	}
 	return (NULL);
 }

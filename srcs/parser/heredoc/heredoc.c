@@ -6,32 +6,33 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:03:15 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 18:11:30 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:45:21 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	write_one_file(char *file, char *delimiter)
+void	write_one_file(int fd, char *delimiter)
 {
-	int		fd;
 	char	*line;
 	t_data	*data;
 
 	data = _data();
-	fd = open(file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	while (42)
 	{
 		line = readline(">");
-		line = expand_env_var(line);
 		if (!line)
 		{
-			close(fd);
 			if (data->nb_heredoc == -1)
+			{
+				close_all_heredoc(*(_tree()));
+				update_last_cmd_status(1);
 				free_all(QUIT);
+			}
 			heredoc_error(delimiter);
 			return ;
 		}
+		line = expand_env_var(line);
 		if (ft_strcmp(line, delimiter) == 0)
 			return (free(line), (void)close(fd));
 		line = ft_strjoin_char(line, '\n');
@@ -48,7 +49,7 @@ void	write_node_heredoc(t_tree *node)
 	while (i < node->token->nb_file_in)
 	{
 		if (node->token->infile[i].type == HEREDOC)
-			write_one_file(node->token->infile[i].file,
+			write_one_file(node->token->infile[i].fd,
 				node->token->infile[i].delim);
 		i++;
 	}
@@ -73,6 +74,7 @@ void	write_heredoc(void)
 		free_all(QUIT);
 	else if (pid == 0)
 	{
+		sig_choice(SIG_HEREDOC);
 		write_forked(*(_tree()));
 		free_all(QUIT);
 	}
@@ -81,8 +83,8 @@ void	write_heredoc(void)
 }
 
 void	start_heredoc(void)
-{
+{	
 	create_heredoc(*(_tree()));
-	sig_choice(SIG_HEREDOC);
 	write_heredoc();
+	close_all_heredoc(*(_tree()));
 }

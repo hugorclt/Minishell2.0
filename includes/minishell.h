@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 18:50:42 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:42:37 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_file
 {
 	char	*file;
 	char	*delim;
+	int		fd;
 	int		type;
 }	t_file;
 
@@ -201,8 +202,9 @@ void		exec_one_builtin(t_tree *node);
 /* --------------------------------- heredoc -------------------------------- */
 void		create_heredoc(t_tree *node);
 void		heredoc_error(char *delim);
-void		start_heredoc(void);
+void			start_heredoc(void);
 void		unlink_heredoc(t_tree *node);
+void		close_all_heredoc(t_tree *node);
 
 /* --------------------------------- parser --------------------------------- */
 int			create_tree(void);
@@ -311,7 +313,7 @@ char		*unquote_line(char *cmd);
 char		**split_quoted(char *cmd);
 char		**unquote(char **cmd);
 char		**expand(char **args);
-char	*expand_env_var(char *cmd);
+char		*expand_env_var(char *cmd);
 char		**wildcards(char **old_matrix);
 int			unquote_line_init(char *cmd, int *j, int *len, char **ret);
 int			len_wo_quote(char *cmd);
