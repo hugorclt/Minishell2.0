@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 01:20:43 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/12 22:11:07 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/19 19:16:00 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_lst_remove_if(t_list **begin_list, char *key_ref)
 	if (ft_strncmp(cur->key, key_ref, ft_strlen(key_ref)) == 0)
 	{
 		*begin_list = cur->next;
+		free(cur->key);
+		free(cur->value);
 		free(cur);
 		return ;
 	}
