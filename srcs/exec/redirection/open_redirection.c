@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 13:40:10 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:07:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static int	open_file_in(t_tree *node)
 	return (SUCCESS);
 }
 
-static int	open_file_out_utils(t_tree *node, int fd, int i)
+static int	open_file_out_utils(t_tree *node, int *fd, int i)
 {
-	fd = open(node->token->outfile[i].file,
+	(*fd) = open(node->token->outfile[i].file,
 			O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (check_error_and_close_fd(node->token->outfile->file, fd, i,
+	if (check_error_and_close_fd(node->token->outfile->file, (*fd), i,
 			node->token->nb_file_out) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
@@ -64,7 +64,7 @@ static int	open_file_out(t_tree *node)
 	{
 		if (node->token->outfile->type == OUTFILE)
 		{
-			if (open_file_out_utils(node, fd, i) == FAILURE)
+			if (open_file_out_utils(node, &fd, i) == FAILURE)
 				return (FAILURE);
 		}
 		else if (node->token->outfile->type == OUTFILE_APND)
