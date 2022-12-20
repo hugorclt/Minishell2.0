@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 11:58:42 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:37:41 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_fptr	dispatch(char *str)
 	int			index;
 	t_choice	funchoice[7];
 
-	index = 0;
+	index = -1;
 	funchoice[0].callback = builtin_cd;
 	funchoice[0].fun_name = "cd";
 	funchoice[1].callback = builtin_echo;
@@ -32,11 +32,11 @@ t_fptr	dispatch(char *str)
 	funchoice[5].fun_name = "pwd";
 	funchoice[6].callback = builtin_unset;
 	funchoice[6].fun_name = "unset";
-	while (index < 7)
+	while (++index < 7)
 	{
-		if (ft_strncmp(funchoice[index].fun_name, str, ft_strlen(funchoice[index].fun_name)) == 0)
+		if (ft_strncmp(funchoice[index].fun_name, str,
+				ft_strlen(funchoice[index].fun_name)) == 0)
 			return (funchoice[index].callback);
-		index++;
 	}
 	return (NULL);
 }

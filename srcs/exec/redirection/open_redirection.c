@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:58 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 08:35:30 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:40:10 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ static int	open_file_in(t_tree *node)
 	{
 		fd = open(node->token->infile[i].file, O_RDONLY);
 		if (check_error_and_close_fd(node->token->infile->file, fd, i,
-			node->token->nb_file_in) == FAILURE)
+				node->token->nb_file_in) == FAILURE)
 			return (FAILURE);
 		i++;
 	}
 	node->token->fd_in = fd;
+	return (SUCCESS);
+}
+
+static int	open_file_out_utils(t_tree *node, int fd, int i)
+{
+	fd = open(node->token->outfile[i].file,
+			O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (check_error_and_close_fd(node->token->outfile->file, fd, i,
+			node->token->nb_file_out) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -54,10 +64,7 @@ static int	open_file_out(t_tree *node)
 	{
 		if (node->token->outfile->type == OUTFILE)
 		{
-			fd = open(node->token->outfile[i].file,
-					O_CREAT | O_TRUNC | O_WRONLY, 0644);
-			if (check_error_and_close_fd(node->token->outfile->file, fd, i,
-				node->token->nb_file_out) == FAILURE)
+			if (open_file_out_utils(node, fd, i) == FAILURE)
 				return (FAILURE);
 		}
 		else if (node->token->outfile->type == OUTFILE_APND)
@@ -65,7 +72,7 @@ static int	open_file_out(t_tree *node)
 			fd = open(node->token->outfile[i].file,
 					O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (check_error_and_close_fd(node->token->outfile->file, fd, i,
-				node->token->nb_file_out) == FAILURE)
+					node->token->nb_file_out) == FAILURE)
 				return (FAILURE);
 		}
 		i++;

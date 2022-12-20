@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 10:23:04 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:37:55 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,7 +321,5 @@ char		*expand_env_var(char *cmd);
 char		**wildcards(char **old_matrix);
 int			unquote_line_init(char *cmd, int *j, int *len, char **ret);
 int			len_wo_quote(char *cmd);
-
-extern int	g_value;
 
 #endif

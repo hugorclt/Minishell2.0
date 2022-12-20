@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:28:04 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 11:50:33 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:40:32 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	sig_handle(int sig)
 {
-	g_value = 1;
 	if (sig == SIGINT)
 	{
 		rl_on_new_line();
