@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 08:25:31 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 09:01:29 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	exec_error(char *str, char **env, char *cmd)
 
 	info_cmd = _info_cmd();
 	free_matrix(env);
-	free(cmd);
 	info_cmd->index_cmd++;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": command not found\n", 2);
+	free(cmd);
 	update_last_cmd_status(127);
 	free_all(QUIT);
 }

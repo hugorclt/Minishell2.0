@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 14:27:55 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 08:24:32 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 09:02:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ char	*join_cmdpath(char *cmd)
 
 	path_value = env_get_value("PATH");
 	if (!path_value)
-		return (cmd);
+		return (ft_strdup(cmd));
 	ret = find_path(cmd, path_value);
 	free(path_value);
 	if (!ret)
-		return (cmd);
+		return (ft_strdup(cmd));
 	return (ret);
 }
