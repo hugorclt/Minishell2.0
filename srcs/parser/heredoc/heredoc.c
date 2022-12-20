@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:03:15 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 18:09:51 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:33:34 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	write_heredoc(void)
 	{
 		sig_choice(SIG_HEREDOC);
 		write_forked(*(_tree()));
+		close_all_heredoc(*(_tree()));
 		free_all(QUIT);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 08:25:20 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:40:02 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	exec_fd(t_tree *node)
 	
 	ret = open_file(node);
 	dup2_io(node->token->fd_in, node->token->fd_out);
+	if (node->token->fd_in != 0)
+		close(node->token->fd_in);
+	if (node->token->fd_out != 1)
+		close(node->token->fd_out);
 	close_pipe_fd(node);
 	return (ret);
 }
