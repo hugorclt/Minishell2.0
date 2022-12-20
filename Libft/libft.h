@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:44:18 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/14 13:09:51 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:52:42 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define S1		1
 # define S2		2
 # define BOTH	3
+# define NO		0
+# define YES	1
 
 void	ft_putstr(char *str);
 int		ft_strcmp(char *s1, char *s2);
@@ -68,7 +70,7 @@ void	free_all(int flag);
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_dfree(char *s1, char *s2);
 char	*ft_strjoin_char(char *cmd, char c);
-char	*ft_expjoin_free(char *s1, char *s2, int to_free);
+char	*ft_expjoin_free(char *s1, char *s2, int to_free, int is_cmd);
 int		ft_iswhitespaces(char c);
 
 #endif

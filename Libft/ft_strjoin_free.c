@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:16:27 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 16:29:19 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:52:16 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	ft_free_choice(char *s1, char *s2, int to_free)
 	}
 }
 
-char	*ft_expjoin_free(char *s1, char *s2, int to_free)
+char	*ft_expjoin_free(char *s1, char *s2, int to_free, int is_cmd)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -107,6 +107,8 @@ char	*ft_expjoin_free(char *s1, char *s2, int to_free)
 	if (!s1)
 	{
 		s1 = ft_strdup(s2);
+		if (is_cmd == NO)
+			free(s2);
 		return (s1);
 	}
 	s1_len = ft_strlen(s1);
