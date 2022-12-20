@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+         #
+#    By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:04:50 by hrecolet          #+#    #+#              #
-#    Updated: 2022/12/20 17:16:58 by lbisson          ###   ########.fr        #
+#    Updated: 2022/12/20 18:33:12 by hrecolet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES 		=	srcs/main.c									 \
 				srcs/exec/builtins/builtins_error.c 		 \
 				srcs/exec/redirection/parse_redirection.c	 \
 				srcs/exec/redirection/open_redirection.c 	 \
+				srcs/exec/redirection/redirection_utils.c	 \
 				srcs/parser/checker/check_cmd.c				 \
 				srcs/parser/lexer/join_redir.c				 \
 				srcs/parser/lexer/lexer_utils.c				 \

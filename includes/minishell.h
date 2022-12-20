@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 17:17:13 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/20 18:32:47 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,8 @@ t_token		*concat_token(t_token *token1);
 void		parse_redirection(t_token **token, char **cmd);
 char		**clean_redirection(char **str, int nb_in, int nb_out);
 int			open_file(t_tree *node);
+void		parse_infile_utils(t_token **token, char *cmd, int flag, int j);
+void		parse_outfile_utils(t_token **token, char *cmd, int flag, int j);
 
 /* ---------------------------------- lexer --------------------------------- */
 int			check_cmd(char *cmd);

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:15:41 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/18 19:16:16 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:33:29 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static int	count_outfile(t_token **token, char **cmd)
 
 void	parse_outfile(t_token **token, char **cmd)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	j = 0;
 	i = 0;
@@ -70,14 +70,12 @@ void	parse_outfile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], ">>", 2))
 		{
-			(*token)->outfile[j].file = ft_strdup(cmd[i + 1]);
-			(*token)->outfile[j].type = OUTFILE_APND;
+			parse_outfile_utils(token, cmd[i + 1], OUTFILE_APND, j);
 			j++;
 		}
 		else if (!ft_strncmp(cmd[i], ">", 1))
 		{
-			(*token)->outfile[j].file = ft_strdup(cmd[i + 1]);
-			(*token)->outfile[j].type = OUTFILE;
+			parse_outfile_utils(token, cmd[i + 1], OUTFILE, j);
 			j++;
 		}
 		i++;
@@ -86,8 +84,8 @@ void	parse_outfile(t_token **token, char **cmd)
 
 void	parse_infile(t_token **token, char **cmd)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	j = 0;
 	i = 0;
@@ -98,14 +96,12 @@ void	parse_infile(t_token **token, char **cmd)
 	{
 		if (!ft_strncmp(cmd[i], "<<", 2))
 		{
-			(*token)->infile[j].delim = ft_strdup(cmd[i + 1]);
-			(*token)->infile[j].type = HEREDOC;
+			parse_infile_utils(token, cmd[i + 1], HEREDOC, j);
 			j++;
 		}
 		else if (!ft_strncmp(cmd[i], "<", 1))
 		{
-			(*token)->infile[j].file = ft_strdup(cmd[i + 1]);
-			(*token)->infile[j].type = INFILE;
+			parse_infile_utils(token, cmd[i + 1], INFILE, j);
 			j++;
 		}
 		i++;
