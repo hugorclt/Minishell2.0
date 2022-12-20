@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:47:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 17:23:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:20:49 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	quote_error(char c)
 	write(2, "mimishell: error: ", 19);
 	write(2, &c, 1);
 	write(2, " quote not closed\n", 18);
+	update_last_cmd_status(2);
 	free_all(FREE);
 }
 

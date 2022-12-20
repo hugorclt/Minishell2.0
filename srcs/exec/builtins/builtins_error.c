@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 13:54:01 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/18 14:14:10 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/20 08:21:45 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	export_invalid_identifier(char *arg)
 	{
 		ft_putstr_fd("mimishell: export: '", 2);
 		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("': not a valiid identifier\n", 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 	}
 	update_last_cmd_status(FAILURE);
 }
