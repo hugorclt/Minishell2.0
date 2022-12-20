@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 17:34:51 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/20 17:59:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	export_key_and_value(char *key, char *val)
 
 static void	check_export_args(char *arg)
 {
+	int		i;
 	int		equal_index;
 	char	*key;
 	char	*val;
@@ -59,8 +60,17 @@ static void	check_export_args(char *arg)
 		export_invalid_identifier(key);
 		return (free(key), free(val));
 	}
-	else
-		export_key_and_value(key, val);
+	i = 1;
+	while (i < ft_strlen(key))
+	{
+		if (!ft_isalnum(key[i]))
+		{
+			export_invalid_identifier(key);
+			return (free(key), free(val));
+		}
+		i++;
+	}
+	export_key_and_value(key, val);
 }
 
 void	builtin_export(char **args)
