@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   launch_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:50:50 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 12:13:02 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:33:54 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	wait_cmd_sig(int *status)
+{
+	if (WIFSIGNALED(*status))
+	{
+		if (WCOREDUMP(*status))
+			ft_putstr_fd("Quit (core dumped)\n", 2);
+		else
+		{
+			ft_putstr_fd("\n", 1);
+			(*status) += 128;
+		}
+	}
+	else
+		(*status) = WEXITSTATUS(*status);
+}
 
 void	wait_cmd(t_tree *node)
 {
@@ -25,15 +41,7 @@ void	wait_cmd(t_tree *node)
 	while (info_cmd->index_cmd_start < info_cmd->index_cmd)
 	{
 		waitpid(info_cmd->pid[info_cmd->index_cmd_start], &status, 0);
-		if (WIFSIGNALED(status))
-		{
-			if (WCOREDUMP(status))
-				ft_putstr_fd("Quit (core dumped)\n", 2);
-			else
-				status += 128;
-		}
-		else
-			status = WEXITSTATUS(status);
+		wait_cmd_sig(&status);
 		update_last_cmd_status(status);
 		info_cmd->index_cmd_start++;
 	}

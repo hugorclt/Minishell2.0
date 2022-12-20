@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/20 17:15:20 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/20 17:34:51 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	check_export_args(char *arg)
 void	builtin_export(char **args)
 {
 	int		i;
-	
+
 	i = 1;
 	update_last_cmd_status(SUCCESS);
 	if (!args[1])
