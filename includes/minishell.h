@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 20:01:34 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:26:02 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ t_tree		**_tree(void);
 void		error_parsing(char *msg);
 void		error_opening(char *str);
 void		print_error_unexpected(char *cmd);
-void		exec_error(char *str, char **env);
+void		exec_error(char *str, char **env, char *cmd);
 
 /* ---------------------------------- free ---------------------------------- */
 void		free_env(void);

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:49:10 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 20:09:36 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:25:20 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	exec_cmd(t_tree *node)
 {
 	t_info_cmd	*info_cmd;
 	char		**env;
+	char		*cmd;
 
 	info_cmd = _info_cmd();
 	if (node->token->id == CMD)
@@ -86,9 +87,9 @@ void	exec_cmd(t_tree *node)
 				free_all(QUIT);
 			exec_builtin(node, FORK);
 			env = env_to_matrix();
-			if (execve(join_cmdpath(node->token->cmd[0]),
-					node->token->cmd, env) == -1)
-				exec_error(node->token->cmd[0], env);
+			cmd = join_cmdpath(node->token->cmd[0]);
+			if (execve(cmd, node->token->cmd, env) == -1)
+				exec_error(node->token->cmd[0], env, cmd);
 		}
 		info_cmd->index_cmd++;
 	}

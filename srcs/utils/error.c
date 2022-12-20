@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:19:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/19 20:12:49 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 08:25:31 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ void	heredoc_error(char *delim)
 	ft_putstr("'\n");
 }
 
-void	exec_error(char *str, char **env)
+void	exec_error(char *str, char **env, char *cmd)
 {
 	t_info_cmd	*info_cmd;
 
 	info_cmd = _info_cmd();
 	free_matrix(env);
+	free(cmd);
 	info_cmd->index_cmd++;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(str, 2);
