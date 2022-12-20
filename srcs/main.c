@@ -6,11 +6,13 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:55:50 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/19 19:43:39 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:54:14 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_value = 0;
 
 void	init_pid(void)
 {
@@ -72,11 +74,11 @@ int	main(int ac, char **av, char **env)
 	data = _data();
 	while (42)
 	{
+		sig_choice(SIG_PARSE);
 		*(_tree()) = NULL;
 		data->nb_heredoc = 0;
 		data->save_in = dup(STDIN);
 		data->save_out = dup(STDOUT);
-		sig_choice(SIG_PARSE);
 		cmd = readline(PINK "mimishell ⚡>" RESET);
 		if (!cmd)
 		{

@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:28:04 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 08:28:58 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:50:33 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sig_handle(int sig)
 {
-	dprintf(2, "signal: %d\n", sig);
+	g_value = 1;
 	if (sig == SIGINT)
 	{
 		rl_on_new_line();
@@ -24,7 +24,10 @@ void	sig_handle(int sig)
 		update_last_cmd_status(130);
 	}
 	else if (sig == SIGQUIT)
+	{
+		dprintf(2, "Quit (core dumped)\n");
 		update_last_cmd_status(131);
+	}
 }
 
 void	sig_heredoc(int sig)
@@ -50,14 +53,14 @@ void	sig_choice(int choice)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (choice == SIG_EXEC_FORK)
-	{
-		signal(SIGINT, sig_handle);
-		signal(SIGQUIT, sig_handle);
-	}
 	else if (choice == SIG_HEREDOC)
 	{
 		signal(SIGINT, sig_heredoc);
 		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (choice == SIG_EXEC_FORK)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 	}
 }

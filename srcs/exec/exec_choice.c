@@ -6,7 +6,7 @@
 /*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:14:18 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/19 17:08:47 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:58:42 by hrecolet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_fptr	dispatch(char *str)
 	funchoice[6].fun_name = "unset";
 	while (index < 7)
 	{
-		if (ft_strncmp(funchoice[index].fun_name, str, ft_strlen(str)) == 0)
+		if (ft_strncmp(funchoice[index].fun_name, str, ft_strlen(funchoice[index].fun_name)) == 0)
 			return (funchoice[index].callback);
 		index++;
 	}
