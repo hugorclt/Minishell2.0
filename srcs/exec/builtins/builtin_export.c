@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:54:08 by lbisson           #+#    #+#             */
-/*   Updated: 2022/12/18 17:35:22 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/12/20 17:15:20 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,8 @@ static char	*init_value(char *str, int equal_index)
 	return (value);
 }
 
-static void	export_key_and_value(char *str)
+static void	export_key_and_value(char *key, char *val)
 {
-	int		equal_index;
-	char	*key;
-	char	*val;
-
-	equal_index = ft_strchr_index(str, '=');
-	key = init_key(str, equal_index);
-	val = init_value(str, equal_index);
 	if (env_get_key(key))
 	{
 		env_change_value(key, val, 0);
@@ -54,26 +47,26 @@ static void	export_key_and_value(char *str)
 
 static void	check_export_args(char *arg)
 {
-	int		j;
+	int		equal_index;
+	char	*key;
+	char	*val;
 
-	j = 0;
-	if (ft_isalpha(arg[0]) == FALSE && arg[0] != '_')
-		return (export_invalid_identifier(arg));
-	while (arg[j])
+	equal_index = ft_strchr_index(arg, '=');
+	key = init_key(arg, equal_index);
+	val = init_value(arg, equal_index);
+	if (ft_isalpha(key[0]) == FALSE && key[0] != '_')
 	{
-		if (export_is_valid_char(arg, j) == TRUE)
-			j++;
-		else
-			return (export_invalid_identifier(arg));
+		export_invalid_identifier(key);
+		return (free(key), free(val));
 	}
-	if (arg[j] == '\0')
-		export_key_and_value(arg);
+	else
+		export_key_and_value(key, val);
 }
 
 void	builtin_export(char **args)
 {
-	int	i;
-
+	int		i;
+	
 	i = 1;
 	update_last_cmd_status(SUCCESS);
 	if (!args[1])

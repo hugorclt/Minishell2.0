@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrecolet <hrecolet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:34:37 by hrecolet          #+#    #+#             */
-/*   Updated: 2022/12/20 13:37:55 by hrecolet         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:17:13 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,6 @@ t_token		*get_token(void);
 void		init_var(t_scanner **scanner, int *i, int *is_tok);
 
 /* -------------------------------- builtins -------------------------------- */
-bool		export_is_valid_char(char *arg, int index);
 void		builtin_cd(char **arg);
 void		builtin_echo(char **arg);
 void		builtin_env(char **arg);
